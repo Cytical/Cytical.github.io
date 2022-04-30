@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Ezra Guiao </title>
+	<meta name="author" content="">
+	<meta name="description" content="A Personal Portfolio Website to showcase my projects and experiences">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+	<link type = "text/css", rel="stylesheet", href="default.css">
+	<link id= "theme-style", rel="stylesheet", href="">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="myscript.js"></script>
+</head>
+
+<body>
+	<article class="main">
+		<div id="hero">
+			<div class="container">
+				<label id="switch" class="switch">
+					<input type="checkbox" onchange="toggleTheme()" id="slider">
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<div id="welcome">
+				<h1 id="heading">hi, i'm ezra.</h1>
+				<h2 id="subline">cs undergraduate student</h2>
+			</div>
+			<div id="navigation">
+				<ul>
+					<li><a href="#about-me">about me</a></li>
+					<li><a href="#projects">projects</a></li>
+					<li><a href="#contact">contact</a></li>
+				</ul>
+			</div>
+			<div id="to-bottom">
+				<a href="#about-me"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><rect fill="none" height="44" width="44"/><path d="M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8s-8-3.59-8-8S7.59,4,12,4 M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10 c5.52,0,10-4.48,10-10C22,6.48,17.52,2,12,2L12,2z M13,12l0-4h-2l0,4H8l4,4l4-4H13z"/></g></svg></a>
+			</div>
+		</div>
+		<div id="site-content">
+			<h3 id="about-me">about me.</h3>
+
+			
+			<p>Ever since at a young age, I have always been fascinated by how the technologies around me can work. I quickly grew an affinity into learning and creating my very own designs. Working on projects has never been dull as I know the things I create help other people</p>
+			<!-- <blockquote>"Done is better than perfect!"</blockquote> -->
+			<p>Currently a first year university computer science student (as of 2022) my passion countines to grow as I learn so many more new things and hone my craft. I have dabbled myself in web and game development, but currently on focusing on data science </p>
+		
+			<h3 id="projects">projects.</h3>
+
+			<h4 class="project-heading">Phillipine Stock Exchange Terminal</h4>
+			<div id="project-0" class="project-container">
+				<img src="terminal main.png" style="max-height: 400px">
+			</div>
+			<div class="space"></div>
+
+				<p class="project-description">Django website using Philippine Stock Exchange API and scraped financial data.
+					Company information is scraped from Marketwatch using BeautifulSoup. Main Page has a filter search to allows for user to type in the
+					company ticker to get relevant up to date information 
+				</p>
+				<p class="project-description"></p>
+
+			<div class="space"></div>
+			<div id="project-1" class="project-container">
+				<img src="terminal chart.png" style="max-height: 400px">
+			</div>
+
+			<p class="project-description"> Also integrates the tradingview chart </p>
+			<p> Made using: Django - Python - HTML - CSS - Javascript</p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://github.com/Cytical/PSE_Terminal">&lt/&gt
+						code</a></button>
+				<button class="project-button demo-button"><a
+						href="https://pse-terminal.herokuapp.com/home">demo</a></button>
+			</div>
+
+			<h3 id="contact">contact.</h3>
+			<p>Let me know if you have any questions.</p>
+			<p> guiaomikhail@gmail.com </p>
+			<div id="cta-container">
+				<button class="cta-button"><a href="mailto:guiaomikhail@gmail.com">Contact</a></button>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
