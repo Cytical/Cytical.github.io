@@ -1,6 +1,5 @@
 /*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
 /* black = #151515 , gold = #cc9966  red = #600*/
-
 .container {
     position: absolute;
     bottom: 80%;
@@ -85,7 +84,6 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
-
 html,
 body,
 p,
@@ -135,8 +133,10 @@ textarea {
 }
 
 html {
-    box-sizing: border-box
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
+
 
 *,
 *::before,
@@ -169,14 +169,8 @@ th:not([align]) {
     text-align: left
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #151515;
-}
+
 
 a {
     color: inherit;
@@ -192,8 +186,20 @@ button a:hover {
     text-decoration-color: white;
 }
 
+
+
+.main {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #151515;
+}
+
 #hero {
-    width: 98vw;
+    width: 100vw;
     height: 100vh;
     margin: 0 auto;
     margin-bottom: 5rem;
@@ -203,20 +209,6 @@ button a:hover {
     position: absolute;
     bottom: 55%;
     left: 10%;
-}
-
-#heading {
-    font-size: 38px;
-    font-family: monospace;
-    color: #c96;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid black;
-    width: 13ch;
-    animation:
-        typing 2s steps(13),
-        blink-caret .75s 2s step-end infinite;
-        
 }
 
 
@@ -230,8 +222,8 @@ button a:hover {
 #navigation {
     position: absolute;
     top: 5%;
-    right: 10%;
-    font-size: 22px;
+    right: 4%;
+    font-size: 24px;
     text-align: right;
     transition: top 1.2s;
     color: #cc9966
@@ -265,6 +257,18 @@ svg {
     margin-top: 20px;
 }
 
+#heading {
+    font-size: 42px;
+    font-family: monospace;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #c96;
+    border-right: 3px solid black;
+    width: 10.3ch;
+    animation:
+        typing 2.3s steps(13),
+        blink-caret .75s 2.1s step-end infinite;
+}
 
 @keyframes slidein {
     from {
@@ -299,7 +303,7 @@ svg {
         border-color: transparent
     }
 
-    50% {
+    90% {
         border-color: black;
     }
 }
@@ -314,7 +318,7 @@ h3 {
     margin-top: 20px;
     min-height: 160px;
     padding-top: 120px;
-    color: #cc9966
+    color: #cc9966;
 
 }
 
@@ -325,16 +329,16 @@ p {
 
 #subline {
     margin-top: 10px;
-    color: white
+    color: white;
 }
 
 #site-content {
-    max-width: 750px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 5vw;
-    color: white
+    scroll-snap-align: start;
+    color: white;
 }
-
 
 blockquote {
     border-left: 3px solid #666;
@@ -422,8 +426,7 @@ blockquote {
 
 
 .project-container {
-
-    height: 300px;
+    height: 500px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -434,9 +437,14 @@ blockquote {
     box-shadow: rgba(0, 0, 0, 0.24) 2px 5px 8px;
 }
 
+.project-container img {
+    width: 100%;
+    height: auto;
+}
+
 .project-heading {
     font-size: 28px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 }
 
 .project-description {
@@ -447,11 +455,10 @@ blockquote {
     margin-bottom: 80px
 }
 
-button {
+.code-button, .demo-button {
     font-weight: bold;
     font-family: inherit;
     font-size: 16px;
-    color: black;
     height: 40px;
     padding: 5px 15px;
     background-color: #c96;
@@ -478,25 +485,136 @@ button {
 }
 
 .space {
-    margin-top: 70px;
+    margin-top: 35px;
 }
 
-/* custom scrollbar */
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 8px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background: #f1f1f1;
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+* {
+    box-sizing: border-box
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides {
+    transition: transform 0.5s ease;
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.slides {
+    animation-name: fade;
+    animation-duration: 0.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .6
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
 }
+
+/* html {
+    font-family: 'Roboto', sans-serif;
+    background-color: #151515;
+    overflow-x: hidden;
+     
+} */

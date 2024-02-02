@@ -4,15 +4,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Ezra Guiao </title>
-	<meta name="author" content="">
+	<meta name="author" content="Mikhail Ezra Guiao">
 	<meta name="description" content="A Personal Portfolio Website to showcase my projects and experiences">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-	<link type = "text/css", rel="stylesheet", href="default.css">
+	
 	<link id= "theme-style", rel="stylesheet", href="">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+		<link type="text/css" , rel="stylesheet" , href="default.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="myscript.js"></script>
@@ -28,53 +29,129 @@
 				</label>
 			</div>
 			<div id="welcome">
-				<h1 id="heading">hi, i'm ezra.</h1>
-				<h2 id="subline">cs undergraduate student</h2>
+				<h1 id="heading">ezra guiao</h1>
+				<h2 id="subline">3rd yr cs undergrad</h2>
+				<h2 id="subline">@ up diliman</h2>
 			</div>
 			<div id="navigation">
 				<ul>
 					<li><a href="#about-me">about me</a></li>
 					<li><a href="#projects">projects</a></li>
+					<li><a href="#academic work">academic work</a></li>
 					<li><a href="#contact">contact</a></li>
 				</ul>
 			</div>
 			<div id="to-bottom">
-				<a href="#about-me"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><rect fill="none" height="44" width="44"/><path d="M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8s-8-3.59-8-8S7.59,4,12,4 M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10 c5.52,0,10-4.48,10-10C22,6.48,17.52,2,12,2L12,2z M13,12l0-4h-2l0,4H8l4,4l4-4H13z"/></g></svg></a>
+				<a href="#projects"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><rect fill="none" height="44" width="44"/><path d="M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8s-8-3.59-8-8S7.59,4,12,4 M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10 c5.52,0,10-4.48,10-10C22,6.48,17.52,2,12,2L12,2z M13,12l0-4h-2l0,4H8l4,4l4-4H13z"/></g></svg></a>
 			</div>
 		</div>
 		<div id="site-content">
-			<!-- <h3 id="about-me">about me.</h3>
+			<h3 id="about-me">about me.</h3>
 
 			
-			<p>Ever since at a young age, I have always been fascinated by how the technologies around me can work. I quickly grew an affinity into learning and creating my very own designs. Working on projects has never been dull as I know the things I create help other people</p>
-			<p>Currently a first year university computer science student (as of 2022) my passion countines to grow as I learn so many more new things and hone my craft. I have dabbled myself in web and game development, but currently on focusing on data science </p> -->
+			<p> aspiring software engineer/data scientist looking for internship in the Philippines and abroad. </p>
 		
-			<h3 id="projects">projects.</h3>
+		<h3 id="projects">projects.</h3>
 
-			<h4 class="project-heading">Phillipine Stock Exchange Terminal</h4>
-			<div id="project-0" class="project-container">
-				<img src="terminal main.png">
+		<h4 class="project-heading">Acoustify</h4>
+			<div class="slideshow-container">
+				<div class="mySlides1 slides">
+					<img src="images/acoustify main.png">
+				</div>
+				<div class="mySlides1 slides">
+					<img src="images/acoustify artist.png">
+				</div>
+				<div class="mySlides1 slides">
+					<img src="images/acoustify song.png">
+				</div>
+				<div class="mySlides1 slides">
+					<img src="images/acoustify search.png">
+				</div>
+			
+				<a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+				<a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+
+				<div class="dot-container" style="text-align:center; padding-top: 20px;">
+					<span class="dot" onclick="currentSlide(1, 0)"></span>
+					<span class="dot" onclick="currentSlide(2, 0)"></span>
+					<span class="dot" onclick="currentSlide(3, 0)"></span>
+					<span class="dot" onclick="currentSlide(4, 0)"></span>
+					<!-- Add more spans if needed for additional slides -->
+				</div>
 			</div>
-			<div class="space"></div>
+				<div class="space"></div>
 
-				<p class="project-description">Django website using Philippine Stock Exchange API and scraped financial data.
-					Company information is scraped from Marketwatch using BeautifulSoup. Main Page has a filter search to allows for user to type in the
-					company ticker to get relevant up to date information 
-				</p>
-				<p class="project-description"></p>
+			<p class="project-description">Full-stack responsive web app incorporating Spotify Web API. Implements Spotify OAuth through a Node server to get user's songs and playlists. Displays user's most listened songs and artists, recommending similar songs and able to search through millions of songs, with each having a unique dynamically generated page with song information and
+			analysis
+			</p>
 
-			<div class="space"></div>
-			<div id="project-1" class="project-container">
-				<img src="terminal chart.png">
+			<p> Made using: Vue.js - REST API - HTML - CSS - JavaScript - Python</p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://github.com/Cytical/Acoustify">&lt/&gt
+						code</a></button>
+				<button class="project-button demo-button"><a
+						href="https://acoustify.onrender.com/">demo</a></button>
 			</div>
 
-			<p class="project-description"> Also integrates the tradingview chart </p>
+		<h4 class="project-heading">Phillipine Stock Exchange Terminal</h4>
+			<div class="slideshow-container">
+				<div class="mySlides2 slides">
+					<img src="images/terminal chart.png">
+				</div>
+			
+				<div class="mySlides2 slides">
+					<img src="images/terminal main.png">
+				</div>
+			
+			
+				<a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+				<a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+
+				<div class="dot-container" style="text-align:center; padding-top: 20px;">
+					<span class="dot" onclick="currentSlide(1, 1)"></span>
+					<span class="dot" onclick="currentSlide(2, 1)"></span>
+					<!-- Add more spans if needed for additional slides -->
+				</div>
+			</div>
+				<div class="space"></div>
+
+			<p class="project-description">Django website using Philippine Stock Exchange API and scraped financial data.
+				Company information is scraped from Marketwatch using BeautifulSoup. Main Page has a filter search to allows for user to type in the company ticker to get relevant up to date information. It also integrates the tradingview chart.
+			</p>
+
 			<p> Made using: Django - Python - HTML - CSS - Javascript</p>
 			<div class="project-button-container">
 				<button class="project-button code-button"><a href="https://github.com/Cytical/PSE_Terminal">&lt/&gt
 						code</a></button>
 				<button class="project-button demo-button"><a
 						href="https://pse-terminal.herokuapp.com/home">demo</a></button>
+			</div>
+
+			<h3 id="academic work">academic work.</h3>
+
+			<h4 class="project-heading">Comprehensive Analysis of NBA Team Performance
+			through Logistic and Linear Regression and Random
+			Forest Classifier for Predictive Modeling</h4>
+			<div class="space"></div>
+			
+			<p> Used: Jupyter - Python - Numpy - Matplotlib</p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://github.com/Cytical/PSE_Terminal">&lt/&gt
+						code</a></button>
+				<button class="project-button demo-button"><a href="https://pse-terminal.herokuapp.com/home">paper</a></button>
+			</div>
+
+			<h4 class="project-heading">Implementing a variant of BF Scheduler in xv6</h4>
+			<div class="space"></div>
+						<p class="project-description">Xv6 is an educational operating system inspired by Unix, developed at MIT. As part of our coursework, we were required to enhance the xv6 scheduler by integrating a skiplist data structure and incorporating virtual deadlines to determine
+						scheduling priorities. This involved modifying  kernel-level code to introduce custom system calls, including the
+						creation of a new fork function and a schedlog function aimed at printing detailed information about all running
+						processes.
+						</p>
+			<p> Used: C - x86</p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://en.wikipedia.org/wiki/Brain_Fuck_Scheduler">info</a></button>
+
 			</div>
 
 			<h3 id="contact">contact.</h3>
@@ -88,3 +165,40 @@
 </body>
 
 </html>
+
+<script>
+	let slideIndex = [1, 1];
+	let slideId = ["mySlides1", "mySlides2"];
+
+	// Previous and Next slide functions
+	function plusSlides(n, no) {
+		showSlides(slideIndex[no] += n, no);
+	}
+
+	// Show current slide function
+	function currentSlide(n, no) {
+		showSlides(slideIndex[no] = n, no);
+	}
+
+	// Display slides function
+	function showSlides(n, no) {
+		let i;
+		let x = document.getElementsByClassName(slideId[no]);
+		let dots = document.getElementsByClassName("dot"); // Get all dots
+		if (n > x.length) { slideIndex[no] = 1 }
+		if (n < 1) { slideIndex[no] = x.length }
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", ""); // Remove 'active' class from all dots
+		}
+		x[slideIndex[no] - 1].style.display = "block";
+		dots[slideIndex[no] - 1].className += " active"; // Add 'active' class to current dot
+	}
+
+	window.onload = function () {
+		showSlides(1, 0); // Show first slide for slideshow 1
+		showSlides(1, 1); // Show first slide for slideshow 2
+	}
+</script>
