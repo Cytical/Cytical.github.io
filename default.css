@@ -218,8 +218,8 @@ button a:hover {
 #navigation {
     position: absolute;
     top: 5%;
-    right: 10%;
-    font-size: 22px;
+    right: 5%;
+    font-size: 26px;
     text-align: right;
     transition: top 1.2s;
 }
@@ -325,7 +325,7 @@ p {
 }
 
 #site-content {
-    max-width: 750px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 5vw;
     scroll-snap-align: start;
@@ -417,8 +417,6 @@ blockquote {
 
 
 .project-container {
-
-    height: 300px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -427,6 +425,11 @@ blockquote {
     margin-top: 50px;
     margin-bottom: 40px;
     box-shadow: rgba(0, 0, 0, 0.24) 2px 5px 8px;
+}
+
+.project-container img {
+    width: 100%;
+    height: auto;
 }
 
 .project-heading {
