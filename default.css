@@ -252,6 +252,17 @@ svg {
     text-align: center;
 }
 
+#to-top {
+    bottom: 2%;
+    margin-bottom: 3%;
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 #navigation ul li {
     margin-top: 20px;
 }
@@ -475,8 +486,8 @@ button {
 #cta-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 10rem;
-    margin-top: 5rem;
+    margin-bottom: 2.3rem;
+    margin-top: 3rem;
 }
 
 .space {
@@ -489,7 +500,7 @@ button {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #ededed;
 }
 
 /* Handle */
@@ -603,3 +614,6 @@ button {
     }
 }
 
+.lang {
+    font-style: italic;
+}
