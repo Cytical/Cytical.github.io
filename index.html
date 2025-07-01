@@ -29,15 +29,18 @@
 				</label>
 			</div>
 			<div id="welcome">
-				<h1 id="heading">ezra guiao</h1>
-				<h2 id="subline">3rd yr cs undergrad</h2>
-				<h2 id="subline">@ up diliman</h2>
-			</div>
-			<div id="navigation">
+				<h1 id="heading">Ezra Guiao</h1>
+				<h2 id="subline">CS Graduate from UP Diliman  </h2>		
+				</div>
+
+
+				
+				<div id="navigation">
+
 				<ul>
 					<li><a href="#about-me">about me</a></li>
-					<li><a href="#projects">projects</a></li>
-					<li><a href="#academic work">academic work</a></li>
+					<li><a href="#academic work">data projects</a></li>
+					<li><a href="#projects">web projects</a></li>
 					<li><a href="#contact">contact</a></li>
 				</ul>
 			</div>
@@ -45,12 +48,62 @@
 		</div>
 		</div>
 		<div id="site-content">
-			<h3 id="about-me">about me.</h3>
+  <h3 id="about-me">about me.</h3>
 
+	<p>
+		Hi, I'm Ezra a CS graduate from UP Diliman with a deep curiosity for how data can shape decisions, stories, and systems. I love building things that are both functional and meaningful, whether it's a full-stack web app using React or a predictive model using Python and scikit-learn. During my internships, I worked with tools like Pandas, MySQL, Tableau, and Angular to uncover insights and build interactive dashboards. Lately, I’ve been diving into sports analytics and public health data, exploring everything from NBA playoff predictions to HIV perception trends in the Philippines. I'm now looking to grow as a data analyst, somewhere I can keep learning, solving real-world problems, and working with teams that care about impact.
+	</p>
+
+	<h3 id="academic work">data projects.</h3>
+
+			<h4 class="project-heading"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing">Flood Risk Assessment through SWE-Based Hydrological Modeling and Critical Flow Threshold Identification</a></h4>
+			<div class="space"></div>
+						<p class="project-description">
+						Built a flood simulation model using shallow water equations and cellular automata to analyze flood progression, infiltration, and critical thresholds in Philippine river systems.
+						</p>
+			<p> Used: <span class="lang"> Python - Numba - Matplotlib </span></p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://github.com/Louis-Miguel/cag-flood-sim">&lt/&gt
+						code</a></button>
+				<button class="project-button demo-button"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing">paper</a></button>
+			</div>
+
+			<h4 class="project-heading"><a href="https://g-mooncloud.github.io/cs132-portfolio/">Perception Mapping of HIV Awareness in the Philippines</a></h4>
+			<div class="space"></div>
+			<p class="project-description">
+			Analyzed survey data from over 35,000 households (NDHS 2022) to quantify HIV knowledge and awareness across demographics. Used preprocessing, quantification, and group analysis to compute a perception metric per respondent and visualize patterns by region, age, and education.
+			</p>
+			<p> Used: <span class="lang">Python - Pandas - Plotly - Jupyter</span></p>
+			<div class="project-button-container">
+			<button class="project-button code-button"><a href="https://github.com/g-mooncloud/cs132-portfolio">&lt/&gt code</a></button>
+			<button class="project-button demo-button"><a href="https://g-mooncloud.github.io/cs132-portfolio/">website</a></button>
+			</div>
+
+
+
+			<h4 class="project-heading"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">Comprehensive Analysis of NBA Team Performance
+			through Logistic and Linear Regression and Random
+			Forest Classifier for Predictive Modeling</a></h4>
+			<div class="space"></div>
 			
-			<p> aspiring software engineer/data scientist looking for internship in the Philippines and abroad. </p>
-		
-		<h3 id="projects">projects.</h3>
+			<p> Used: <span class="lang"> Jupyter - Python - Numpy - Matplotlib </span></p>
+			<div class="project-button-container">
+				<button class="project-button code-button"><a href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb">&lt/&gt
+						code</a></button>
+				<button class="project-button demo-button"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">paper</a></button>
+			</div>
+
+			<h4 class="project-heading"><a href="https://en.wikipedia.org/wiki/Brain_Fuck_Scheduler">Implementing a variant of BF Scheduler in xv6</a></h4>
+			<div class="space"></div>
+						<p class="project-description">Xv6 is an educational operating system inspired by Unix, developed at MIT. As part of our coursework, we were required to enhance the xv6 scheduler by integrating a skiplist data structure and incorporating virtual deadlines to determine
+						scheduling priorities. This involved modifying  kernel-level code to introduce custom system calls, including the
+						creation of a new fork function and a schedlog function aimed at printing detailed information about all running
+						processes.
+						</p>
+			<p> Used:<span class="lang"> C - x86 </span></p>
+
+	<h3 id="projects">web projects.</h3>
+
 
 		<h4 class="project-heading">Acoustify</h4>
 			<div class="slideshow-container">
@@ -84,8 +137,7 @@
 			</div>
 				<div class="space"></div>
 
-			<p class="project-description">Full-stack responsive web app incorporating Spotify Web API. Implements Spotify OAuth through a Node server to get user's songs and playlists. Displays user's most listened songs and artists, recommending similar songs and able to search through millions of songs, with each having a unique dynamically generated page with song information and
-			analysis
+			<p class="project-description">Full-stack responsive web app incorporating Spotify Web API. Implements Spotify OAuth through a Node server to get user's songs and playlists. Displays user's most listened songs and artists, recommending similar songs and able to search through millions of songs, with each having a unique dynamically generated page with song information and analysis. Allows the user to play songs through the web.
 			</p>
 
 			<p> Made using: <span class="lang"> Vue.js - REST API - HTML - CSS - JavaScript - Python </span></p>
@@ -129,28 +181,7 @@
 						href="https://pse-terminal.herokuapp.com/home">demo</a></button>
 			</div>
 
-			<h3 id="academic work">academic work.</h3>
-
-			<h4 class="project-heading"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">Comprehensive Analysis of NBA Team Performance
-			through Logistic and Linear Regression and Random
-			Forest Classifier for Predictive Modeling</a></h4>
-			<div class="space"></div>
 			
-			<p> Used: <span class="lang"> Jupyter - Python - Numpy - Matplotlib </span></p>
-			<div class="project-button-container">
-				<button class="project-button code-button"><a href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb">&lt/&gt
-						code</a></button>
-				<button class="project-button demo-button"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">paper</a></button>
-			</div>
-
-			<h4 class="project-heading"><a href="https://en.wikipedia.org/wiki/Brain_Fuck_Scheduler">Implementing a variant of BF Scheduler in xv6</a></h4>
-			<div class="space"></div>
-						<p class="project-description">Xv6 is an educational operating system inspired by Unix, developed at MIT. As part of our coursework, we were required to enhance the xv6 scheduler by integrating a skiplist data structure and incorporating virtual deadlines to determine
-						scheduling priorities. This involved modifying  kernel-level code to introduce custom system calls, including the
-						creation of a new fork function and a schedlog function aimed at printing detailed information about all running
-						processes.
-						</p>
-			<p> Used:<span class="lang"> C - x86 </span></p>
 
 			<h3 id="contact">contact.</h3>
 			<p>Let me know if you have any questions.</p>
