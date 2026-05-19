@@ -1,49 +1,34 @@
-$(document).scroll(function() {
-	var y = $(this).scrollTop();
-	if (y > 550 && $( window ).width() < 1160){
-		$('#extra-header').fadeIn();
-	} else {
-		$('#extra-header').fadeOut();
-	}
+// Theme toggle
+const toggle = document.getElementById('themeToggle');
+const label = document.getElementById('toggleLabel');
+const html = document.documentElement;
 
-	if (y > 1 && $( window ).width() >= 1160) {
-		$('#navigation').addClass('moved-navigation')
-	} else {
-		$('#navigation').removeClass('moved-navigation')
-	}
-	
-      });
+const saved = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', saved);
+label.textContent = saved === 'dark' ? 'light' : 'dark';
 
-$(window).resize(function(){
-	checkHeaders();
+toggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  label.textContent = next === 'dark' ? 'light' : 'dark';
 });
 
-$(document).ready(function(){
-	checkHeaders();
-});
+// Nav shadow on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
 
-function checkHeaders(){
-	var y = $(this).scrollTop();
-	if ( $(window).width() >= 1160){
-		$('#navigation').css({position:'fixed'});
-		$('#extra-header').fadeOut();
-	} else {
-		$('#navigation').css({position:'absolute'});
-		if (y > 550){
-			$('#extra-header').fadeIn();
-		}
-	}
-}
-
-
-// function to toggle between light and dark theme
-function toggleTheme() {
-   if (document.getElementById('slider').checked) {
-       document.getElementById('theme-style').href = 'dark.css';
-   } else {
-       document.getElementById('theme-style').href = 'default.css';
-   }
-}
-
-
-
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));

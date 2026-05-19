@@ -1,237 +1,324 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-	<meta charset="utf-8">
-	<title>Ezra Guiao </title>
-	<meta name="author" content="Mikhail Ezra Guiao">
-	<meta name="description" content="A Personal Portfolio Website to showcase my projects and experiences">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
-	
-	<link id= "theme-style", rel="stylesheet", href="">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
-		<link type="text/css" , rel="stylesheet" , href="default.css">
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="myscript.js"></script>
+  <meta charset="utf-8">
+  <title>Ezra Guiao — Data Analyst</title>
+  <meta name="author" content="Mikhail Ezra Guiao">
+  <meta name="description" content="Data analyst and CS graduate from UP Diliman. I turn messy data into clear decisions.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-	<article class="main">
-		<div id="hero">
-			<div class="container">
-				<label id="switch" class="switch">
-					<input type="checkbox" onchange="toggleTheme()" id="slider">
-					<span class="slider round"></span>
-				</label>
-			</div>
-			<div id="welcome">
-				<h1 id="heading">Ezra Guiao</h1>
-				<h2 id="subline">CS Graduate from UP Diliman  </h2>		
-				</div>
 
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+  <span id="toggleLabel">dark</span>
+</button>
 
-				
-				<div id="navigation">
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <span class="nav-name">Ezra<span></span></span>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#data">data</a></li>
+      <li><a href="#web">web</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-				<ul>
-					<li><a href="#about-me">about me</a></li>
-					<li><a href="#academic work">data projects</a></li>
-					<li><a href="#projects">web projects</a></li>
-					<li><a href="#contact">contact</a></li>
-				</ul>
-			</div>
-		<div id="to-bottom"><a href="#projects"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="down-arrow"><g data-name="Layer 2"><g data-name="arrowhead-down"><path d="M17.37 12.39 12 16.71l-5.36-4.48a1 1 0 1 0-1.28 1.54l6 5a1 1 0 0 0 1.27 0l6-4.83a1 1 0 0 0 .15-1.41 1 1 0 0 0-1.41-.14z"></path><path d="M11.36 11.77a1 1 0 0 0 1.27 0l6-4.83a1 1 0 0 0 .15-1.41 1 1 0 0 0-1.41-.15L12 9.71 6.64 5.23a1 1 0 0 0-1.28 1.54z"></path></g></g></svg></a>
-		</div>
-		</div>
-		<div id="site-content">
-  <h3 id="about-me">about me.</h3>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">Data&nbsp;&nbsp;Analyst</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dot-pulse"></span>
+      <span>Open to opportunities · Manila, PH</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line">Ezra</span>
+      <span class="line accent">Guiao</span>
+    </h1>
+    <p class="hero-sub">Data Analyst &amp; CS Graduate, UP Diliman.<br>I make data tell the right story.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-primary" download>Download résumé ↓</a>
+      <a href="#data" class="btn btn-ghost">View work ↓</a>
+    </div>
+    <div class="hero-meta-strip">
+      <div class="hero-meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Data Analyst &amp; Data Scientist</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Education</div>
+        <div class="meta-value">BS Computer Science<br>UP Diliman</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Experience</div>
+        <div class="meta-value">Citibank, Ayala, etc.</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <div class="skills-ticker">
+      <div class="ticker-inner">
+        <span>Python</span><span>·</span><span>Pandas</span><span>·</span>
+        <span>Scikit-learn</span><span>·</span><span>SQL</span><span>·</span>
+        <span>Tableau</span><span>·</span><span>Plotly</span><span>·</span>
+        <span>NumPy</span><span>·</span><span>Jupyter</span><span>·</span>
+        <span>Vue.js</span><span>·</span><span>Django</span><span>·</span>
+        <span>React</span><span>·</span><span>Angular</span><span>·</span>
+        <span>Matplotlib</span><span>·</span><span>Numba</span><span>·</span>
+        <span>MySQL</span><span>·</span><span>BeautifulSoup</span><span>·</span>
+        <!-- dupe for seamless loop -->
+        <span>Python</span><span>·</span><span>Pandas</span><span>·</span>
+        <span>Scikit-learn</span><span>·</span><span>SQL</span><span>·</span>
+        <span>Tableau</span><span>·</span><span>Plotly</span><span>·</span>
+        <span>NumPy</span><span>·</span><span>Jupyter</span><span>·</span>
+        <span>Vue.js</span><span>·</span><span>Django</span><span>·</span>
+        <span>React</span><span>·</span><span>Angular</span><span>·</span>
+        <span>Matplotlib</span><span>·</span><span>Numba</span><span>·</span>
+        <span>MySQL</span><span>·</span><span>BeautifulSoup</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-	<p>
-		Hi, I'm Ezra a CS graduate from UP Diliman with a deep curiosity for how data can shape decisions, stories, and systems. I love building things that are both functional and meaningful, whether it's a full-stack web app using React or a predictive model using Python and scikit-learn. During my internships, I worked with tools like Pandas, MySQL, Tableau, and Angular to uncover insights and build interactive dashboards. Lately, I’ve been diving into sports analytics and public health data, exploring everything from NBA playoff predictions to HIV perception trends in the Philippines. I'm now looking to grow as a data analyst, somewhere I can keep learning, solving real-world problems, and working with teams that care about impact.
-	</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">01 / about</div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p class="large-text">I'm a CS graduate who sits at the intersection of <em>data and finance.</em></p>
+        <p>Whether it's building predictive models in Python or shipping interactive dashboards with PowerBI, I care about the question behind the analysis. I've worked with large-scale survey data, financial scrapers, and spatial flood simulations. </p>
+        <p>With my previous experience in software engineering, I can not only interpret data into business decisions, I can also build and maintain data pipelines.</p>
+        <div class="about-resume">
+          <a href="#" class="btn btn-ghost" download>Download résumé ↓</a>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-number">35k+</span>
+          <span class="stat-label">survey records analyzed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">shipped projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2 years</span>
+          <span class="stat-label">Experience</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-	<h3 id="academic work">data projects.</h3>
+<!-- DATA PROJECTS -->
+<section id="data">
+  <div class="section-inner">
+    <div class="section-label reveal">02 / data projects</div>
+    <div class="project-list">
 
-			<h4 class="project-heading"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing">Flood Risk Assessment through SWE-Based Hydrological Modeling and Critical Flow Threshold Identification</a></h4>
-			<div class="space"></div>
-						<p class="project-description">
-						Built a flood simulation model using shallow water equations and cellular automata to analyze flood progression, infiltration, and critical thresholds in Philippine river systems.
-						</p>
-			<p> Used: <span class="lang"> Python - Numba - Matplotlib </span></p>
-			<div class="project-button-container">
-				<button class="project-button code-button"><a href="https://github.com/Louis-Miguel/cag-flood-sim">&lt/&gt
-						code</a></button>
-				<button class="project-button demo-button"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing">paper</a></button>
-			</div>
+      <article class="project-item reveal">
+        <div class="project-meta">
+          <span class="project-tag">Hydrology · Simulation</span>
+          <span class="project-year">2024</span>
+        </div>
+        <h3 class="project-title"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank">Flood Risk Assessment via SWE-Based Hydrological Modeling</a></h3>
+        <p class="project-desc">Built a flood simulation model using shallow water equations and cellular automata to model flood progression, infiltration rates, and critical flow thresholds across Philippine river systems. Optimized with Numba JIT compilation.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Python</span><span>Numba</span><span>Matplotlib</span></div>
+          <div class="project-links">
+            <a href="https://github.com/Louis-Miguel/cag-flood-sim" target="_blank" class="link-pill">Code ↗</a>
+            <a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank" class="link-pill">Paper ↗</a>
+          </div>
+        </div>
+      </article>
 
-			<h4 class="project-heading"><a href="https://g-mooncloud.github.io/cs132-portfolio/">Perception Mapping of HIV Awareness in the Philippines</a></h4>
-			<div class="space"></div>
-			<p class="project-description">
-			Analyzed survey data from over 35,000 households (NDHS 2022) to quantify HIV knowledge and awareness across demographics. Used preprocessing, quantification, and group analysis to compute a perception metric per respondent and visualize patterns by region, age, and education.
-			</p>
-			<p> Used: <span class="lang">Python - Pandas - Plotly - Jupyter</span></p>
-			<div class="project-button-container">
-			<button class="project-button code-button"><a href="https://github.com/g-mooncloud/cs132-portfolio">&lt/&gt code</a></button>
-			<button class="project-button demo-button"><a href="https://g-mooncloud.github.io/cs132-portfolio/">website</a></button>
-			</div>
+      <article class="project-item reveal">
+        <div class="project-meta">
+          <span class="project-tag">Finance · Fraud Detection · BI</span>
+          <span class="project-year">2024</span>
+        </div>
 
+        <h3 class="project-title">Bank Fraud Detection Dashboard</h3>
 
+        <p class="project-desc">
+          Built a Power BI fraud dashboard analyzing 1M+ bank account applications from the NeurIPS 2022 dataset. Designed a composite fraud risk scoring system that identified a 6.56% fraud rate in very high-risk applicants, 6x the portfolio average.
+        </p>
 
-			<h4 class="project-heading"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">Comprehensive Analysis of NBA Team Performance
-			through Logistic and Linear Regression and Random
-			Forest Classifier for Predictive Modeling</a></h4>
-			<div class="space"></div>
-			
-			<p> Used: <span class="lang"> Jupyter - Python - Numpy - Matplotlib </span></p>
-			<div class="project-button-container">
-				<button class="project-button code-button"><a href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb">&lt/&gt
-						code</a></button>
-				<button class="project-button demo-button"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing">paper</a></button>
-			</div>
+        <div class="project-footer">
+          <div class="project-stack">
+            <span>Power BI</span>
+            <span>Python</span>
+            <span>Data Analysis</span>
+          </div>
+        </div>
+      </article>
 
-			<h4 class="project-heading"><a href="https://en.wikipedia.org/wiki/Brain_Fuck_Scheduler">Implementing a variant of BF Scheduler in xv6</a></h4>
-			<div class="space"></div>
-						<p class="project-description">Xv6 is an educational operating system inspired by Unix, developed at MIT. As part of our coursework, we were required to enhance the xv6 scheduler by integrating a skiplist data structure and incorporating virtual deadlines to determine
-						scheduling priorities. This involved modifying  kernel-level code to introduce custom system calls, including the
-						creation of a new fork function and a schedlog function aimed at printing detailed information about all running
-						processes.
-						</p>
-			<p> Used:<span class="lang"> C - x86 </span></p>
+      <article class="project-item reveal">
+        <div class="project-meta">
+          <span class="project-tag">Public Health · EDA</span>
+          <span class="project-year">2023</span>
+        </div>
+        <h3 class="project-title"><a href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank">Perception Mapping of HIV Awareness in the Philippines</a></h3>
+        <p class="project-desc">Analyzed NDHS 2022 survey data from over 35,000 households to quantify HIV knowledge and awareness. Engineered a composite perception metric and visualized patterns disaggregated by region, age, and education level.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Python</span><span>Pandas</span><span>Plotly</span><span>Jupyter</span></div>
+          <div class="project-links">
+            <a href="https://github.com/g-mooncloud/cs132-portfolio" target="_blank" class="link-pill">Code ↗</a>
+            <a href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank" class="link-pill">Site ↗</a>
+          </div>
+        </div>
+      </article>
 
-	<h3 id="projects">web projects.</h3>
+      <article class="project-item reveal">
+        <div class="project-meta">
+          <span class="project-tag">Sports Analytics · ML</span>
+          <span class="project-year">2023</span>
+        </div>
+        <h3 class="project-title"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing" target="_blank">NBA Playoff Prediction: Logistic Regression &amp; Random Forest</a></h3>
+        <p class="project-desc">Comprehensive analysis of NBA team performance using logistic regression, linear regression, and random forest classifiers. Identified key statistical predictors of playoff success across multiple seasons.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Python</span><span>NumPy</span><span>Matplotlib</span><span>Scikit-learn</span></div>
+          <div class="project-links">
+            <a href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb" target="_blank" class="link-pill">Code ↗</a>
+            <a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing" target="_blank" class="link-pill">Paper ↗</a>
+          </div>
+        </div>
+      </article>
 
+      <article class="project-item reveal">
+        <div class="project-meta">
+          <span class="project-tag">Systems · OS</span>
+          <span class="project-year">2023</span>
+        </div>
+        <h3 class="project-title">BF Scheduler Variant in xv6</h3>
+        <p class="project-desc">Extended the xv6 educational OS with a skiplist-backed scheduler using virtual deadlines. Implemented custom kernel system calls including a modified fork and a schedlog function for process introspection.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>C</span><span>x86</span></div>
+        </div>
+      </article>
 
-		<h4 class="project-heading">Acoustify</h4>
-			<div class="slideshow-container">
-				<div class="mySlides1 slides">
-					<img src="images/acoustify main.png">
-				</div>
-				<div class="mySlides1 slides">
-					<img src="images/acoustify artist.png">
-				</div>
-				<div class="mySlides1 slides">
-					<img src="images/acoustify song.png">
-				</div>
-				<div class="mySlides1 slides">
-					<img src="images/acoustify search.png">
-				</div>
-				<div class="mySlides1 slides">
-					<img src="images/acoustify rank.png">
-				</div>
-			
-				<a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-				<a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+    </div>
+  </div>
+</section>
 
-				<div class="dot-container" style="text-align:center; padding-top: 20px;">
-					<span class="dot" onclick="currentSlide(1, 0)"></span>
-					<span class="dot" onclick="currentSlide(2, 0)"></span>
-					<span class="dot" onclick="currentSlide(3, 0)"></span>
-					<span class="dot" onclick="currentSlide(4, 0)"></span>
-					<span class="dot" onclick="currentSlide(5, 0)"></span>
-					<!-- Add more spans if needed for additional slides -->
-				</div>
-			</div>
-				<div class="space"></div>
+<!-- WEB PROJECTS -->
+<section id="web">
+  <div class="section-inner">
+    <div class="section-label reveal">03 / web projects</div>
+    <div class="web-grid reveal">
 
-			<p class="project-description">Full-stack responsive web app incorporating Spotify Web API. Implements Spotify OAuth through a Node server to get user's songs and playlists. Displays user's most listened songs and artists, recommending similar songs and able to search through millions of songs, with each having a unique dynamically generated page with song information and analysis. Allows the user to play songs through the web.
-			</p>
+      <article class="web-card">
+        <div class="web-card-header">
+          <div class="web-card-meta">
+            <span class="project-tag">Full-Stack · Music</span>
+            <span class="project-year">2023</span>
+          </div>
+          <h3>Acoustify</h3>
+        </div>
+        <div class="web-card-img-wrap">
+          <img src="images/acoustify main.png" alt="Acoustify main screen" loading="lazy">
+        </div>
+        <p>Full-stack app built on the Spotify Web API. Implements OAuth via a Node server, surfaces your most-played songs and artists, generates dynamic song pages with audio analysis, and lets you play music directly in the browser.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Vue.js</span><span>Node</span><span>Python</span><span>REST API</span></div>
+          <div class="project-links">
+            <a href="https://github.com/Cytical/Acoustify" target="_blank" class="link-pill">Code ↗</a>
+            <a href="https://acoustify.onrender.com/" target="_blank" class="link-pill">Demo ↗</a>
+          </div>
+        </div>
+      </article>
 
-			<p> Made using: <span class="lang"> Vue.js - REST API - HTML - CSS - JavaScript - Python </span></p>
-			<div class="project-button-container">
-				<button class="project-button code-button"><a href="https://github.com/Cytical/Acoustify">&lt/&gt
-						code</a></button>
-				<button class="project-button demo-button"><a
-						href="https://acoustify.onrender.com/">demo</a></button>
-			</div>
+      <article class="web-card">
+        <div class="web-card-header">
+          <div class="web-card-meta">
+            <span class="project-tag">Finance · Web Scraping</span>
+            <span class="project-year">2022</span>
+          </div>
+          <h3>Philippine Stock Exchange Terminal</h3>
+        </div>
+        <div class="web-card-img-wrap">
+          <img src="images/terminal chart.png" alt="PSE Terminal chart view" loading="lazy">
+        </div>
+        <p>Django app powered by the PSE API and scraped financial data from Marketwatch via BeautifulSoup. Ticker search returns up-to-date company info with an integrated TradingView chart.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Django</span><span>Python</span><span>BeautifulSoup</span></div>
+          <div class="project-links">
+            <a href="https://github.com/Cytical/PSE_Terminal" target="_blank" class="link-pill">Code ↗</a>
+            <a href="https://pse-terminal.herokuapp.com/home" target="_blank" class="link-pill">Demo ↗</a>
+          </div>
+        </div>
+      </article>
 
-		<h4 class="project-heading">Phillipine Stock Exchange Terminal</h4>
-			<div class="slideshow-container">
-				<div class="mySlides2 slides">
-					<img src="images/terminal chart.png">
-				</div>
-			
-				<div class="mySlides2 slides">
-					<img src="images/terminal main.png">
-				</div>
-			
-			
-				<a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
-				<a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+    </div>
+  </div>
+</section>
 
-				<div class="dot-container" style="text-align:center; padding-top: 20px;">
-					<span class="dot" onclick="currentSlide(1, 1)"></span>
-					<span class="dot" onclick="currentSlide(2, 1)"></span>
-				</div>
-			</div>
-				<div class="space"></div>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">04 / contact</div>
+    <h2 class="contact-headline reveal">Let's work<br><em>together.</em></h2>
+    <div class="contact-inner-grid">
+      <div class="contact-links reveal">
+        <a href="mailto:guiaomikhail@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">guiaomikhail@gmail.com</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ezra-guiao/" target="_blank" class="contact-link">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/ezra-guiao</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+      <div class="contact-right reveal">
+        <p class="contact-sub">I'm currently open to full-time data analyst and data scientist roles. If you have a problem that needs clear thinking and clean data, reach out.</p>
+        <a href="mailto:guiaomikhail@gmail.com" class="btn btn-primary btn-large">Send a message</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-			<p class="project-description">Django website using Philippine Stock Exchange API and scraped financial data.
-				Company information is scraped from Marketwatch using BeautifulSoup. Main Page has a filter search to allows for user to type in the company ticker to get relevant up to date information. It also integrates the tradingview chart.
-			</p>
-
-			<p> Made using: <span class="lang"> Django - Python - HTML - CSS - Javascript </span></p>
-			<div class="project-button-container">
-				<button class="project-button code-button"><a href="https://github.com/Cytical/PSE_Terminal">&lt/&gt
-						code</a></button>
-				<button class="project-button demo-button"><a
-						href="https://pse-terminal.herokuapp.com/home">demo</a></button>
-			</div>
-
-			
-
-			<h3 id="contact">contact.</h3>
-			<p>Let me know if you have any questions.</p>
-			<p> guiaomikhail@gmail.com </p>
-			<p> <a href="https://www.linkedin.com/in/ezra-guiao/"> linkedin </a></p>
-			<div id="cta-container">
-				<button class="cta-button"><a href="mailto:guiaomikhail@gmail.com">Contact</a></button>
-			</div>
-
-			
-		</div>
-				<div id="to-top"><a href="#projects"><img src="svg/double-arrow-top-icon.svg"/></a>
-	</div>
-</body>
-
-</html>
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Mikhail Ezra Guiao</span>
+    <span>Manila, PH</span>
+  </div>
+</footer>
 
 <script>
-	let slideIndex = [1, 1];
-	let slideId = ["mySlides1", "mySlides2"];
+/* -- THEME -- */
+const html  = document.documentElement;
+const btn   = document.getElementById('themeToggle');
+const lbl   = document.getElementById('toggleLabel');
+const saved = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', saved);
+lbl.textContent = saved === 'dark' ? 'light' : 'dark';
+btn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  lbl.textContent = next === 'dark' ? 'light' : 'dark';
+});
 
-	// Previous and Next slide functions
-	function plusSlides(n, no) {
-		showSlides(slideIndex[no] += n, no);
-	}
+/* -- NAV BORDER ON SCROLL -- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive:true });
 
-	// Show current slide function
-	function currentSlide(n, no) {
-		showSlides(slideIndex[no] = n, no);
-	}
-
-	// Display slides function
-	function showSlides(n, no) {
-		let i;
-		let x = document.getElementsByClassName(slideId[no]);
-		let dots = document.getElementsByClassName("dot"); // Get all dots
-		if (n > x.length) { slideIndex[no] = 1 }
-		if (n < 1) { slideIndex[no] = x.length }
-		for (i = 0; i < x.length; i++) {
-			x[i].style.display = "none";
-		}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", ""); // Remove 'active' class from all dots
-		}
-		x[slideIndex[no] - 1].style.display = "block";
-		dots[slideIndex[no] - 1].className += " active"; // Add 'active' class to current dot
-	}
-
-	window.onload = function () {
-		showSlides(1, 0); // Show first slide for slideshow 1
-		showSlides(1, 1); // Show first slide for slideshow 2
-	}
+/* -- SCROLL REVEAL -- */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold:.08, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+</body>
+</html>
