@@ -663,10 +663,10 @@
   }
 
   function lbOpen(fig) {
-    var container = fig.closest('.arch-shots') || fig.parentElement;
-    var figs = container.classList.contains('arch-shots')
-      ? $$('figure', container)
-      : [fig];
+    /* Group by the strip the figure lives in, so the arrows walk one
+       project's screenshots and stop there. */
+    var container = fig.closest('.arch-shots') || fig.closest('.proj-shots');
+    var figs = container ? $$('figure', container) : [fig];
     lbGroup = figs.map(figureData);
     lbReturn = document.activeElement;
     lb.hidden = false;
@@ -681,7 +681,7 @@
     if (lbReturn && lbReturn.focus) lbReturn.focus();
   }
 
-  $$('.arch-shots figure, .proj-figure').forEach(function (fig) {
+  $$('.arch-shots figure, .proj-shots figure, .proj-figure').forEach(function (fig) {
     if (!$('img', fig)) return;
     fig.setAttribute('tabindex', '0');
     fig.setAttribute('role', 'button');
