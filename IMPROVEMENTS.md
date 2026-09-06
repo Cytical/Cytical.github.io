@@ -34,7 +34,7 @@ continue. Each is easy to reverse.
   weight).** `<video poster>` is fetched by Chrome even though `#pane-pseye` is
   `display:none`, so every visitor to about.md pays for an image on a page they have
   not opened. Move the poster to JS on first open of the pane, and re-encode it.
-- [ ] **2. Broken list item in README.md's "How to explore."** `projects.ipynb` is a
+- [x] **2. Broken list item in README.md's "How to explore."** `projects.ipynb` is a
   second `<span>` inside the `live-project.tsx` `<li>`, so it renders with no icon
   and hangs off the previous entry.
 - [ ] **3. `site.webmanifest` is stale.** Still "Data Quality Analyst at Citibank,"
@@ -52,10 +52,10 @@ continue. Each is easy to reverse.
 - [ ] **7. Nothing on the site signals the HK/SG target.** Availability, the
   "Based in" row, the structured data and the meta description all stop at Manila.
   A Hong Kong recruiter filtering by market has no reason to keep reading.
-- [ ] **8. README tells the visitor to click file names recruiter mode has hidden.**
+- [x] **8. README tells the visitor to click file names recruiter mode has hidden.**
   Recruiter mode is now the default, so the explorer says "About" while the README
   says to open `about.md`.
-- [ ] **9. `readme-foot` describes recruiter mode as opt-in.** It is now on by
+- [x] **9. `readme-foot` describes recruiter mode as opt-in.** It is now on by
   default, so the sentence points the wrong way.
 
 ## P2 , accessibility
