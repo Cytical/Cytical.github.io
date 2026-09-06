@@ -32,9 +32,10 @@ GitHub Pages.
   behind them inert, every target clears the WCAG 2.2 24px minimum, and
   `prefers-reduced-motion` is respected: the node field holds still and the PSEye recording
   gives its controls back rather than looping silently.
-- **Weight.** About 95 KB on a first visit, most of it the two fonts. Images are WebP with
-  JPEG fallbacks and load lazily. The PSEye poster and the 6.7 MB recording are attached only
-  when that pane is opened, so nobody pays for a page they did not click on.
+- **Weight.** About 112 KB gzipped on a first visit, over six requests, more than half of it
+  the two fonts. Images are WebP with JPEG fallbacks and load lazily. The PSEye poster and the
+  6.7 MB recording are attached only when that pane is opened, so nobody pays for a page they
+  did not click on.
 - **Try the terminal.** `help`, `find power bi`, `git log`, `open pseye`. Press <kbd>⌘K</kbd>
   (or <kbd>Ctrl</kbd>+<kbd>K</kbd>) to jump to anything.
 

@@ -849,6 +849,10 @@ html:not(.js-ready) .statusbar{position:static}
   .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,.nodes,
   .palette,.scrim,.skip,.demo,.lightbox,.to-top,.pdf-frame,.pdf-actions,
   .tb-actions,.hero-actions,.looking-cta,.contact-cta,
+  /* pane-to-pane navigation: a bordered button that cannot be pressed
+     is worse than no button. The .xlink versions stay, since those read
+     as a line of text either way. */
+  .readme-cta,.about-exp-cta,
   .arch-shots,.proj-shots,.arch-chev,body::after{display:none !important}
 
   /* Re-point the palette at ink on paper. Without this the dark-theme

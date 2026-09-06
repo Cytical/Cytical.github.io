@@ -143,6 +143,22 @@ moved the goalposts.
   a page weight from before the fonts and the poster changed, and never mentioned
   the fonts, the media directory, the PSEye page or recruiter mode being default.
 
+## Round four, from testing the paths nobody looks at
+
+- [x] **31. Two navigation buttons printed as dead controls.** "Full experience
+  & education" and "start with about.md" are bordered buttons that move between
+  panes. On paper they are boxes that cannot be pressed. The `.xlink` versions
+  stay, because those read as a line of text either way.
+- [x] **32. README overstated the first-visit weight.** Measured gzipped, which
+  is what GitHub Pages serves: 112 KB, not the 95 KB I had estimated.
+
+Verified while here, and left alone because they are correct: the site renders
+all ten panes stacked and readable with every `<script>` stripped, 13,700
+characters of text, archives expanded, no horizontal overflow; every external
+link returns 200 apart from LinkedIn, which answers 999 to anything that is not
+a browser; and the print stylesheet lays out cleanly with the chrome, the
+screenshots and the recording dropped.
+
 ---
 
 ## Blocked, needs Ezra
