@@ -468,7 +468,7 @@
         '<b>Mikhail Ezra Guiao</b>\n' +
         'Data Analyst at Citibank. BS Computer Science, UP Diliman (<i>cum laude</i>).\n' +
         'MS Analytics at Georgia Tech, 2026–28. Based in Manila, PH.\n' +
-        '<span class="ok">status:</span> open to data analyst and data scientist roles.'
+        '<span class="ok">status:</span> open to data analyst and data scientist roles in Hong Kong, Singapore and Manila.'
       );
     },
 
@@ -507,7 +507,8 @@
         'linkedin  <b>linkedin.com/in/ezra-guiao</b>\n' +
         'github    <b>github.com/Cytical</b>\n' +
         'location  <b>Manila, Philippines</b>\n' +
-        'timezone  <b>PHT · UTC+8</b>'
+        'markets   <b>Hong Kong · Singapore · Manila</b>\n' +
+        'timezone  <b>PHT · UTC+8</b>, the same clock as HK and SG'
       );
     },
 

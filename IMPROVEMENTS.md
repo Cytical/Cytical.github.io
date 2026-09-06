@@ -37,19 +37,19 @@ continue. Each is easy to reverse.
 - [x] **2. Broken list item in README.md's "How to explore."** `projects.ipynb` is a
   second `<span>` inside the `live-project.tsx` `<li>`, so it renders with no icon
   and hangs off the previous entry.
-- [ ] **3. `site.webmanifest` is stale.** Still "Data Quality Analyst at Citibank,"
+- [x] **3. `site.webmanifest` is stale.** Still "Data Quality Analyst at Citibank,"
   and the `name` field carries an em dash the rest of the codebase does not use.
 - [x] **4. The skip link is broken on any deep link.** It targets `#pane-about`,
   which is `display:none` whenever the visitor lands on `#projects`, `#pseye` or any
   other hash. Skip-to-content then does nothing.
-- [ ] **5. Meta description contradicts the page.** It says "starting an MS in
+- [x] **5. Meta description contradicts the page.** It says "starting an MS in
   Analytics at Georgia Tech in 2026"; the page says it started August 2026.
 - [x] **6. Experience bullets render as commas.** `.tl-bullets li::before` uses
   `content:","`, which reads as dirt on the page rather than as a bullet.
 
 ## P1 , positioning
 
-- [ ] **7. Nothing on the site signals the HK/SG target.** Availability, the
+- [x] **7. Nothing on the site signals the HK/SG target.** Availability, the
   "Based in" row, the structured data and the meta description all stop at Manila.
   A Hong Kong recruiter filtering by market has no reason to keep reading.
 - [x] **8. README tells the visitor to click file names recruiter mode has hidden.**
@@ -95,8 +95,8 @@ continue. Each is easy to reverse.
 
 ## P5 , SEO and metadata
 
-- [ ] **19. `sitemap.xml` lastmod is stale** and there is no `og:locale`.
-- [ ] **20. `Person` structured data has no `image`,** so nothing ties the schema
+- [x] **19. `sitemap.xml` lastmod is stale** and there is no `og:locale`.
+- [x] **20. `Person` structured data has no `image`,** so nothing ties the schema
   entity to the link-preview card.
 
 ---
