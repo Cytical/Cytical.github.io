@@ -741,31 +741,52 @@
     }
     var stroke = accent();
 
-    function seed() {
-      var want = Math.min(MAX, Math.round((w * h) / PER_PX));
-      nodes = [];
-      for (var i = 0; i < want; i++) {
-        nodes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          /* slow, and never axis-aligned, so it reads as drift not scrolling */
-          vx: (Math.random() - 0.5) * 0.16,
-          vy: (Math.random() - 0.5) * 0.16,
-          r: 1 + Math.random() * 1.4,
-          ox: 0, oy: 0
-        });
-      }
+    function want() { return Math.min(MAX, Math.round((w * h) / PER_PX)); }
+
+    function node() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        /* slow, and never axis-aligned, so it reads as drift not scrolling */
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        r: 1 + Math.random() * 1.4,
+        ox: 0, oy: 0
+      };
     }
 
-    function resize() {
+    function seed() {
+      nodes = [];
+      for (var i = 0, n = want(); i < n; i++) nodes.push(node());
+    }
+
+    /* Resizing used to reseed, which meant dragging a window edge scattered
+       the whole field once per resize event for the length of the drag. Carry
+       the nodes across instead, scaled into the new box, and only grow or
+       trim to what the new area asks for. */
+    function fit() {
       var r = nodeCanvas.getBoundingClientRect();
+      var pw = w, ph = h;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = r.width; h = r.height;
       nodeCanvas.width = Math.round(w * dpr);
       nodeCanvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       stroke = accent();
-      seed();
+
+      if (!nodes.length) { seed(); return; }
+      var sx = pw ? w / pw : 1, sy = ph ? h / ph : 1;
+      for (var i = 0; i < nodes.length; i++) {
+        nodes[i].x *= sx;
+        nodes[i].y *= sy;
+      }
+      var n = want();
+      while (nodes.length > n) nodes.pop();
+      while (nodes.length < n) nodes.push(node());
+
+      /* Setting canvas.width clears it, so without this the field blinks out
+         for a frame on every step of a drag. */
+      draw();
     }
 
     function draw() {
@@ -826,7 +847,7 @@
     function start() {
       if (running) return;
       running = true;
-      resize();
+      fit();
       if (prefersReduce()) { draw(); return; }   /* one still frame, no loop */
       raf = requestAnimationFrame(frame);
     }
@@ -842,7 +863,13 @@
       if (document.visibilityState === 'visible') start(); else stop();
     };
 
-    window.addEventListener('resize', function () { if (running) resize(); });
+    /* A drag fires resize far faster than the field can be redrawn, so
+       collapse a burst of them into one measurement per frame. */
+    var refit = 0;
+    window.addEventListener('resize', function () {
+      if (!running || refit) return;
+      refit = requestAnimationFrame(function () { refit = 0; fit(); });
+    });
     document.addEventListener('visibilitychange', syncNodes);
     nodeCanvas.parentNode.addEventListener('pointermove', function (e) {
       var r = nodeCanvas.getBoundingClientRect();

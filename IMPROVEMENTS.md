@@ -86,10 +86,10 @@ continue. Each is easy to reverse.
 
 ## P4 , polish
 
-- [ ] **17. The node field teleports on window resize.** `resize()` reseeds the whole
+- [x] **17. The node field teleports on window resize.** `resize()` reseeds the whole
   field on every resize event, so dragging a window edge scatters the nodes and
   fires a full reseed per frame.
-- [ ] **18. Section comments in `index.html` are shifted by one.** The comment above
+- [x] **18. Section comments in `index.html` are shifted by one.** The comment above
   `#pane-about` says README, the one above `#pane-readme` says RESUME, and so on
   down the file.
 
