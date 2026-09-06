@@ -121,6 +121,8 @@ body::after{
   font-family:var(--mono);font-size:10.5px;color:var(--faint);
   border:1px solid var(--line);border-radius:3px;padding:2px 5px;line-height:1;
 }
+/* The magnifier only stands in for the ⌘K hint on narrow screens. */
+.tb-btn--palette .tb-ico{display:none}
 
 /* ---------- activity rail ---------- */
 .rail{
@@ -788,10 +790,15 @@ html:not(.js-ready) .statusbar{position:static}
   .skill-cols{grid-template-columns:1fr}
   .looking-grid{grid-template-columns:1fr}
   .looking{padding:20px}
-  .tb-btn--resume span,.tb-btn--mode span{display:none}
-  .tb-btn--mode{padding:0 8px;font-size:0}
-  .tb-btn--mode .dot{margin:0}
-  .tb-btn--palette{display:none}
+  /* Icon-only, but still 28px targets with names of their own rather
+     than a font-size:0 rectangle that swallowed its own status dot. */
+  .tb-btn--resume .tb-text,.tb-btn--resume>span,.tb-btn--mode .tb-text{display:none}
+  .tb-btn--mode,.tb-btn--palette,.tb-btn--resume{
+    width:28px;height:28px;padding:0;display:grid;place-items:center;
+  }
+  .tb-btn--palette .kbd{display:none}
+  .tb-btn--palette .tb-ico{display:block;width:14px;height:14px}
+  .tb-btn svg{width:14px;height:14px}
   .titlebar{gap:8px}
   .tb-crumb b{display:none}
   .tb-crumb .sep{display:none}

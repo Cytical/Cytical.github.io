@@ -68,10 +68,10 @@ continue. Each is easy to reverse.
   keyboard except through the undiscoverable Delete shortcut.
 - [x] **12. Sub-minimum tap targets (WCAG 2.2 SC 2.5.8, AA).** At 390px the mode
   toggle is 18x24 and the drawer close is 19x18, both under the 24x24 floor.
-- [ ] **13. The recruiter toggle is an empty box on mobile.** `font-size:0` hides
+- [x] **13. The recruiter toggle is an empty box on mobile.** `font-size:0` hides
   the label and collapses the status dot to 0x0, leaving an unlabelled rectangle in
   the title bar of the most-used breakpoint.
-- [ ] **14. The command palette is unreachable on mobile.** The rail is
+- [x] **14. The command palette is unreachable on mobile.** The rail is
   `display:none` and `.tb-btn--palette` is too, so ⌘K has no trigger and no keyboard
   to reach it from.
 
