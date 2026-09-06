@@ -846,6 +846,52 @@
   }());
 
   /* ============================================================
+     MODALS. The lightbox and the palette both sit outside .app, so the
+     whole page can be made inert behind them in one go.
+     ============================================================ */
+  var app = $('.app');
+  var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),' +
+                  'select,textarea,[tabindex]:not([tabindex="-1"])';
+
+  function focusables(box) {
+    return $$(FOCUSABLE, box).filter(function (el) {
+      /* offsetParent is null for anything display:none, which is how the
+         palette's own list and the lightbox's disabled arrows drop out. */
+      return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+    });
+  }
+
+  /* Tab off either end of a dialog wraps, rather than landing on the page
+     the scrim is covering. */
+  function trapTab(box, e) {
+    /* The palette's input already claims Tab to walk its own list. Let
+       whoever handled it first win. */
+    if (e.key !== 'Tab' || e.defaultPrevented) return;
+    var items = focusables(box);
+    if (!items.length) return;
+    var first = items[0], last = items[items.length - 1];
+    var at = document.activeElement;
+    if (e.shiftKey && (at === first || !box.contains(at))) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (at === last || !box.contains(at))) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
+  /* inert is what actually stops the pointer and the tab order; aria-hidden
+     is there for the assistive tech that has not caught up with it. Focus is
+     always moved out of .app before this runs, so hiding it is safe. */
+  function setBackgroundInert(on) {
+    if (!app) return;
+    if (on) { app.inert = true; app.setAttribute('aria-hidden', 'true'); }
+    else { app.inert = false; app.removeAttribute('aria-hidden'); }
+  }
+
+  function anyDialogOpen() {
+    return !lb.hidden || !palette.hidden;
+  }
+
+  /* ============================================================
      LIGHTBOX. Click any screenshot to see it at full size.
      Groups by the figure's container so arrows walk one project.
      ============================================================ */
@@ -890,6 +936,7 @@
     lbReturn = document.activeElement;
     lb.hidden = false;
     lbShow(figs.indexOf(fig));
+    setBackgroundInert(true);
     $('#lbClose').focus();
   }
 
@@ -897,6 +944,7 @@
     lb.hidden = true;
     lbImg.hidden = true;
     lbImg.removeAttribute('src');
+    if (!anyDialogOpen()) setBackgroundInert(false);
     if (lbReturn && lbReturn.focus) lbReturn.focus();
   }
 
@@ -911,6 +959,7 @@
     });
   });
 
+  lb.addEventListener('keydown', function (e) { trapTab(lb, e); });
   $('#lbScrim').addEventListener('click', lbClose);
   $('#lbClose').addEventListener('click', lbClose);
   $('#lbPrev').addEventListener('click', function () { lbShow(lbIdx - 1); });
@@ -1098,10 +1147,12 @@
     palette.hidden = false;
     paletteInput.value = '';
     renderPalette();
+    setBackgroundInert(true);
     paletteInput.focus();
   }
   function closePalette() {
     palette.hidden = true;
+    if (!anyDialogOpen()) setBackgroundInert(false);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
@@ -1113,6 +1164,7 @@
     else if (e.key === 'Escape')    { e.preventDefault(); closePalette(); }
     else if (e.key === 'Tab')       { e.preventDefault(); select(selIdx + (e.shiftKey ? -1 : 1)); }
   });
+  palette.addEventListener('keydown', function (e) { trapTab(palette, e); });
   $('#paletteScrim').addEventListener('click', closePalette);
   $('#paletteBtn').addEventListener('click', openPalette);
   $('#railSearch').addEventListener('click', openPalette);

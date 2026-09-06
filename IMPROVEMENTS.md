@@ -60,7 +60,7 @@ continue. Each is easy to reverse.
 
 ## P2 , accessibility
 
-- [ ] **10. Neither modal traps focus.** The lightbox and the command palette are
+- [x] **10. Neither modal traps focus.** The lightbox and the command palette are
   both `aria-modal="true"`, and Tab walks straight out of them into the page behind
   the scrim. Nothing marks the background inert either.
 - [ ] **11. Tab close buttons are `<span role="button">` inside a `<button>`.**
