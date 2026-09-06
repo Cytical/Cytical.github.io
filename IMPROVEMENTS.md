@@ -39,12 +39,12 @@ continue. Each is easy to reverse.
   and hangs off the previous entry.
 - [ ] **3. `site.webmanifest` is stale.** Still "Data Quality Analyst at Citibank,"
   and the `name` field carries an em dash the rest of the codebase does not use.
-- [ ] **4. The skip link is broken on any deep link.** It targets `#pane-about`,
+- [x] **4. The skip link is broken on any deep link.** It targets `#pane-about`,
   which is `display:none` whenever the visitor lands on `#projects`, `#pseye` or any
   other hash. Skip-to-content then does nothing.
 - [ ] **5. Meta description contradicts the page.** It says "starting an MS in
   Analytics at Georgia Tech in 2026"; the page says it started August 2026.
-- [ ] **6. Experience bullets render as commas.** `.tl-bullets li::before` uses
+- [x] **6. Experience bullets render as commas.** `.tl-bullets li::before` uses
   `content:","`, which reads as dirt on the page rather than as a bullet.
 
 ## P1 , positioning

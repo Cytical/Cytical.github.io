@@ -582,7 +582,7 @@ button.status-item:hover{color:var(--ink)}
 .tl-role .org{color:var(--accent);font-weight:400}
 .tl-bullets{display:flex;flex-direction:column;gap:9px}
 .tl-bullets li{position:relative;padding-left:22px;font-size:13.5px;color:var(--mid);line-height:1.6}
-.tl-bullets li::before{content:",";position:absolute;left:0;top:0;color:var(--dim)}
+.tl-bullets li::before{content:"\2022 ";position:absolute;left:2px;top:0;color:var(--accent);opacity:.55}
 .tl-bullets b{color:var(--ink);font-weight:500}
 .edu-honor{font-family:var(--mono);font-size:11px;color:var(--accent-2);margin-top:7px}
 .tl-sub{font-size:13.5px;color:var(--mid)}
@@ -599,10 +599,10 @@ button.status-item:hover{color:var(--ink)}
   color:var(--mid);margin-top:3px;padding:1px 0;border-radius:2px;line-height:1.45;
   transition:color .15s;
 }
-.skill .e::before{content:"→ ";color:var(--accent)}
+.skill .e::before{content:"\2192 ";color:var(--accent)}
 button.skill-e-noop{cursor:default}
 .skill button.e:hover{color:var(--ink)}
-.skill button.e:hover::before{content:"↗ "}
+.skill button.e:hover::before{content:"\2197 "}
 
 /* ---------- contact pane ---------- */
 .contact-block{

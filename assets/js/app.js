@@ -28,6 +28,7 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var RESUME = 'Ezra_Guiao_Resume.pdf';
 
+  var skipLink   = $('.skip');
   var tabbar     = $('#tabbar');
   var editorBody = $('#editorBody');
   var sidebar    = $('#sidebar');
@@ -126,6 +127,11 @@
     $$('.tree-file').forEach(function (b) {
       b.setAttribute('aria-current', b.dataset.file === id ? 'true' : 'false');
     });
+
+    /* The skip link is a real anchor so it still works with JS off, where
+       only about.md is ever shown. With JS on, any pane can be the visible
+       one, and a link into a display:none pane skips to nothing. */
+    if (skipLink) skipLink.setAttribute('href', '#pane-' + id);
 
     var f = FILES[id];
     $('#crumbFile').textContent = f.name;
