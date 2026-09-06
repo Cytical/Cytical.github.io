@@ -14,6 +14,7 @@
     'readme':       { name: 'README.md',        plain: 'Start here',        ic: '▤', dir: '',          lang: 'MD'   },
     'about':        { name: 'about.md',         plain: 'About',             ic: '▤', dir: 'portfolio', lang: 'MD'   },
     'resume':       { name: 'resume.pdf',       plain: 'Résumé',            ic: '●',      dir: 'portfolio', lang: 'PDF'  },
+    'pseye':        { name: 'live-project.tsx', plain: 'Live project',      ic: '<>',     dir: 'portfolio', lang: 'TSX'  },
     'projects':     { name: 'projects.ipynb',   plain: 'Projects',          ic: '{}',     dir: 'portfolio', lang: 'PY'   },
     'experience':   { name: 'experience.log',   plain: 'Experience',        ic: '▤', dir: 'portfolio', lang: 'LOG'  },
     'skills':       { name: 'skills.json',      plain: 'Skills',            ic: '{}',     dir: 'portfolio', lang: 'JSON' },
@@ -21,7 +22,7 @@
     'archive-data': { name: 'data-projects.md', plain: 'Earlier data work', ic: '▤', dir: 'archive',   lang: 'MD'   },
     'archive-web':  { name: 'web-projects.md',  plain: 'Earlier web work',  ic: '▤', dir: 'archive',   lang: 'MD'   }
   };
-  var ORDER = ['readme', 'about', 'resume', 'projects', 'experience', 'skills', 'contact', 'archive-data', 'archive-web'];
+  var ORDER = ['readme', 'about', 'resume', 'pseye', 'projects', 'experience', 'skills', 'contact', 'archive-data', 'archive-web'];
 
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
@@ -134,6 +135,8 @@
     renderTabs();
     renderPager();
     if (id === 'resume') mountPdf();
+    syncDemo();
+    syncNodes();
 
     if (!opts.silent) {
       var hash = '#' + id;
@@ -309,9 +312,11 @@
     if (on) hideTerm();
     try { localStorage.setItem('mode', m); } catch (e) {}
   }
-  (function initMode() {
-    setMode(root.getAttribute('data-mode') === 'recruiter' ? 'recruiter' : 'dev');
-  })();
+  /* Recruiter mode is what a first-time visitor gets, so this has to run
+     after the terminal exists. boot() calls it, not this line. */
+  function initMode() {
+    setMode(root.getAttribute('data-mode') === 'dev' ? 'dev' : 'recruiter');
+  }
   $('#modeBtn').addEventListener('click', function () {
     setMode(root.getAttribute('data-mode') === 'recruiter' ? 'dev' : 'recruiter');
   });
@@ -333,6 +338,7 @@
     termInput.focus();
   }
   function hideTerm() {
+    if (!term) return;
     term.hidden = true;
     $('#railTerm').setAttribute('aria-pressed', 'false');
   }
@@ -402,8 +408,9 @@
       if (!id) { print('<span class="warn">cat: ' + esc(args[0] || '') + ': no such file</span>'); return; }
       var body = {
         readme:         'My portfolio, laid out like the editor I work in.',
-        about:          'Ezra Guiao, Data Quality Analyst at Citibank. CS grad, UP Diliman.\nMostly SQL, Python and Power BI, on the finance side of data.',
-        projects:       'PSEye · Acoustify · Flood Modeling & Visualization · Bank Fraud Risk Scoring · HIV Perception Mapping',
+        about:          'Ezra Guiao, Data Analyst at Citibank. CS grad, UP Diliman.\nMostly SQL, Python and Power BI, on the finance side of data.',
+        pseye:          'Market intelligence for the Philippine Stock Exchange. 282 listed companies,\ndaily ingestion, and a recap generated from every close. Live at pseye.site.',
+        projects:       'Acoustify · Flood Modeling & Visualization · Bank Fraud Risk Scoring · HIV Perception Mapping',
         experience:     'Citibank (2025–) · Pointwest (2024) · HealthNow/Ayala Health (2022) · Bit Create (2022)',
         skills:         'Python, SQL, Pandas, Power BI, Next.js, TypeScript, Django, AI workflow automation.',
         contact:        'guiaomikhail@gmail.com · linkedin.com/in/ezra-guiao · github.com/Cytical',
@@ -452,7 +459,7 @@
     whoami: function () {
       print(
         '<b>Mikhail Ezra Guiao</b>\n' +
-        'Data Quality Analyst at Citibank. BS Computer Science, UP Diliman (<i>cum laude</i>).\n' +
+        'Data Analyst at Citibank. BS Computer Science, UP Diliman (<i>cum laude</i>).\n' +
         'MS Analytics at Georgia Tech, 2026–28. Based in Manila, PH.\n' +
         '<span class="ok">status:</span> open to data analyst and data scientist roles.'
       );
@@ -468,7 +475,7 @@
 
     projects: function () {
       print(
-        '<b>PSEye</b>                  Next.js · Postgres · <span class="ok">live</span> at pseye.site · 2,500 monthly visitors\n' +
+        '<b>PSEye</b>                  Next.js · Postgres · <span class="ok">live</span> at pseye.site · has its own page, run <b>open pseye</b>\n' +
         '<b>Acoustify</b>              Vue.js · Node · Spotify Web API, OAuth and audio analysis\n' +
         '<b>Flood Modeling</b>         Python · Numba · QGIS · NCTS-funded thesis\n' +
         '<b>Bank Fraud Risk</b>        Python · Power BI · 1M+ applications, 6.56% top-tier fraud rate\n' +
@@ -547,7 +554,7 @@
   function gitLog() {
     print(
       '<span class="ok">c1a7f30</span> (HEAD -> main) feat: PSEye ships, 282 companies on daily ingestion\n' +
-      '<span class="ok">9b2e14c</span> feat: joined Citibank as Data Quality Analyst\n' +
+      '<span class="ok">9b2e14c</span> feat: joined Citibank as Data Analyst\n' +
       '<span class="ok">4f88a1d</span> feat: BS Computer Science, UP Diliman, cum laude\n' +
       '<span class="ok">7d3c092</span> feat: flood model thesis under NCTS research grant\n' +
       '<span class="ok">2ea56b8</span> feat: fraud risk scoring over 1M+ applications\n' +
@@ -628,6 +635,200 @@
   });
 
   /* ============================================================
+     DEMO VIDEO. The recording is the one asset that might not be in the
+     repo yet, so if the file is missing the figure removes itself and the
+     page falls back to the screenshots underneath it.
+     ============================================================ */
+  var demoFig = $('#pseyeDemo');
+  var demoVid = demoFig && $('video', demoFig);
+
+  /* Without an observer to tell us otherwise, assume it is on screen. */
+  var demoOnScreen = !('IntersectionObserver' in window);
+  var syncNodes = function () {};
+
+  if (demoFig) {
+    var showDemo = function () { demoFig.hidden = false; syncDemo(); };
+    /* readyState >= HAVE_METADATA means the file exists and decodes. Check it
+       once up front too, in case metadata arrived before this ran. */
+    if (demoVid.readyState >= 1) showDemo();
+    demoVid.addEventListener('loadedmetadata', showDemo);
+
+    if ('IntersectionObserver' in window) {
+      /* Play only while it is actually on screen. An inactive pane is
+         display:none, so switching files stops it without any extra work,
+         and nobody downloads 7 MB for a page they never opened. */
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { demoOnScreen = e.isIntersecting; });
+        syncDemo();
+      }, { threshold: 0.2 }).observe(demoFig);
+    }
+    /* Chrome does not advance a video in a background tab, and the observer
+       sees no intersection change on the way back, so the recording would
+       stay stopped after a trip to another tab. Re-sync on the way in. */
+    document.addEventListener('visibilitychange', syncDemo);
+  }
+
+  /* The single place that decides whether the recording is running. */
+  function syncDemo() {
+    if (!demoFig || demoFig.hidden) return;
+    if (prefersReduce()) {
+      /* Someone who asked the OS for less motion should not get a silent
+         video looping at them. Give them the controls back instead. */
+      demoVid.controls = true;
+      demoVid.pause();
+      return;
+    }
+    if (demoOnScreen && current === 'pseye') demoVid.play().catch(function () {});
+    else demoVid.pause();
+  }
+
+  /* ============================================================
+     NODE FIELD, the drifting background behind every page.
+
+     Deliberately sparse. Density is tied to area rather than fixed, so a
+     wide monitor does not turn it into a mesh, and it is capped so a very
+     large window cannot make it expensive. It stops whenever the tab is in
+     the background, since nobody is looking at it.
+     ============================================================ */
+  var nodeCanvas = $('#nodeField');
+
+  if (nodeCanvas) (function () {
+    var ctx = nodeCanvas.getContext('2d');
+    var nodes = [];
+    var w = 0, h = 0, dpr = 1;
+    var raf = 0, running = false;
+    var pointer = { x: -9999, y: -9999 };
+
+    var LINK = 132;      /* px within which two nodes are joined */
+    var PUSH = 110;      /* px within which the cursor nudges a node */
+    var PER_PX = 15500;  /* one node per this many px2 */
+    var MAX = 70;
+
+    function accent() {
+      var c = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      return c || '#3ddc97';
+    }
+    var stroke = accent();
+
+    function seed() {
+      var want = Math.min(MAX, Math.round((w * h) / PER_PX));
+      nodes = [];
+      for (var i = 0; i < want; i++) {
+        nodes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          /* slow, and never axis-aligned, so it reads as drift not scrolling */
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: (Math.random() - 0.5) * 0.16,
+          r: 1 + Math.random() * 1.4,
+          ox: 0, oy: 0
+        });
+      }
+    }
+
+    function resize() {
+      var r = nodeCanvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      nodeCanvas.width = Math.round(w * dpr);
+      nodeCanvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      stroke = accent();
+      seed();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var i, j, a, b, dx, dy, d;
+
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < -20) a.x = w + 20; else if (a.x > w + 20) a.x = -20;
+        if (a.y < -20) a.y = h + 20; else if (a.y > h + 20) a.y = -20;
+
+        /* Cursor pushes a node aside, and it eases back once the cursor
+           leaves. The offset is kept separate from the drift so the two
+           never fight each other. */
+        dx = a.x - pointer.x; dy = a.y - pointer.y;
+        d = Math.sqrt(dx * dx + dy * dy);
+        if (d < PUSH && d > 0.01) {
+          var f = (1 - d / PUSH) * 14;
+          a.ox += ((dx / d) * f - a.ox) * 0.12;
+          a.oy += ((dy / d) * f - a.oy) * 0.12;
+        } else {
+          a.ox *= 0.92; a.oy *= 0.92;
+        }
+      }
+
+      ctx.lineWidth = 1;
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          b = nodes[j];
+          dx = (a.x + a.ox) - (b.x + b.ox);
+          dy = (a.y + a.oy) - (b.y + b.oy);
+          d = Math.sqrt(dx * dx + dy * dy);
+          if (d > LINK) continue;
+          ctx.globalAlpha = (1 - d / LINK) * 0.13;
+          ctx.strokeStyle = stroke;
+          ctx.beginPath();
+          ctx.moveTo(a.x + a.ox, a.y + a.oy);
+          ctx.lineTo(b.x + b.ox, b.y + b.oy);
+          ctx.stroke();
+        }
+      }
+
+      ctx.fillStyle = stroke;
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i];
+        ctx.globalAlpha = 0.3;
+        ctx.beginPath();
+        ctx.arc(a.x + a.ox, a.y + a.oy, a.r, 0, 6.2832);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function frame() { draw(); raf = requestAnimationFrame(frame); }
+
+    function start() {
+      if (running) return;
+      running = true;
+      resize();
+      if (prefersReduce()) { draw(); return; }   /* one still frame, no loop */
+      raf = requestAnimationFrame(frame);
+    }
+
+    function stop() {
+      running = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    }
+
+    /* Same rule as the recording: run only when it is actually being seen. */
+    syncNodes = function () {
+      if (document.visibilityState === 'visible') start(); else stop();
+    };
+
+    window.addEventListener('resize', function () { if (running) resize(); });
+    document.addEventListener('visibilitychange', syncNodes);
+    nodeCanvas.parentNode.addEventListener('pointermove', function (e) {
+      var r = nodeCanvas.getBoundingClientRect();
+      pointer.x = e.clientX - r.left;
+      pointer.y = e.clientY - r.top;
+    });
+    nodeCanvas.parentNode.addEventListener('pointerleave', function () {
+      pointer.x = pointer.y = -9999;
+    });
+    /* Recolour when the theme flips, since the accent differs per theme. */
+    new MutationObserver(function () { stroke = accent(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    syncNodes();
+  }());
+
+  /* ============================================================
      LIGHTBOX. Click any screenshot to see it at full size.
      Groups by the figure's container so arrows walk one project.
      ============================================================ */
@@ -703,7 +904,7 @@
      terminal's `find`, so a recruiter can search by technology.
      ============================================================ */
   var WORK = [
-    { name: 'PSEye', file: 'projects', anchor: 'proj-pseye', year: '2025',
+    { name: 'PSEye', file: 'pseye', year: '2026',
       tech: 'nextjs next.js typescript postgres neon vercel react sql',
       blurb: 'Live market intelligence platform, 282 PSE-listed companies' },
     { name: 'Flood Modeling & Visualization System', file: 'projects', anchor: 'proj-flood', year: '2024',
@@ -924,6 +1125,7 @@
      BOOT
      ============================================================ */
   (function boot() {
+    initMode();
     var id = location.hash.replace('#', '');
     if (FILES[id] && id !== 'about') openTabs = ['about', id];
     var start = FILES[id] ? id : 'about';

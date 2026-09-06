@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-mode="dev">
+<html lang="en" data-theme="dark" data-mode="recruiter">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ezra Guiao, Data Analyst</title>
 <meta name="author" content="Mikhail Ezra Guiao">
-<meta name="description" content="Data Quality Analyst at Citibank. BS Computer Science from UP Diliman, starting an MS in Analytics at Georgia Tech in 2026. I work on data pipelines, risk models and dashboards.">
+<meta name="description" content="Data Analyst at Citibank. BS Computer Science from UP Diliman, starting an MS in Analytics at Georgia Tech in 2026. I work on data pipelines, risk models and dashboards.">
 <link rel="canonical" href="https://cytical.github.io/">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -19,15 +19,15 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cytical.github.io/">
 <meta property="og:title" content="Ezra Guiao, Data Analyst">
-<meta property="og:description" content="Data Quality Analyst at Citibank. Python, SQL, Power BI, and a live market data platform at pseye.site.">
+<meta property="og:description" content="Data Analyst at Citibank. Python, SQL, Power BI, and a live market data platform at pseye.site.">
 <meta property="og:image" content="https://cytical.github.io/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Ezra Guiao, Data Quality Analyst at Citibank.">
+<meta property="og:image:alt" content="Ezra Guiao, Data Analyst at Citibank.">
 <meta property="og:site_name" content="Ezra Guiao">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ezra Guiao, Data Analyst">
-<meta name="twitter:description" content="Data Quality Analyst at Citibank. Python, SQL, Power BI, and a live market data platform at pseye.site.">
+<meta name="twitter:description" content="Data Analyst at Citibank. Python, SQL, Power BI, and a live market data platform at pseye.site.">
 <meta name="twitter:image" content="https://cytical.github.io/images/og-card.png">
 
 <script>
@@ -42,7 +42,7 @@
      Light is opt-in via the toggle and only then remembered. */
   if(t!=='light'&&t!=='dark')t='dark';
   d.setAttribute('data-theme',t);
-  d.setAttribute('data-mode',m==='recruiter'?'recruiter':'dev');
+  d.setAttribute('data-mode',m==='dev'?'dev':'recruiter');
 })();
 </script>
 
@@ -51,7 +51,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.css?v=33">
+<link rel="stylesheet" href="assets/css/style.css?v=50">
 
 <script type="application/ld+json">
 {
@@ -61,7 +61,7 @@
   "alternateName":"Ezra Guiao",
   "url":"https://cytical.github.io/",
   "email":"mailto:guiaomikhail@gmail.com",
-  "jobTitle":"Data Quality Analyst",
+  "jobTitle":"Data Analyst",
   "worksFor":{"@type":"Organization","name":"Citibank"},
   "address":{"@type":"PostalAddress","addressLocality":"Manila","addressCountry":"PH"},
   "alumniOf":[
@@ -150,6 +150,9 @@
         <button class="tree-file" data-file="resume" aria-current="false">
           <span class="ic" aria-hidden="true">&#9635;</span><span class="code">resume.pdf</span><span class="plain">R&eacute;sum&eacute;</span>
         </button>
+        <button class="tree-file" data-file="pseye" aria-current="false">
+          <span class="ic" aria-hidden="true">&lt;&gt;</span><span class="code">live-project.tsx</span><span class="plain">Live project</span>
+        </button>
         <button class="tree-file" data-file="projects" aria-current="false">
           <span class="ic" aria-hidden="true">{}</span><span class="code">projects.ipynb</span><span class="plain">Projects</span>
         </button>
@@ -200,28 +203,20 @@
     <div class="tabbar" id="tabbar" role="tablist" aria-label="Open files"></div>
 
     <div class="editor-body" id="editorBody">
+      <!-- Background for about.md. Fixed to the editor region and painted
+           under the panes; app.js only runs it while about.md is open. -->
+      <canvas class="nodes" id="nodeField" aria-hidden="true"></canvas>
       <div class="panes">
 
         <!-- ==================== README ==================== -->
         <section class="pane" id="pane-about" data-active="true" role="tabpanel" tabindex="0" aria-label="About">
           <div class="pane-inner">
 
-            <div class="recruiter-card">
-              <p class="rc-title">Quick summary</p>
-              <div class="rc-grid">
-                <div class="rc-item"><div class="k">Current role</div><div class="v">Data Quality Analyst, Citibank<br>Oct 2025 – Present</div></div>
-                <div class="rc-item"><div class="k">Education</div><div class="v">MS Analytics, Georgia Tech (2026–28)<br>BS Computer Science, UP Diliman <em>cum laude</em></div></div>
-                <div class="rc-item"><div class="k">Core skills</div><div class="v">Python · SQL · Pandas · Power BI · Next.js · AI workflow automation</div></div>
-                <div class="rc-item"><div class="k">Looking for</div><div class="v">Data analyst and data scientist roles</div></div>
-              </div>
-              <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Download résumé (PDF)</a>
-            </div>
-
             <div class="about-top">
               <div>
                 <p class="pill"><span class="status-dot" aria-hidden="true"></span> Open to opportunities · Manila, PH</p>
                 <h1 class="hero-name">Ezra Guiao</h1>
-                <p class="hero-role">Data Quality Analyst at Citibank</p>
+                <p class="hero-role">Data Analyst at Citibank</p>
                 <p class="hero-tag">I build the pipelines and dashboards that financial decisions get made on.</p>
                 <div class="hero-actions">
                   <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">
@@ -253,15 +248,15 @@
 
 
             <ul class="creds">
-              <li><span class="k">Currently</span><span class="v">Data Quality Analyst at <b>Citibank</b> &middot; Manila</span></li>
-              <li><span class="k">Starting Aug 2026</span><span class="v">MS Analytics at <b>Georgia Tech</b> &middot; Data Science track</span></li>
+              <li><span class="k">Currently</span><span class="v">Data Analyst at <b>Citibank</b> &middot; Manila</span></li>
+              <li><span class="k">Started Aug 2026</span><span class="v">MS Analytics at <b>Georgia Tech</b></span></li>
               <li><span class="k">Graduated 2025</span><span class="v">BS Computer Science, <b>UP Diliman</b> &middot; <i>cum laude</i></span></li>
             </ul>
 
             <div class="prose">
-              <p>I studied computer science and ended up working in data, mostly on the finance side of it.</p>
-              <p>Day to day that means SQL and Python against banking data, and Power BI for the reporting on top. Outside work I run PSEye, a market data platform for the Philippine Stock Exchange, which is where most of my pipeline and schema design has actually happened. Before that I did a thesis on flood simulation and a fair amount of survey analysis.</p>
-              <p>The software engineering background is the useful part. I can read the analysis and I can also build and keep the pipeline running underneath it, which in practice means I am not waiting on someone else to get me the data.</p>
+              <p>I work on data in banking. Day to day that is SQL and Python against client onboarding data at Citibank, and Power BI for the reporting that sits on top of it.</p>
+              <p>Outside work I run PSEye, a market data platform for the Philippine Stock Exchange. It is the one system I own from ingestion through to what a visitor actually sees, and it is where most of my pipeline and schema design has really happened. Before it came a thesis on flood simulation and a good deal of survey analysis.</p>
+              <p>The computer science degree is what makes the difference day to day. I can do the analysis, and I can build and maintain the pipeline underneath it, so I am not waiting on someone else to hand me the data.</p>
             </div>
 
             <div class="about-exp">
@@ -269,31 +264,19 @@
               <div class="tl">
                 <div class="tl-item">
                   <div class="tl-when">Oct 2025 &ndash; Present</div>
-                  <div>
-                    <h3 class="tl-role">Data Quality Analyst <span class="org">&middot; Citibank</span></h3>
-                    <p class="tl-sub">I own onboarding remediation change requests from the FRD through to post-release monitoring, and I am the point of contact between the APAC and NAM teams on them. Automating the validation workflow cut processing time by 92%.</p>
-                  </div>
+                  <h3 class="tl-role">Data Analyst <span class="org">&middot; Citibank</span></h3>
                 </div>
                 <div class="tl-item">
                   <div class="tl-when">Jul 2024 &ndash; Aug 2024</div>
-                  <div>
-                    <h3 class="tl-role">Software Engineer Intern <span class="org">&middot; Pointwest</span></h3>
-                    <p class="tl-sub">Led the UI/UX and system architecture for an internal skills inventory platform, working with a team of ten. It was approved by the C-suite for company-wide adoption.</p>
-                  </div>
+                  <h3 class="tl-role">Software Engineer Intern <span class="org">&middot; Pointwest</span></h3>
                 </div>
                 <div class="tl-item">
                   <div class="tl-when">Jul 2022 &ndash; Sep 2022</div>
-                  <div>
-                    <h3 class="tl-role">Data Analyst Intern <span class="org">&middot; HealthNow (Ayala Health)</span></h3>
-                    <p class="tl-sub">Analysed about 500,000 user profiles with Pandas and MySQL for audience targeting work, and standardised how the databases across the group talked to each other.</p>
-                  </div>
+                  <h3 class="tl-role">Data Analyst Intern <span class="org">&middot; HealthNow (Ayala Health)</span></h3>
                 </div>
                 <div class="tl-item">
                   <div class="tl-when">Jun 2022 &ndash; Aug 2022</div>
-                  <div>
-                    <h3 class="tl-role">Software Engineer Intern <span class="org">&middot; Bit Create</span></h3>
-                    <p class="tl-sub">Built and shipped client sites in Vue.js, and did the UI/UX and back end for a real estate platform.</p>
-                  </div>
+                  <h3 class="tl-role">Software Engineer Intern <span class="org">&middot; Bit Create</span></h3>
                 </div>
               </div>
               <div class="about-exp-cta">
@@ -332,7 +315,8 @@
               <ul>
                 <li><span class="ic">▤</span><span><b>about.md</b>, who I am and what I work on</span></li>
                 <li><span class="ic">&#9679;</span><span><b>resume.pdf</b>, the one-pager, readable without downloading it</span></li>
-                <li><span class="ic">{}</span><span><b>projects.ipynb</b>, five projects written up properly</span></li>
+                <li><span class="ic">{}</span><span><b>live-project.tsx</b>, PSEye, the one that is actually in production, with a recording of it in use</span>
+                <span><b>projects.ipynb</b>, four more projects written up properly</span></li>
                 <li><span class="ic">▤</span><span><b>experience.log</b>, Citibank, Pointwest, Ayala Health, Bit Create, and education</span></li>
                 <li><span class="ic">{}</span><span><b>skills.json</b>, each skill with the project it came from</span></li>
                 <li><span class="ic">▤</span><span><b>archive/</b>, older work I have not deleted</span></li>
@@ -377,32 +361,100 @@
           </div>
         </section>
 
+        <!-- ==================== PSEYE ==================== -->
+        <section class="pane" id="pane-pseye" role="tabpanel" tabindex="0" aria-label="PSEye">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <div>
+                <a class="pane-kicker" href="https://pseye.site" target="_blank" rel="noopener">
+                  <span class="status-dot" aria-hidden="true"></span>pseye.site &#8599;
+                </a>
+                <h2 class="pane-title">PSEye</h2>
+              </div>
+              <p class="pane-note">live since 2026, updated every trading day</p>
+            </div>
+
+            <div class="prose">
+              <p>PSEye is a market intelligence platform for the Philippine Stock Exchange. It covers all 282 listed companies, and it is the project I have put the most work into. Everything below is running in production right now, and it gets around 2,500 visitors a month.</p>
+            </div>
+
+            <!-- Revealed by app.js once the recording loads. Hidden here so a
+                 missing or unplayable file leaves no empty player behind. -->
+            <figure class="demo" id="pseyeDemo" hidden>
+              <div class="demo-crop">
+                <video class="demo-video" muted loop playsinline preload="metadata"
+                       poster="images/pseye/demo-poster.jpg"
+                       aria-label="Silent looping screen recording of PSEye being used: the market map, a company page, and the daily recap">
+                  <source src="media/pseye-demo.mp4" type="video/mp4">
+                </video>
+              </div>
+            </figure>
+
+            <hr class="rule">
+
+            <h3 class="sec-title">What is on it</h3>
+            <dl class="feat">
+              <div><dt><a href="https://pseye.site/" target="_blank" rel="noopener">Market map &#8599;</a></dt><dd>A treemap of the whole exchange, sized by market cap and coloured by the day's move. It filters down to the PSEi 30, the top 50 or 100, or your own watchlist, and drills into any of the six sectors.</dd></div>
+              <div><dt><a href="https://pseye.site/stocks/ICT" target="_blank" rel="noopener">Company pages &#8599;</a></dt><dd>Price history, disclosures and news per ticker, plus a statistical profile: annualised return, Sharpe and Sortino, downside deviation, the daily return distribution with its skew and excess kurtosis, and 95% VaR and CVaR.</dd></div>
+              <div><dt><a href="https://pseye.site/daily" target="_blank" rel="noopener">Daily recap &#8599;</a></dt><dd>A page per trading day, written from the close: index level and trend, total market cap against its one-year range, sector movers, and the day's gainers, losers and most active names.</dd></div>
+              <div><dt><a href="https://pseye.site/foreign-flow" target="_blank" rel="noopener">Foreign fund flow &#8599;</a></dt><dd>Daily net foreign buying and selling parsed out of the PSE's Daily Quotation Report, plus weekly gross buying against selling from the Market Watch report, which is the only source that separates the two sides.</dd></div>
+              <div><dt><a href="https://pseye.site/regime" target="_blank" rel="noopener">Market regime &#8599;</a></dt><dd>Risk-on and risk-off labelling over a reconstructed composite index, from three signals: trend against the 200-day average, drawdown from the peak, and 30-day volatility. It describes where the market has been, it does not forecast.</dd></div>
+              <div><dt><a href="https://pseye.site/screener" target="_blank" rel="noopener">Explorer and screener &#8599;</a></dt><dd>Every tracked company in one sortable table: price, change, market cap both raw and PSE-adjusted, float, trailing twelve-month dividend yield, P/E and P/B. There is a dividend screener too, with ex-dates and payout history.</dd></div>
+            </dl>
+
+            <hr class="rule">
+
+            <h3 class="sec-title">How it is built</h3>
+            <div class="prose">
+              <p>The hard part was never the charts. PSE data arrives in inconsistent shapes across several sources, so most of the work went into the ingestion pipeline and the schema that pulls all of it into one queryable model. Once that existed, the daily recap, the fund flow page and the regime labelling all fell out of the same tables instead of each needing its own scraper.</p>
+              <p>Prices and disclosures are ingested daily, and the recap is generated from the close rather than written by hand. That is the only reason a page per trading day is maintainable at all.</p>
+            </div>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Postgres (Neon)</span><span class="chip">SQL</span><span class="chip">Vercel</span></div>
+
+            <hr class="rule">
+
+            <h3 class="sec-title">Screens</h3>
+            <div class="proj-shots">
+              <figure><picture><source srcset="images/pseye/market-map.webp" type="image/webp"><img src="images/pseye/market-map.jpg" width="1342" height="829" alt="PSEye market map, a treemap of PSE-listed companies coloured by daily change" loading="lazy" decoding="async"></picture><figcaption>market map, sized by market cap</figcaption></figure>
+              <figure><picture><source srcset="images/pseye/company.webp" type="image/webp"><img src="images/pseye/company.jpg" width="1567" height="939" alt="PSEye company page for ICT showing price chart, analytics and statistical profile" loading="lazy" decoding="async"></picture><figcaption>company page, price history and risk stats</figcaption></figure>
+              <figure><picture><source srcset="images/pseye/daily-recap.webp" type="image/webp"><img src="images/pseye/daily-recap.jpg" width="1568" height="715" alt="PSEye daily recap for 4 September 2026, showing the PSEi close, index trend, sector movers and the day's gainers, losers and most active names" loading="lazy" decoding="async"></picture><figcaption>daily recap, generated from the close every trading day</figcaption></figure>
+              <figure><picture><source srcset="images/pseye/foreign-flow.webp" type="image/webp"><img src="images/pseye/foreign-flow.jpg" width="1568" height="690" alt="PSEye foreign fund flow page, a bar chart of daily net foreign buying and selling" loading="lazy" decoding="async"></picture><figcaption>foreign fund flow, parsed out of PSE's daily reports</figcaption></figure>
+              <figure><picture><source srcset="images/pseye/regime.webp" type="image/webp"><img src="images/pseye/regime.jpg" width="1568" height="690" alt="PSEye market regime page labelling the PSE's history risk-on or risk-off against a reconstructed composite index" loading="lazy" decoding="async"></picture><figcaption>risk-on / risk-off labelling over a composite index</figcaption></figure>
+            </div>
+
+            <div class="looking">
+              <p class="looking-title">Have a look for yourself</p>
+              <div class="prose"><p>It is free and there is nothing to sign up for. The market map is the front page.</p></div>
+              <div class="looking-cta">
+                <a class="btn btn--primary" href="https://pseye.site" target="_blank" rel="noopener">Open pseye.site &#8599;</a>
+                <button class="btn" data-open="projects">Other projects &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- ==================== PROJECTS ==================== -->
         <section class="pane" id="pane-projects" role="tabpanel" tabindex="0" aria-label="Projects">
           <div class="pane-inner">
             <div class="pane-head">
               <h2 class="pane-title">Projects</h2>
-              <p class="pane-note">five featured, the rest are in the archive</p>
+              <p class="pane-note">PSEye has its own page, four more here, the rest in the archive</p>
             </div>
 
             <div class="proj-grid">
 
-              <!-- PSEye -->
+              <!-- PSEye lives on its own page; this only points at it -->
               <article class="proj" id="proj-pseye">
                 <div class="proj-head">
                   <div>
-                    <h3 class="proj-title"><a href="https://pseye.site" target="_blank" rel="noopener">PSEye</a></h3>
-                    <p class="proj-meta">Market intelligence &middot; 2025 &middot; live at pseye.site</p>
+                    <h3 class="proj-title"><button data-open="pseye">PSEye</button></h3>
+                    <p class="proj-meta">Market intelligence &middot; 2026 &middot; live at pseye.site</p>
                   </div>
                 </div>
-                <p class="proj-desc">A market intelligence platform for the Philippine Stock Exchange, covering all 282 listed companies. It has a market map, portfolio and watchlist tracking, dividend history, and foreign fund flow. I built the daily ingestion pipeline and the schema that pulls inconsistent exchange sources into one queryable model, which also feeds an automated daily recap. It gets around 2,500 visitors a month.</p>
-                <div class="proj-shots">
-                  <figure><picture><source srcset="images/pseye/market-map.webp" type="image/webp"><img src="images/pseye/market-map.jpg" width="1342" height="829" alt="PSEye market map, a treemap of PSE-listed companies coloured by daily change" loading="lazy" decoding="async"></picture><figcaption>market map, sized by market cap</figcaption></figure>
-                  <figure><picture><source srcset="images/pseye/company.webp" type="image/webp"><img src="images/pseye/company.jpg" width="1567" height="939" alt="PSEye company page for ICT showing price chart, analytics and statistical profile" loading="lazy" decoding="async"></picture><figcaption>company page, price history and risk stats</figcaption></figure>
-                </div>
+                <p class="proj-desc">A market intelligence platform for the Philippine Stock Exchange, covering all 282 listed companies. It has a page of its own, with a recording of the site in use.</p>
                 <div class="proj-foot">
                   <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Postgres (Neon)</span><span class="chip">Vercel</span></div>
-                  <div class="proj-links"><a class="xlink" href="https://pseye.site" target="_blank" rel="noopener">Visit pseye.site &#8599;</a></div>
+                  <div class="proj-links"><button class="xlink" data-open="pseye">Open live-project.tsx &rarr;</button></div>
                 </div>
               </article>
 
@@ -497,7 +549,7 @@
               <div class="tl-item">
                 <div class="tl-when">Oct 2025 – Present</div>
                 <div>
-                  <h3 class="tl-role">Data Quality Analyst <span class="org">· Citibank</span></h3>
+                  <h3 class="tl-role">Data Analyst <span class="org">· Citibank</span></h3>
                   <ul class="tl-bullets">
                     <li>Owned data remediation (onboarding) change requests end to end, from scope submission and FRD through deployment and post-release monitoring.</li>
                     <li>Served as primary liaison between stakeholder teams across APAC and NAM, reviewing change requests and running calls to resolve clarifications and drive approvals.</li>
@@ -551,7 +603,6 @@
                 <div class="tl-when">Aug 2026 – Expected 2028</div>
                 <div>
                   <h3 class="tl-role">Master of Science in Analytics <span class="org">· Georgia Institute of Technology</span></h3>
-                  <p class="tl-sub">Data Science track.</p>
                 </div>
               </div>
               <div class="tl-item">
@@ -581,21 +632,21 @@
                 <div class="skill"><div class="n">Pandas / NumPy</div><button class="e" data-goto="experience">500K+ user profiles at HealthNow</button></div>
                 <div class="skill"><div class="n">Power BI</div><button class="e" data-goto="projects#proj-fraud">1M+ application fraud dashboard</button></div>
                 <div class="skill"><div class="n">Tableau</div><button class="e" data-goto="archive-data">Reporting &amp; exploratory dashboards</button></div>
-                <div class="skill"><div class="n">PostgreSQL / MySQL</div><button class="e" data-goto="projects#proj-pseye">PSEye on Neon; HealthNow pipelines</button></div>
+                <div class="skill"><div class="n">PostgreSQL / MySQL</div><button class="e" data-goto="pseye">PSEye on Neon; HealthNow pipelines</button></div>
                 <div class="skill"><div class="n">Jupyter · Matplotlib · Plotly</div><button class="e" data-goto="projects#proj-hiv">NBA prediction, HIV perception mapping</button></div>
                 <div class="skill"><div class="n">Numba · QGIS</div><button class="e" data-goto="projects#proj-flood">JIT-optimized geospatial flood model</button></div>
               </div>
 
               <div class="skill-col">
                 <h3>web-fullstack/</h3>
-                <div class="skill"><div class="n">TypeScript</div><button class="e" data-goto="projects#proj-pseye">PSEye, Ugnayan</button></div>
-                <div class="skill"><div class="n">React / Next.js</div><button class="e" data-goto="projects#proj-pseye">PSEye, live at pseye.site</button></div>
+                <div class="skill"><div class="n">TypeScript</div><button class="e" data-goto="pseye">PSEye, Ugnayan</button></div>
+                <div class="skill"><div class="n">React / Next.js</div><button class="e" data-goto="pseye">PSEye, live at pseye.site</button></div>
                 <div class="skill"><div class="n">Angular · Bootstrap</div><button class="e" data-goto="experience">Pointwest skills inventory platform</button></div>
                 <div class="skill"><div class="n">Vue.js</div><button class="e" data-goto="projects#proj-acoustify">Acoustify, and client sites at Bit Create</button></div>
                 <div class="skill"><div class="n">Node.js</div><button class="e" data-goto="projects#proj-acoustify">Acoustify OAuth server</button></div>
                 <div class="skill"><div class="n">Django</div><button class="e" data-goto="archive-web">PSE Terminal</button></div>
                 <div class="skill"><div class="n">Firebase</div><button class="e" data-goto="archive-web">Ugnayan real-time application tracking</button></div>
-                <div class="skill"><div class="n">Git · Vercel</div><button class="e" data-goto="projects#proj-pseye">Deploying PSEye and this site</button></div>
+                <div class="skill"><div class="n">Git · Vercel</div><button class="e" data-goto="pseye">Deploying PSEye and this site</button></div>
                 <div class="skill"><div class="n">BeautifulSoup</div><button class="e" data-goto="archive-web">Marketwatch financial scraping</button></div>
               </div>
 
@@ -835,6 +886,6 @@
   </div>
 </div>
 
-<script src="assets/js/app.js?v=33"></script>
+<script src="assets/js/app.js?v=50"></script>
 </body>
 </html>

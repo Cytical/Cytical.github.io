@@ -372,9 +372,12 @@ button.status-item:hover{color:var(--ink)}
 
 /* ---------- experience, condensed, on about.md ---------- */
 .about-exp{margin-top:48px}
-.about-exp .tl-item{padding:20px 0}
+/* These rows are date and role only, no blurb underneath, so they close up
+   into a list rather than sitting at CV spacing. */
+.about-exp .tl-item{padding:13px 0;align-items:baseline}
 .about-exp .tl-item:first-child{padding-top:0}
-.about-exp .tl-role{margin-bottom:7px}
+.about-exp .tl-when{padding-top:0}
+.about-exp .tl-role{margin-bottom:0}
 .about-exp-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
 
 /* ---------- what I'm looking for ---------- */
@@ -399,15 +402,6 @@ button.status-item:hover{color:var(--ink)}
 .looking-cta{display:flex;gap:10px;flex-wrap:wrap}
 
 
-/* recruiter summary card */
-.recruiter-card{display:none;border:1px solid var(--accent);border-radius:var(--radius);
-  background:var(--accent-dim);padding:22px 24px;margin-bottom:40px}
-[data-mode="recruiter"] .recruiter-card{display:block}
-.rc-title{font-size:16px;font-weight:600;margin-bottom:14px;color:var(--ink);font-family:var(--sans)}
-.rc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px 28px;margin-bottom:18px}
-.rc-item .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
-.rc-item .v{font-size:13.5px;color:var(--ink);line-height:1.45}
-
 /* ---------- resume pane ---------- */
 .pdf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
 .pdf-frame{
@@ -426,6 +420,87 @@ button.status-item:hover{color:var(--ink)}
   .pdf-frame{min-height:0}
   .pdf-frame object,.pdf-frame iframe{height:70vh}
 }
+/* ---------- node field (about.md background) ---------- */
+/* A canvas is a replaced element: left/right/top/bottom will not stretch it,
+   it just sits at its intrinsic 300x150 inside the box. It needs a real
+   width and height. */
+.nodes{
+  position:fixed;z-index:0;pointer-events:none;
+  left:calc(var(--rail) + var(--sidebar));
+  top:calc(var(--titlebar) + var(--tabbar));
+  width:calc(100vw - var(--rail) - var(--sidebar));
+  height:calc(100vh - var(--titlebar) - var(--tabbar) - var(--statusbar));
+}
+/* Panes are static, so they need a stacking context to sit over the canvas. */
+.pane-inner{position:relative;z-index:1}
+
+/* ---------- pseye pane ---------- */
+/* The live URL is the most useful thing on this page, so it leads it. */
+.pane-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;color:var(--accent);
+  letter-spacing:.02em;margin-bottom:12px;
+  border-bottom:1px solid transparent;padding-bottom:1px;
+}
+.pane-kicker:hover{border-bottom-color:var(--accent)}
+.sec-title{
+  font-family:var(--mono);font-size:12px;font-weight:400;color:var(--faint);
+  letter-spacing:.02em;margin-bottom:20px;
+}
+[data-mode="recruiter"] .sec-title{
+  font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);
+}
+/* This page is as wide as the recording, so the heading, the prose and the
+   screenshots all share its left and right edge. 1280px is the recording's
+   own width: past that it would only be upscaled and the small text in those
+   dashboards goes soft. Paragraphs keep their own max-width for readability,
+   they just start on the same line as everything else. */
+#pane-pseye{
+  --file-w:1280; --file-h:720;   /* the recording */
+  --crop-x:112;  --crop-y:26;    /* dead space above and to the left */
+  --crop-w:1046; --crop-h:669;   /* the browser content worth showing */
+  /* The page is exactly as wide as the cropped recording, so the video plays
+     at its own resolution and is never upscaled. Everything else on the page
+     follows that width, which keeps the shared left and right edge. */
+  /* +2px for the 1px frame border on each side, which sits outside the
+     crop box: without it the video lands a shade under 1:1. */
+  max-width:calc(var(--crop-w) * 1px + 2px + 2 * clamp(24px, 5vw, 72px));
+}
+.demo{
+  width:100%;margin:36px 0 0;
+  border:1px solid var(--line-strong);border-radius:var(--radius);
+  overflow:hidden;background:#000;box-shadow:var(--shadow);
+}
+/* The capture area was bigger than the browser window, so the file carries
+   dead space: 112px down the left, 122px down the right and about 26px top
+   and bottom. Cropping here rather than re-encoding keeps every pixel of the
+   original. The only things trimmed are the ticker tape and the nav bar,
+   which run edge to edge anyway and still do after the crop. */
+.demo-crop{
+  overflow:hidden;
+  max-width:calc(var(--crop-w) * 1px);
+  aspect-ratio:var(--crop-w) / var(--crop-h);
+}
+.demo-video{
+  display:block;background:#000;height:auto;
+  width:calc(100% * var(--file-w) / var(--crop-w));
+  /* Percentage margins resolve against the container's width in both axes,
+     which is exactly the scale factor the width above establishes. */
+  margin-left:calc(-100% * var(--crop-x) / var(--crop-w));
+  margin-top:calc(-100% * var(--crop-y) / var(--crop-w));
+}
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 34px;margin:0}
+.feat dt{
+  font-family:var(--mono);font-size:11.5px;color:var(--accent);
+  letter-spacing:.02em;margin-bottom:7px;
+}
+.feat dt a{
+  border-bottom:1px solid transparent;padding-bottom:1px;
+  transition:border-color .15s;
+}
+.feat dt a:hover{border-bottom-color:var(--accent)}
+.feat dd{margin:0;font-size:13.5px;color:var(--mid);line-height:1.62}
+
 /* ---------- projects pane ---------- */
 .proj-grid{display:flex;flex-direction:column;gap:34px}
 .proj{
@@ -434,9 +509,21 @@ button.status-item:hover{color:var(--ink)}
 }
 .proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .proj-title{font-size:19px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
-.proj-title a:hover{color:var(--accent)}
+.proj-title a:hover,.proj-title button:hover{color:var(--accent)}
 .proj-meta{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px}
 .proj-desc{font-size:14px;color:var(--mid);line-height:1.7;max-width:76ch}
+.proj-shots{display:flex;flex-direction:column;gap:16px}
+.proj-shots figure{
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  background:var(--bg);cursor:zoom-in;transition:border-color .2s;
+}
+.proj-shots figure:hover{border-color:var(--line-strong)}
+.proj-shots picture{display:block}
+.proj-shots img{display:block;width:100%;height:auto}
+.proj-shots figcaption{
+  font-family:var(--mono);font-size:10.5px;color:var(--faint);
+  padding:8px 11px;border-top:1px solid var(--line);
+}
 .proj-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .proj-links{display:flex;gap:14px;margin-left:auto}
@@ -661,11 +748,14 @@ html:not(.js-ready) .statusbar{position:static}
    RESPONSIVE
    ============================================================ */
 @media (max-width:1080px){
+  .feat{grid-template-columns:1fr;gap:22px}
   .skill-cols{grid-template-columns:repeat(2,1fr)}
   .creds{grid-template-columns:1fr}
 }
 @media (max-width:900px){
   :root{--sidebar:260px}
+  /* the rail is gone and the sidebar is a drawer, so neither offsets it */
+  .nodes{left:0;width:100vw}
   .app{grid-template-columns:1fr;grid-template-areas:"title" "editor" "status"}
   .rail{display:none}
   .tb-menu{display:grid}
@@ -716,7 +806,7 @@ html:not(.js-ready) .statusbar{position:static}
    ============================================================ */
 @media print{
   .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,
-  .palette,.scrim,.skip,.lightbox,.to-top,.pdf-frame,.pdf-actions,
+  .palette,.scrim,.skip,.demo,.lightbox,.to-top,.pdf-frame,.pdf-actions,
   .tb-actions,.hero-actions,.looking-cta,.contact-cta,
   .arch-shots,.proj-shots,.arch-chev,body::after{display:none !important}
 
@@ -761,7 +851,6 @@ html:not(.js-ready) .statusbar{position:static}
   .looking{background:none;border:1pt solid #ccc;border-left-width:2pt}
   .creds .k,.looking-grid dt,.skill .e::before{color:#000}
   .chip{border-color:#999;color:#333}
-  .recruiter-card{display:block !important;background:none;border:1pt solid #999}
 
   /* archives print collapsed-open, without the image strips */
   .arch-head[aria-expanded="false"] + .arch-body{display:flex !important}

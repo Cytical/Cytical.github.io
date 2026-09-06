@@ -1,0 +1,5 @@
+# Recording sources. media/pseye-demo.mp4 is the one the site serves; the
+# original capture stays local so the repo does not carry it twice.
+media/*.mkv
+media/*.mov
+media/*.avi
