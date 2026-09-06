@@ -63,10 +63,10 @@ continue. Each is easy to reverse.
 - [x] **10. Neither modal traps focus.** The lightbox and the command palette are
   both `aria-modal="true"`, and Tab walks straight out of them into the page behind
   the scrim. Nothing marks the background inert either.
-- [ ] **11. Tab close buttons are `<span role="button">` inside a `<button>`.**
+- [x] **11. Tab close buttons are `<span role="button">` inside a `<button>`.**
   Interactive content nested in interactive content: invalid, and not reachable by
   keyboard except through the undiscoverable Delete shortcut.
-- [ ] **12. Sub-minimum tap targets (WCAG 2.2 SC 2.5.8, AA).** At 390px the mode
+- [x] **12. Sub-minimum tap targets (WCAG 2.2 SC 2.5.8, AA).** At 390px the mode
   toggle is 18x24 and the drawer close is 19x18, both under the 24x24 floor.
 - [ ] **13. The recruiter toggle is an empty box on mobile.** `font-size:0` hides
   the label and collapses the status dot to 0x0, leaving an unlabelled rectangle in

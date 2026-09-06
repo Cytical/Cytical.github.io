@@ -44,8 +44,17 @@
     tabbar.innerHTML = '';
     openTabs.forEach(function (id) {
       var f = FILES[id];
+      /* Presentational wrapper: the tablist owns tabs, and a close
+         button is not one. Keeping them siblings is what lets the close
+         control be a real button instead of a span pretending to be one. */
+      var wrap = document.createElement('span');
+      wrap.className = 'tab-wrap';
+      wrap.setAttribute('role', 'presentation');
+      wrap.dataset.selected = id === current ? 'true' : 'false';
+
       var tab = document.createElement('button');
       tab.className = 'tab';
+      tab.type = 'button';
       tab.id = 'tab-' + id;
       tab.setAttribute('role', 'tab');
       tab.setAttribute('aria-selected', id === current ? 'true' : 'false');
@@ -68,13 +77,17 @@
       tab.appendChild(label);
 
       if (openTabs.length > 1) {
-        var x = document.createElement('span');
+        var x = document.createElement('button');
         x.className = 'tab-close';
-        x.setAttribute('role', 'button');
+        x.type = 'button';
         x.setAttribute('aria-label', 'Close ' + f.name);
-        x.textContent = '×';
+        /* Rides the same roving tabindex as its tab, so the tab bar stays
+           two stops rather than one per open file. */
+        x.tabIndex = id === current ? 0 : -1;
+        x.innerHTML = '<span aria-hidden="true">×</span>';
         x.addEventListener('click', function (e) { e.stopPropagation(); closeTab(id); });
-        tab.appendChild(x);
+        wrap.appendChild(x);
+        wrap.dataset.closable = 'true';
       }
 
       tab.addEventListener('click', function () { open(id); });
@@ -92,7 +105,8 @@
           if (el) el.focus();
         }
       });
-      tabbar.appendChild(tab);
+      wrap.insertBefore(tab, wrap.firstChild);
+      tabbar.appendChild(wrap);
     });
 
     /* Tabs only exist while they're open, so a pane's aria-labelledby would
