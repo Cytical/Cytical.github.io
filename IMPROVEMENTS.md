@@ -80,7 +80,7 @@ continue. Each is easy to reverse.
 - [x] **15. Self-host the two webfonts.** 79.7 KB over two files from a third-party
   origin, plus a render-path CSS request, plus DNS and TLS to `fonts.gstatic.com`.
   Latin-only subsets served same-origin remove all of it.
-- [ ] **16. 2.93 MB of unreferenced images are tracked in git.** The pre-optimisation
+- [x] **16. 2.93 MB of unreferenced images are tracked in git.** The pre-optimisation
   originals (filenames with spaces) and four unused Acoustify crops. No effect on
   page weight, but every clone pays for them.
 
