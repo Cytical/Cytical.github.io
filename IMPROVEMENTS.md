@@ -30,7 +30,7 @@ continue. Each is easy to reverse.
 
 ## P0 , broken or wrong
 
-- [ ] **1. The PSEye poster image loads on every visit (134 KB, 54% of first-load
+- [x] **1. The PSEye poster image loads on every visit (134 KB, 54% of first-load
   weight).** `<video poster>` is fetched by Chrome even though `#pane-pseye` is
   `display:none`, so every visitor to about.md pays for an image on a page they have
   not opened. Move the poster to JS on first open of the pane, and re-encode it.

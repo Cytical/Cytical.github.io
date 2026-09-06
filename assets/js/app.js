@@ -135,6 +135,7 @@
     renderTabs();
     renderPager();
     if (id === 'resume') mountPdf();
+    if (id === 'pseye') armDemo();
     syncDemo();
     syncNodes();
 
@@ -666,6 +667,15 @@
        sees no intersection change on the way back, so the recording would
        stay stopped after a trip to another tab. Re-sync on the way in. */
     document.addEventListener('visibilitychange', syncDemo);
+  }
+
+  /* The poster is 80 kB and the browser fetches it as soon as the attribute
+     exists, pane hidden or not, so it ships as data-poster and is attached
+     here on the first visit to the page that actually shows it. */
+  function armDemo() {
+    if (!demoVid || !demoVid.dataset.poster) return;
+    demoVid.poster = demoVid.dataset.poster;
+    delete demoVid.dataset.poster;
   }
 
   /* The single place that decides whether the recording is running. */

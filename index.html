@@ -51,7 +51,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.css?v=50">
+<link rel="stylesheet" href="assets/css/style.css?v=51">
 
 <script type="application/ld+json">
 {
@@ -382,8 +382,12 @@
                  missing or unplayable file leaves no empty player behind. -->
             <figure class="demo" id="pseyeDemo" hidden>
               <div class="demo-crop">
+                <!-- The poster is data-, not poster=: Chrome fetches a poster the
+                     moment the attribute exists, even with the pane display:none,
+                     so every visitor to about.md was paying 130 kB for a frame of
+                     a page they had not opened. app.js attaches it on first open. -->
                 <video class="demo-video" muted loop playsinline preload="metadata"
-                       poster="images/pseye/demo-poster.jpg"
+                       data-poster="images/pseye/demo-poster.jpg"
                        aria-label="Silent looping screen recording of PSEye being used: the market map, a company page, and the daily recap">
                   <source src="media/pseye-demo.mp4" type="video/mp4">
                 </video>
@@ -886,6 +890,6 @@
   </div>
 </div>
 
-<script src="assets/js/app.js?v=50"></script>
+<script src="assets/js/app.js?v=51"></script>
 </body>
 </html>
