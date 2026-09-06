@@ -74,7 +74,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 
-/* film grain — carried over from the previous design */
+/* film grain , carried over from the previous design */
 body::after{
   content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.03;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -115,7 +115,7 @@ body::after{
 .tb-btn:hover{background:var(--bg-hover);color:var(--ink);border-color:var(--line-strong)}
 .tb-btn svg{width:12px;height:12px;flex:none}
 .tb-btn .dot{width:6px;height:6px;border-radius:50%;background:var(--faint);flex:none}
-[data-mode="recruiter"] .tb-btn--mode .dot{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+[data-mode="recruiter"] .tb-btn--mode .dot{background:var(--accent)}
 [data-mode="recruiter"] .tb-btn--mode{color:var(--ink);border-color:var(--line-strong)}
 .kbd{
   font-family:var(--mono);font-size:10.5px;color:var(--faint);
@@ -256,16 +256,10 @@ body::after{
 button.status-item:hover{color:var(--ink)}
 .status-dot{
   width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;
-  animation:pulse 2.6s ease-out infinite;
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 var(--accent-dim)}
-  70%{box-shadow:0 0 0 7px transparent}
-  100%{box-shadow:0 0 0 0 transparent}
 }
 
 /* ============================================================
-   PANES — shared content primitives
+   PANES , shared content primitives
    ============================================================ */
 .pane{display:none;padding:56px clamp(24px,5vw,72px) 0;max-width:1080px;margin:0 auto;width:100%}
 .pane[data-active="true"]{display:block}
@@ -301,7 +295,6 @@ button.status-item:hover{color:var(--ink)}
   font-family:var(--mono);font-size:11.5px;color:var(--mid);
   margin-bottom:22px;
 }
-.pill .status-dot{animation:pulse 2.6s ease-out infinite}
 
 /* stacks / chips */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -309,12 +302,6 @@ button.status-item:hover{color:var(--ink)}
   font-family:var(--mono);font-size:10.5px;color:var(--mid);
   border:1px solid var(--line);border-radius:3px;padding:3px 8px;letter-spacing:.02em;
 }
-.badge{
-  font-family:var(--mono);font-size:10.5px;color:var(--accent);
-  border:1px solid var(--accent);border-radius:3px;padding:3px 8px;
-  white-space:nowrap;letter-spacing:.02em;
-}
-.badge--alt{color:var(--accent-2);border-color:var(--accent-2)}
 
 /* external link */
 .xlink{
@@ -340,27 +327,13 @@ button.status-item:hover{color:var(--ink)}
 .readme-foot b{color:var(--mid);font-weight:400}
 
 /* ---------- about pane ---------- */
-.about-top{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
 .hero-name{font-size:clamp(40px,6.4vw,68px);font-weight:600;letter-spacing:-.04em;line-height:1;margin-bottom:16px}
-.hero-role{font-family:var(--mono);font-size:13px;color:var(--mid);margin-bottom:26px;letter-spacing:.01em}
+.hero-role{font-family:var(--mono);font-size:13px;color:var(--mid);margin-bottom:24px;letter-spacing:.01em}
 .hero-tag{
-  font-family:var(--mono);font-size:clamp(16px,2.1vw,21px);line-height:1.5;
-  color:var(--ink);max-width:22ch;margin-bottom:32px;letter-spacing:-.01em;
+  font-family:var(--mono);font-size:clamp(14.5px,1.6vw,17px);line-height:1.6;
+  color:var(--ink);max-width:52ch;margin-bottom:30px;
 }
-.hero-tag .hl{color:var(--accent)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:9px}
-.hero-viz{justify-self:center}
-.hero-viz svg{width:100%;max-width:280px;height:auto;overflow:visible}
-.viz-line{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
-  stroke-dasharray:600;stroke-dashoffset:600;animation:draw 3.2s ease-out forwards}
-.viz-area{fill:var(--accent-dim);opacity:0;animation:fadeIn 1.4s ease-out 1.6s forwards}
-.viz-grid{stroke:var(--line);stroke-width:1}
-.viz-dot{fill:var(--bg-panel);stroke:var(--accent);stroke-width:1.6;opacity:0;animation:fadeIn .5s ease-out forwards}
-.viz-pulse{fill:var(--accent-2);animation:blip 2.4s ease-in-out infinite}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes fadeIn{to{opacity:1}}
-@keyframes blip{0%,100%{opacity:.25;r:3}50%{opacity:1;r:4.5}}
-
 /* ---------- skip link ---------- */
 .skip{
   position:fixed;top:-60px;left:12px;z-index:9600;
@@ -425,15 +398,6 @@ button.status-item:hover{color:var(--ink)}
 .looking-grid dd{margin:0;font-size:13.5px;color:var(--mid);line-height:1.5}
 .looking-cta{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ---------- project impact line ---------- */
-.impact{
-  font-size:13px;line-height:1.55;color:var(--ink);
-  border-left:2px solid var(--accent);padding:2px 0 2px 12px;
-}
-.impact-k{
-  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:3px;
-}
 
 /* recruiter summary card */
 .recruiter-card{display:none;border:1px solid var(--accent);border-radius:var(--radius);
@@ -463,72 +427,20 @@ button.status-item:hover{color:var(--ink)}
   .pdf-frame object,.pdf-frame iframe{height:70vh}
 }
 /* ---------- projects pane ---------- */
-.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;align-items:start}
+.proj-grid{display:flex;flex-direction:column;gap:34px}
 .proj{
   border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-elev);
-  padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px;
-  transition:border-color .2s,transform .2s;
+  padding:24px 24px 20px;display:flex;flex-direction:column;gap:16px;
 }
-.proj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.proj-title{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.proj-title{font-size:19px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
 .proj-title a:hover{color:var(--accent)}
 .proj-meta{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px}
-.proj-desc{font-size:13.5px;color:var(--mid);line-height:1.62}
-/* Featured figures are charts and plots — never crop them. A fixed box with
-   `contain` keeps every card the same height regardless of source ratio
-   (sources here range from 1.05:1 to 1.9:1). */
-.proj-figure{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg);
-  cursor:zoom-in;transition:border-color .2s}
-.proj-figure:hover{border-color:var(--accent)}
-.proj-figure picture{display:block}
-.proj-figure img{
-  width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;
-  /* these are matplotlib/plotly exports on white — give them a deliberate
-     "plot paper" inset instead of letting white float on near-black */
-  background:#fff;padding:10px;
-  transition:transform .4s;
-}
-.proj:hover .proj-figure img{transform:scale(1.015)}
-.proj-figcap{font-family:var(--mono);font-size:10px;color:var(--faint);padding:7px 10px;border-top:1px solid var(--line)}
-/* PSEye leads the pane: full width, its own screenshot strip, and the live
-   link promoted to a primary button — it is the one thing to click here. */
-.proj--hero{grid-column:1/-1;border-color:var(--line-strong);border-left:2px solid var(--accent)}
-.proj--hero:hover{transform:none}
-.proj--hero .proj-title{font-size:26px;letter-spacing:-.025em}
-.proj--hero .proj-desc{font-size:14.5px;max-width:80ch}
-.proj-kicker{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:9px;
-}
-/* Product screenshots, unlike the chart figures below, are meant to be
-   cropped — show the top of the frame, which is where the UI lives. */
-.proj-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.proj-shots figure{border:1px solid var(--line);border-radius:3px;overflow:hidden;
-  background:var(--bg);cursor:zoom-in;transition:border-color .2s}
-.proj-shots figure:hover{border-color:var(--accent)}
-.proj-shots img{
-  display:block;width:100%;height:auto;aspect-ratio:16/10;
-  object-fit:cover;object-position:top center;transition:transform .4s;
-}
-.proj-shots figure:hover img{transform:scale(1.03)}
-.proj-shots figcaption{font-family:var(--mono);font-size:9.5px;color:var(--faint);
-  padding:6px 9px;border-top:1px solid var(--line)}
-
+.proj-desc{font-size:14px;color:var(--mid);line-height:1.7;max-width:76ch}
 .proj-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .proj-links{display:flex;gap:14px;margin-left:auto}
 
-/* readout strip — a little "live data" texture on featured cards */
-.readout{border:1px solid var(--line);border-radius:3px;background:var(--bg);padding:11px 13px;
-  font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;flex-direction:column;gap:8px}
-.readout-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.readout-row .v{color:var(--ink)}
-.readout-row .v.ok{color:var(--accent)}
-.readout-row .v.alt{color:var(--accent-2)}
-.meter{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
-.meter span{display:block;height:100%;background:var(--accent);border-radius:2px}
-.meter span.alt{background:var(--accent-2)}
 
 /* target highlight when arriving from a skills link */
 @keyframes flashRing{
@@ -554,7 +466,7 @@ button.status-item:hover{color:var(--ink)}
 .arch-head[aria-expanded="true"] .arch-chev{color:var(--accent)}
 .arch-body{padding:0 4px 22px 60px;display:flex;flex-direction:column;gap:16px}
 .arch-head[aria-expanded="false"] + .arch-body{display:none}
-/* Archive strips are UI screenshots — cropping from the top keeps the
+/* Archive strips are UI screenshots , cropping from the top keeps the
    interesting part and makes every tile identical. */
 .arch-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
 .arch-shots figure{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg);
@@ -565,7 +477,7 @@ button.status-item:hover{color:var(--ink)}
   width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center;
   transition:transform .4s;
 }
-/* charts must not be cropped — a 1.05:1 plot loses a third of its height to
+/* charts must not be cropped , a 1.05:1 plot loses a third of its height to
    a 16:10 crop, so contain it on the same plot-paper ground instead */
 .arch-shots .is-chart img{object-fit:contain;background:#fff;padding:8px}
 .arch-shots .is-chart:hover img{transform:none}
@@ -583,7 +495,7 @@ button.status-item:hover{color:var(--ink)}
 .tl-role .org{color:var(--accent);font-weight:400}
 .tl-bullets{display:flex;flex-direction:column;gap:9px}
 .tl-bullets li{position:relative;padding-left:22px;font-size:13.5px;color:var(--mid);line-height:1.6}
-.tl-bullets li::before{content:"—";position:absolute;left:0;top:0;color:var(--dim)}
+.tl-bullets li::before{content:",";position:absolute;left:0;top:0;color:var(--dim)}
 .tl-bullets b{color:var(--ink);font-weight:500}
 .edu-honor{font-family:var(--mono);font-size:11px;color:var(--accent-2);margin-top:7px}
 .tl-sub{font-size:13.5px;color:var(--mid)}
@@ -678,7 +590,7 @@ button.skill-e-noop{cursor:default}
 
 
 /* ============================================================
-   LIGHTBOX — screenshots are the evidence; let people see them
+   LIGHTBOX , screenshots are the evidence; let people see them
    ============================================================ */
 .lightbox{position:fixed;inset:0;z-index:9700;display:grid;place-items:center;padding:4vh 4vw}
 .lightbox[hidden]{display:none}
@@ -718,20 +630,14 @@ button.skill-e-noop{cursor:default}
 ::-webkit-scrollbar-thumb:hover{background:var(--mid)}
 
 /* ============================================================
-   REVEAL — pure CSS, driven by the pane becoming active.
+   REVEAL , pure CSS, driven by the pane becoming active.
    `both` fill means the end state is guaranteed even if the tab
    is throttled; no JS timing can strand content at opacity 0.
    Re-runs on tab switch because display:none restarts animations.
    ============================================================ */
-@keyframes revealUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.js-ready .pane[data-active="true"] .reveal{animation:revealUp .55s cubic-bezier(.2,.7,.3,1) both}
-.js-ready .pane[data-active="true"] .reveal:nth-child(2){animation-delay:.07s}
-.js-ready .pane[data-active="true"] .reveal:nth-child(3){animation-delay:.14s}
-.js-ready .pane[data-active="true"] .reveal:nth-child(4){animation-delay:.21s}
-.js-ready .pane[data-active="true"] .reveal:nth-child(n+5){animation-delay:.28s}
 
 /* ============================================================
-   NO-JS FALLBACK — every pane stacked and readable
+   NO-JS FALLBACK , every pane stacked and readable
    ============================================================ */
 html:not(.js-ready) .rail,
 html:not(.js-ready) .tabbar,
@@ -755,11 +661,6 @@ html:not(.js-ready) .statusbar{position:static}
    RESPONSIVE
    ============================================================ */
 @media (max-width:1080px){
-  .about-top{grid-template-columns:1fr;gap:36px}
-  /* The sparkline is decoration. When the hero collapses to one column it
-     must fall BELOW the name and role, not push them off the first screen. */
-  .hero-viz{justify-self:start}
-  .hero-viz svg{max-width:200px}
   .skill-cols{grid-template-columns:repeat(2,1fr)}
   .creds{grid-template-columns:1fr}
 }
@@ -775,18 +676,13 @@ html:not(.js-ready) .statusbar{position:static}
     transform:translateX(-100%);transition:transform .22s cubic-bezier(.3,.7,.3,1);
   }
   .sidebar[data-open="true"]{transform:none}
-  .proj-grid{grid-template-columns:1fr}
   .tl-item{grid-template-columns:1fr;gap:10px}
   .pane{padding-top:40px}
   .statusbar .right .hide-sm{display:none}
 }
 @media (max-width:600px){
-  /* on a phone the fold is ~4 lines of text; spend all of it on content */
-  .hero-viz{display:none}
   body{font-size:13.5px}
   .skill-cols{grid-template-columns:1fr}
-  .proj-shots{grid-template-columns:1fr}
-  .proj--hero .proj-title{font-size:22px}
   .looking-grid{grid-template-columns:1fr}
   .looking{padding:20px}
   .tb-btn--resume span,.tb-btn--mode span{display:none}
@@ -812,20 +708,17 @@ html:not(.js-ready) .statusbar{position:static}
     animation-duration:.01ms !important;animation-iteration-count:1 !important;
     transition-duration:.01ms !important;scroll-behavior:auto !important;
   }
-  .js-ready .pane[data-active="true"] .reveal{animation:none}
-  .viz-line{stroke-dashoffset:0}
-  .viz-area,.viz-dot{opacity:1}
 }
 
 /* ============================================================
-   PRINT — a recruiter hitting Cmd+P should get a clean document,
+   PRINT , a recruiter hitting Cmd+P should get a clean document,
    not a screenshot of an IDE. Every pane prints, in reading order.
    ============================================================ */
 @media print{
   .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,
-  .palette,.scrim,.skip,.hero-viz,.readout,.meter,.lightbox,.to-top,.pdf-frame,.pdf-actions,
+  .palette,.scrim,.skip,.lightbox,.to-top,.pdf-frame,.pdf-actions,
   .tb-actions,.hero-actions,.looking-cta,.contact-cta,
-  .proj-figure,.arch-shots,.proj-shots,.arch-chev,body::after{display:none !important}
+  .arch-shots,.proj-shots,.arch-chev,body::after{display:none !important}
 
   /* Re-point the palette at ink on paper. Without this the dark-theme
      tokens survive and accent text prints almost invisibly. */
@@ -848,7 +741,6 @@ html:not(.js-ready) .statusbar{position:static}
      heading, and the reader is already holding the document it embeds */
   #pane-resume{display:none !important}
   .pane-inner{padding-bottom:0}
-  .pane[data-active] .reveal{animation:none !important;opacity:1 !important;transform:none !important}
 
   .pane-title,.readme-title,.hero-name{font-size:17pt;margin-bottom:6pt;color:#000}
   .hero-name{font-size:22pt}
@@ -861,15 +753,14 @@ html:not(.js-ready) .statusbar{position:static}
   .pane{page-break-before:auto}
 
   /* grids collapse to a readable single flow */
-  .proj-grid,.skill-cols{display:block}
+  .skill-cols{display:block}
   .proj,.skill-col{border:0;border-top:1pt solid #ccc;border-radius:0;
     background:none;padding:8pt 0;margin:0}
   .creds{grid-template-columns:repeat(3,1fr);background:#fff}
   .creds li{background:#fff;border:0}
   .looking{background:none;border:1pt solid #ccc;border-left-width:2pt}
-  .impact{border-left:2pt solid #666}
-  .impact-k,.creds .k,.looking-grid dt,.skill .e::before{color:#000}
-  .chip,.badge{border-color:#999;color:#333}
+  .creds .k,.looking-grid dt,.skill .e::before{color:#000}
+  .chip{border-color:#999;color:#333}
   .recruiter-card{display:block !important;background:none;border:1pt solid #999}
 
   /* archives print collapsed-open, without the image strips */

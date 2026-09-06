@@ -1,5 +1,5 @@
 /* ============================================================
-   ezra-guiao / portfolio.sys — workspace runtime
+   ezra-guiao / portfolio.sys, workspace runtime
    Vanilla JS, no dependencies. Progressive enhancement:
    nothing here is required to READ the page, only to navigate it.
    ============================================================ */
@@ -129,7 +129,7 @@
     var f = FILES[id];
     $('#crumbFile').textContent = f.name;
     $('#statusLang').textContent = f.lang;
-    document.title = 'Ezra Guiao — ' + f.plain;
+    document.title = 'Ezra Guiao, ' + f.plain;
 
     renderTabs();
     renderPager();
@@ -175,7 +175,7 @@
     var destFile = FILES[b.dataset.goto.split('#')[0]];
     if (skill && destFile) {
       b.setAttribute('aria-label',
-        skill.textContent.trim() + ' — ' + b.textContent.trim() +
+        skill.textContent.trim() + ': ' + b.textContent.trim() +
         '. Open ' + destFile.name + '.');
     }
     b.addEventListener('click', function () {
@@ -241,7 +241,7 @@
   });
 
   /* ============================================================
-     COPY EMAIL — one less step between a recruiter and contacting you
+     COPY EMAIL, so nobody has to select the address by hand
      ============================================================ */
   var EMAIL = 'guiaomikhail@gmail.com';
   function copyEmail(btn) {
@@ -401,14 +401,14 @@
       var id = resolve(args[0]);
       if (!id) { print('<span class="warn">cat: ' + esc(args[0] || '') + ': no such file</span>'); return; }
       var body = {
-        readme:         'Portfolio framed as the workspace I actually work in.',
-        about:          'Ezra Guiao — Data Quality Analyst @ Citibank. CS grad, UP Diliman.\nI make data tell the right story.',
-        projects:       'PSEye · Flood Modeling & Visualization · Bank Fraud Risk Scoring · HIV Perception Mapping',
+        readme:         'My portfolio, laid out like the editor I work in.',
+        about:          'Ezra Guiao, Data Quality Analyst at Citibank. CS grad, UP Diliman.\nMostly SQL, Python and Power BI, on the finance side of data.',
+        projects:       'PSEye · Acoustify · Flood Modeling & Visualization · Bank Fraud Risk Scoring · HIV Perception Mapping',
         experience:     'Citibank (2025–) · Pointwest (2024) · HealthNow/Ayala Health (2022) · Bit Create (2022)',
         skills:         'Python, SQL, Pandas, Power BI, Next.js, TypeScript, Django, AI workflow automation.',
         contact:        'guiaomikhail@gmail.com · linkedin.com/in/ezra-guiao · github.com/Cytical',
         'archive-data': 'NBA Playoff Prediction · xv6 BF Scheduler · flood model supplementary output',
-        'archive-web':  'Acoustify · PSE Terminal · Ugnayan'
+        'archive-web':  'PSE Terminal · Ugnayan'
       }[id];
       print(body + '\n\n<span class="ok">tip:</span> run <b>open ' + id + '</b> to see the full page.');
     },
@@ -469,10 +469,11 @@
     projects: function () {
       print(
         '<b>PSEye</b>                  Next.js · Postgres · <span class="ok">live</span> at pseye.site · 2,500 monthly visitors\n' +
+        '<b>Acoustify</b>              Vue.js · Node · Spotify Web API, OAuth and audio analysis\n' +
         '<b>Flood Modeling</b>         Python · Numba · QGIS · NCTS-funded thesis\n' +
         '<b>Bank Fraud Risk</b>        Python · Power BI · 1M+ applications, 6.56% top-tier fraud rate\n' +
         '<b>HIV Perception Mapping</b> Python · Plotly · 35k+ households (NDHS 2022)\n\n' +
-        'run <b>open projects</b> for the full write-ups.'
+        'run <b>open projects</b> for the longer write-ups.'
       );
     },
 
@@ -545,9 +546,9 @@
 
   function gitLog() {
     print(
-      '<span class="ok">c1a7f30</span> (HEAD -> main) feat: PSEye ships — 282 companies, daily ingestion\n' +
+      '<span class="ok">c1a7f30</span> (HEAD -> main) feat: PSEye ships, 282 companies on daily ingestion\n' +
       '<span class="ok">9b2e14c</span> feat: joined Citibank as Data Quality Analyst\n' +
-      '<span class="ok">4f88a1d</span> feat: BS Computer Science, UP Diliman — cum laude\n' +
+      '<span class="ok">4f88a1d</span> feat: BS Computer Science, UP Diliman, cum laude\n' +
       '<span class="ok">7d3c092</span> feat: flood model thesis under NCTS research grant\n' +
       '<span class="ok">2ea56b8</span> feat: fraud risk scoring over 1M+ applications\n' +
       '<span class="ok">15b9c47</span> init: first commit'
@@ -583,7 +584,7 @@
   });
 
   /* ============================================================
-     RESUME VIEWER — mounted on first open, not on page load, so the
+     RESUME VIEWER, mounted on first open rather than on page load, so the
      PDF costs nothing to visitors who never open the tab.
      ============================================================ */
   var pdfMounted = false;
@@ -614,7 +615,7 @@
   }
 
   /* ============================================================
-     BACK TO TOP — the projects and experience panes run long
+     BACK TO TOP, because the projects and experience panes run long
      ============================================================ */
   var toTop = $('#toTop');
   editorBody.addEventListener('scroll', function () {
@@ -627,7 +628,7 @@
   });
 
   /* ============================================================
-     LIGHTBOX — click any screenshot to see it at full size.
+     LIGHTBOX. Click any screenshot to see it at full size.
      Groups by the figure's container so arrows walk one project.
      ============================================================ */
   var lb      = $('#lightbox');
@@ -639,12 +640,12 @@
 
   function figureData(fig) {
     var img = $('img', fig);
-    var cap = $('figcaption', fig) || $('.proj-figcap', fig);
+    var cap = $('figcaption', fig);
     return {
       src: img.currentSrc || img.src,
       alt: img.getAttribute('alt') || '',
       cap: cap ? cap.textContent.trim() : (img.getAttribute('alt') || ''),
-      chart: fig.classList.contains('is-chart') || fig.classList.contains('proj-figure')
+      chart: fig.classList.contains('is-chart')
     };
   }
 
@@ -681,7 +682,7 @@
     if (lbReturn && lbReturn.focus) lbReturn.focus();
   }
 
-  $$('.arch-shots figure, .proj-shots figure, .proj-figure').forEach(function (fig) {
+  $$('.arch-shots figure, .proj-shots figure').forEach(function (fig) {
     if (!$('img', fig)) return;
     fig.setAttribute('tabindex', '0');
     fig.setAttribute('role', 'button');
@@ -698,7 +699,7 @@
   $('#lbNext').addEventListener('click', function () { lbShow(lbIdx + 1); });
 
   /* ============================================================
-     WORK INDEX — one source of truth for ⌘K project entries and the
+     WORK INDEX, one source of truth for ⌘K project entries and the
      terminal's `find`, so a recruiter can search by technology.
      ============================================================ */
   var WORK = [
@@ -723,7 +724,7 @@
     { name: 'Global Development Indicators', file: 'archive-data',
       tech: 'python matplotlib pandas visualization dataviz',
       blurb: 'GDP per capita against population, 2018' },
-    { name: 'Acoustify', file: 'archive-web', year: '2023',
+    { name: 'Acoustify', file: 'projects', anchor: 'proj-acoustify', year: '2023',
       tech: 'vue vuejs node nodejs python rest api oauth spotify',
       blurb: 'Spotify Web API app with OAuth via a Node server' },
     { name: 'Philippine Stock Exchange Terminal', file: 'archive-web', year: '2022',
@@ -792,11 +793,11 @@
         go: function () { location.href = 'mailto:guiaomikhail@gmail.com'; } },
       { group: 'Links', ic: '⧉', label: 'Copy email address', alt: 'clipboard contact',
         go: function () { copyEmail($('#copyEmail')); } },
-      { group: 'Links', ic: '↗', label: 'GitHub — github.com/Cytical', alt: 'code repos',
+      { group: 'Links', ic: '↗', label: 'GitHub, github.com/Cytical', alt: 'code repos',
         go: function () { window.open('https://github.com/Cytical', '_blank', 'noopener'); } },
-      { group: 'Links', ic: '↗', label: 'LinkedIn — linkedin.com/in/ezra-guiao', alt: 'profile',
+      { group: 'Links', ic: '↗', label: 'LinkedIn, linkedin.com/in/ezra-guiao', alt: 'profile',
         go: function () { window.open('https://www.linkedin.com/in/ezra-guiao/', '_blank', 'noopener'); } },
-      { group: 'Links', ic: '↗', label: 'PSEye — pseye.site', alt: 'live project demo',
+      { group: 'Links', ic: '↗', label: 'PSEye, pseye.site', alt: 'live project demo',
         go: function () { window.open('https://pseye.site', '_blank', 'noopener'); } }
     );
     return list;
@@ -823,7 +824,7 @@
       results = ALL.slice();
     } else {
       /* Literal substring hits are what people actually mean. Subsequence
-         matching alone is far too loose — it let "flood" pull in three
+         matching alone is far too loose. It let "flood" pull in three
          unrelated projects and pushed the résumé actions below them for
          the query "resume". Fall back to it only when nothing matches
          literally, so shorthand like "dlrs" still works. */
@@ -918,10 +919,6 @@
       else if (sidebar.getAttribute('data-open') === 'true') closeDrawer();
     }
   });
-
-  /* Reveal is handled entirely in CSS (see .pane[data-active] .reveal).
-     Keeping it out of JS means no timing path can leave content at
-     opacity 0 in a throttled or backgrounded tab. */
 
   /* ============================================================
      BOOT

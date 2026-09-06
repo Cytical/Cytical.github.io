@@ -2,7 +2,7 @@
 
 My portfolio, built as an IDE workspace. Live at **[cytical.github.io](https://cytical.github.io)**.
 
-Static HTML, CSS and vanilla JavaScript — no framework, no build step, no dependencies.
+Static HTML, CSS and vanilla JavaScript. No framework, no build step, no dependencies.
 Everything is served straight from this repo by GitHub Pages.
 
 ## What's in it
@@ -21,7 +21,7 @@ Everything is served straight from this repo by GitHub Pages.
   every section renders stacked and readable, so crawlers get the full content.
 - **Accessibility.** All text meets WCAG AA contrast in both themes. The tab strip implements the
   ARIA tabs pattern with arrow-key navigation, and `prefers-reduced-motion` is respected.
-- **Weight.** Images are served as WebP with JPEG fallbacks — about 300 KB total, down from 2.7 MB
+- **Weight.** Images are served as WebP with JPEG fallbacks, about 300 KB total, down from 2.7 MB
   of source PNGs.
 - **Try the terminal.** `help`, `find power bi`, `git log`, `open projects`. Press <kbd>⌘K</kbd>
   (or <kbd>Ctrl</kbd>+<kbd>K</kbd>) to jump to anything.
@@ -36,5 +36,5 @@ Then open <http://localhost:8000>. There is nothing to install or compile.
 
 ## Contact
 
-**Mikhail Ezra Guiao** — [guiaomikhail@gmail.com](mailto:guiaomikhail@gmail.com)
+**Mikhail Ezra Guiao**, [guiaomikhail@gmail.com](mailto:guiaomikhail@gmail.com)
 · [LinkedIn](https://www.linkedin.com/in/ezra-guiao/)

@@ -4,7 +4,7 @@ Allow: /
 Disallow: /Ezra_Guiao_Resume.pdf
 
 # AI training and answer-engine crawlers: not welcome anywhere.
-# These are honoured voluntarily — they stop well-behaved bots, not scrapers.
+# These are honoured voluntarily. They stop well-behaved bots, not scrapers.
 User-agent: GPTBot
 Disallow: /
 
