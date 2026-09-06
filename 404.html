@@ -8,15 +8,19 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <script>
+/* Same rule as index.html: dark for everyone, light only if they chose it
+   there. Deciding by prefers-color-scheme here meant a visitor on a light OS
+   got a light 404 and a dark home page. */
 (function(){var d=document.documentElement,t=null;
 try{t=localStorage.getItem('theme');}catch(e){}
-if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+if(t!=='light'&&t!=='dark')t='dark';
 d.setAttribute('data-theme',t);})();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=11">
+<!-- @font-face lives in style.css; preloaded here for the same reason
+     as on the home page. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-var.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=60">
 <style>
   .nf{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:32px;background:var(--bg)}
   .nf-box{width:min(620px,100%)}
@@ -24,6 +28,11 @@ d.setAttribute('data-theme',t);})();
     border:1px solid var(--line);border-bottom:0;border-radius:var(--radius) var(--radius) 0 0;
     background:var(--bg-elev);font-family:var(--mono);font-size:11.5px;color:var(--faint)}
   .nf-dot{width:9px;height:9px;border-radius:50%;background:var(--dim)}
+  .nf-title{margin-left:6px}
+  /* a hyphen is a break opportunity, and live-project.tsx was
+     splitting across two lines at it */
+  .nf-ls{display:flex;flex-wrap:wrap;gap:2px 16px}
+  .nf-ls span{white-space:nowrap}
   .nf-body{border:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);
     background:var(--bg-panel);padding:26px 24px;font-family:var(--mono);font-size:13px;line-height:1.75}
   .nf-body .err{color:var(--accent-2)}
@@ -39,16 +48,17 @@ d.setAttribute('data-theme',t);})();
       <span class="nf-dot" aria-hidden="true"></span>
       <span class="nf-dot" aria-hidden="true"></span>
       <span class="nf-dot" aria-hidden="true"></span>
-      <span style="margin-left:6px">bash, portfolio.sys</span>
+      <span class="nf-title">bash, portfolio.sys</span>
     </div>
     <div class="nf-body">
       <p><span class="ok">$</span> cat <span id="nfPath">this-page</span></p>
       <p class="err">cat: no such file or directory</p>
       <p class="mid" style="margin-top:14px">exit status <b>404</b></p>
       <p style="margin-top:18px"><span class="ok">$</span> ls ~/portfolio</p>
-      <p class="mid">about.md&nbsp;&nbsp;projects.ipynb&nbsp;&nbsp;experience.log&nbsp;&nbsp;skills.json&nbsp;&nbsp;contact.sh</p>
+      <p class="mid nf-ls"><span>about.md</span><span>resume.pdf</span><span>live-project.tsx</span><span>projects.ipynb</span><span>experience.log</span><span>skills.json</span><span>contact.sh</span></p>
       <div class="nf-links">
         <a class="btn btn--primary" href="/">Back to portfolio</a>
+        <a class="btn" href="/#pseye">PSEye</a>
         <a class="btn" href="/#projects">Projects</a>
         <a class="btn" href="/#contact">Contact</a>
       </div>

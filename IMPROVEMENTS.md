@@ -127,6 +127,22 @@ moved the goalposts.
   and coordinating UAT. For a move toward data science and AI engineering,
   those two are the evidence and they are below the fold of the entry.
 
+## Round three, the two files nobody re-reads
+
+- [x] **27. 404.html still called Google Fonts,** which undid the point of
+  self-hosting them the moment a link rotted, and pinned a stale `style.css?v=11`.
+- [x] **28. 404.html picked its theme by a different rule than the site.** It
+  read `prefers-color-scheme`, so a visitor on a light OS got a light 404 and a
+  dark home page.
+- [x] **29. Its `ls ~/portfolio` output was stale.** No `live-project.tsx` and no
+  `resume.pdf`, so the not-found page did not mention the headline project. Its
+  shortcut row did not link to it either. The listing also broke
+  `live-project.tsx` across two lines at the hyphen.
+- [x] **30. README.md described a repo that no longer exists.** It called
+  `images/` the home of the original screenshots after those were deleted, quoted
+  a page weight from before the fonts and the poster changed, and never mentioned
+  the fonts, the media directory, the PSEye page or recruiter mode being default.
+
 ---
 
 ## Blocked, needs Ezra
