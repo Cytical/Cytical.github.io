@@ -47,12 +47,13 @@
 })();
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.css?v=57">
+<!-- Both faces are served from this origin, so they start downloading
+     alongside the stylesheet rather than after a round trip to Google to
+     find out what to ask for. crossorigin is required on a font preload
+     even same-origin, or the fetch is made twice. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-var.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=58">
 
 <script type="application/ld+json">
 {
@@ -896,6 +897,6 @@
   </div>
 </div>
 
-<script src="assets/js/app.js?v=57"></script>
+<script src="assets/js/app.js?v=58"></script>
 </body>
 </html>

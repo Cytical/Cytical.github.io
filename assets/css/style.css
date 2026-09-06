@@ -3,6 +3,26 @@
    IDE-workspace portfolio. Vanilla CSS, no build step.
    ============================================================ */
 
+/* ---------- fonts ----------
+   Inter and JetBrains Mono, served from this origin.
+
+   Google Fonts cost a DNS lookup, a TLS handshake and a stylesheet round trip
+   to fonts.googleapis.com before the browser even learned which font files to
+   ask fonts.gstatic.com for, on a page whose entire payload is smaller than
+   the fonts themselves. These are the same variable fonts Google serves,
+   subset to the characters this site renders.
+
+   Both families are SIL OFL 1.1. See assets/fonts/OFL.txt.
+   ---------------------------------------------------------------- */
+@font-face{
+  font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;
+  src:url('../fonts/inter-var.woff2') format('woff2');
+}
+@font-face{
+  font-family:'JetBrains Mono';font-style:normal;font-weight:400 500;font-display:swap;
+  src:url('../fonts/jetbrains-mono-var.woff2') format('woff2');
+}
+
 /* ---------- tokens ---------- */
 :root{
   --bg:#0a0a0b;
