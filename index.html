@@ -1,324 +1,854 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark" data-mode="dev">
 <head>
-  <meta charset="utf-8">
-  <title>Ezra Guiao — Data Analyst</title>
-  <meta name="author" content="Mikhail Ezra Guiao">
-  <meta name="description" content="Data analyst and CS graduate from UP Diliman. I turn messy data into clear decisions.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ezra Guiao — Data Analyst &amp; Data Scientist</title>
+<meta name="author" content="Mikhail Ezra Guiao">
+<meta name="description" content="Data Quality Analyst at Citibank. BS Computer Science, UP Diliman; MS Analytics, Georgia Tech. I build the pipelines, risk models and dashboards behind the decisions.">
+<link rel="canonical" href="https://cytical.github.io/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<!-- Dark by default for everyone; app.js repoints this if the visitor
+     opts into the light theme. -->
+<meta name="theme-color" content="#0a0a0b" id="themeColor">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cytical.github.io/">
+<meta property="og:title" content="Ezra Guiao — Data Analyst &amp; Data Scientist">
+<meta property="og:description" content="Data Quality Analyst at Citibank. I build the pipelines, risk models and dashboards behind the decisions.">
+<meta property="og:image" content="https://cytical.github.io/images/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ezra Guiao — Data Quality Analyst at Citibank. 1M+ applications risk-scored, 35k+ survey records analyzed.">
+<meta property="og:site_name" content="Ezra Guiao">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ezra Guiao — Data Analyst &amp; Data Scientist">
+<meta name="twitter:description" content="Data Quality Analyst at Citibank. I make data tell the right story.">
+<meta name="twitter:image" content="https://cytical.github.io/images/og-card.png">
+
+<script>
+/* Runs before first paint: without this a saved light theme (or recruiter
+   mode) is applied only once app.js runs at the end of <body>, so the page
+   flashes dark first. Kept tiny and inline on purpose — an external file
+   would be fetched too late to help. */
+(function(){
+  var d=document.documentElement,t=null,m=null;
+  try{t=localStorage.getItem('theme');m=localStorage.getItem('mode');}catch(e){}
+  /* Dark is the default for everyone, regardless of the OS setting.
+     Light is opt-in via the toggle and only then remembered. */
+  if(t!=='light'&&t!=='dark')t='dark';
+  d.setAttribute('data-theme',t);
+  d.setAttribute('data-mode',m==='recruiter'?'recruiter':'dev');
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="assets/css/style.css?v=31">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Mikhail Ezra Guiao",
+  "alternateName":"Ezra Guiao",
+  "url":"https://cytical.github.io/",
+  "email":"mailto:guiaomikhail@gmail.com",
+  "jobTitle":"Data Quality Analyst",
+  "worksFor":{"@type":"Organization","name":"Citibank"},
+  "address":{"@type":"PostalAddress","addressLocality":"Manila","addressCountry":"PH"},
+  "alumniOf":[
+    {"@type":"CollegeOrUniversity","name":"University of the Philippines Diliman"},
+    {"@type":"CollegeOrUniversity","name":"Georgia Institute of Technology"}
+  ],
+  "sameAs":["https://github.com/Cytical","https://www.linkedin.com/in/ezra-guiao/","https://pseye.site"],
+  "knowsAbout":["Data Analysis","Data Science","Data Quality","Python","SQL","Pandas","Power BI","Tableau","PostgreSQL","Next.js","TypeScript","Machine Learning","Fraud Detection","AI Workflow Automation"],
+  "hasOccupation":{
+    "@type":"Occupation","name":"Data Analyst",
+    "occupationLocation":{"@type":"City","name":"Manila"},
+    "skills":"Python, SQL, Pandas, Power BI, Next.js, data pipelines, risk modelling"
+  },
+  "subjectOf":[
+    {"@type":"WebSite","name":"PSEye","url":"https://pseye.site",
+     "description":"Market intelligence platform covering 282 PSE-listed companies."},
+    {"@type":"CreativeWork","name":"Flood Modeling & Visualization System",
+     "description":"Geospatial flood simulation using shallow water equations and RK2 integration, built under an NCTS-funded research initiative."},
+    {"@type":"CreativeWork","name":"Bank Fraud Risk Scoring",
+     "description":"Composite fraud risk score over 1M+ bank account applications, surfaced in a Power BI dashboard."},
+    {"@type":"CreativeWork","name":"Perception Mapping of HIV Awareness in the Philippines",
+     "description":"Analysis of NDHS 2022 survey data from over 35,000 households."}
+  ]
+}
+</script>
 </head>
 <body>
 
-<!-- THEME TOGGLE -->
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-  <span class="toggle-track"><span class="toggle-thumb"></span></span>
-  <span id="toggleLabel">dark</span>
-</button>
+<a class="skip" href="#pane-about">Skip to content</a>
 
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-inner">
-    <span class="nav-name">Ezra<span></span></span>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#data">data</a></li>
-      <li><a href="#web">web</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </div>
-</nav>
+<div class="app">
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-text">Data&nbsp;&nbsp;Analyst</div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="dot-pulse"></span>
-      <span>Open to opportunities · Manila, PH</span>
+  <!-- ============ TITLE BAR ============ -->
+  <header class="titlebar">
+    <button class="tb-menu" id="menuBtn" aria-label="Open explorer" aria-expanded="false" aria-controls="sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="tb-crumb">
+      <b>ezra-guiao</b><span class="sep">·</span><span class="file" id="crumbFile">about.md</span>
     </div>
-    <h1 class="hero-title">
-      <span class="line">Ezra</span>
-      <span class="line accent">Guiao</span>
-    </h1>
-    <p class="hero-sub">Data Analyst &amp; CS Graduate, UP Diliman.<br>I make data tell the right story.</p>
-    <div class="hero-cta">
-      <a href="resume_ezra.pdf" class="btn btn-primary" target="_blank">View résumé ↓</a>
-      <a href="#data" class="btn btn-ghost">View work ↓</a>
+    <div class="tb-actions">
+      <button class="tb-btn tb-btn--mode" id="modeBtn" aria-pressed="false">
+        <span class="dot" aria-hidden="true"></span>recruiter<span>: <b id="modeState">off</b></span>
+      </button>
+      <a class="tb-btn tb-btn--resume" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+        <span>résumé</span>
+      </a>
+      <button class="tb-btn tb-btn--palette" id="paletteBtn" aria-label="Open command palette"><span class="kbd">⌘K</span></button>
     </div>
-    <div class="hero-meta-strip">
-      <div class="hero-meta-item">
-        <div class="meta-label">Role</div>
-        <div class="meta-value">Data Analyst &amp; Data Scientist</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="meta-label">Education</div>
-        <div class="meta-value">BS Computer Science<br>UP Diliman</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="meta-label">Experience</div>
-        <div class="meta-value">Citibank, Ayala, etc.</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-aside">
-    <div class="skills-ticker">
-      <div class="ticker-inner">
-        <span>Python</span><span>·</span><span>Pandas</span><span>·</span>
-        <span>Scikit-learn</span><span>·</span><span>SQL</span><span>·</span>
-        <span>Tableau</span><span>·</span><span>Plotly</span><span>·</span>
-        <span>NumPy</span><span>·</span><span>Jupyter</span><span>·</span>
-        <span>Vue.js</span><span>·</span><span>Django</span><span>·</span>
-        <span>React</span><span>·</span><span>Angular</span><span>·</span>
-        <span>Matplotlib</span><span>·</span><span>Numba</span><span>·</span>
-        <span>MySQL</span><span>·</span><span>BeautifulSoup</span><span>·</span>
-        <!-- dupe for seamless loop -->
-        <span>Python</span><span>·</span><span>Pandas</span><span>·</span>
-        <span>Scikit-learn</span><span>·</span><span>SQL</span><span>·</span>
-        <span>Tableau</span><span>·</span><span>Plotly</span><span>·</span>
-        <span>NumPy</span><span>·</span><span>Jupyter</span><span>·</span>
-        <span>Vue.js</span><span>·</span><span>Django</span><span>·</span>
-        <span>React</span><span>·</span><span>Angular</span><span>·</span>
-        <span>Matplotlib</span><span>·</span><span>Numba</span><span>·</span>
-        <span>MySQL</span><span>·</span><span>BeautifulSoup</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </header>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="section-label reveal">01 / about</div>
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <p class="large-text">I'm a CS graduate who sits at the intersection of <em>data and finance.</em></p>
-        <p>Whether it's building predictive models in Python or shipping interactive dashboards with PowerBI, I care about the question behind the analysis. I've worked with large-scale survey data, financial scrapers, and spatial flood simulations. </p>
-        <p>With my previous experience in software engineering, I can not only interpret data into business decisions, I can also build and maintain data pipelines.</p>
-        <div class="about-resume">
-          <a href="resume_ezra.pdf" class="btn btn-ghost" target="_blank">View résumé ↓</a>
-        </div>
+  <!-- ============ ACTIVITY RAIL ============ -->
+  <nav class="rail" aria-label="Workspace panels">
+    <button class="rail-btn" id="railExplorer" aria-pressed="true" aria-label="Toggle explorer" title="Explorer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    </button>
+    <button class="rail-btn" id="railSearch" aria-label="Open command palette" title="Search (⌘K)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    </button>
+    <button class="rail-btn" id="railTerm" aria-pressed="false" aria-label="Toggle terminal" title="Terminal (Ctrl+`)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 7l4 4-4 4M12 15h7"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+    </button>
+  </nav>
+
+  <!-- ============ EXPLORER ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="File explorer">
+    <div class="side-head">
+      <span>Explorer · portfolio.sys</span>
+      <button class="side-close" id="sideClose" aria-label="Close explorer">×</button>
+    </div>
+
+    <div class="tree">
+      <button class="tree-file" data-file="readme" aria-current="false">
+        <span class="ic" aria-hidden="true">▤</span><span class="code">README.md</span><span class="plain">Start here</span>
+      </button>
+
+      <button class="tree-folder" aria-expanded="true" aria-controls="grp-portfolio">
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="code">portfolio/</span><span class="plain">Portfolio</span>
+      </button>
+      <div class="tree-group" id="grp-portfolio">
+        <button class="tree-file" data-file="about" aria-current="true">
+          <span class="ic" aria-hidden="true">▤</span><span class="code">about.md</span><span class="plain">About</span>
+        </button>
+        <button class="tree-file" data-file="resume" aria-current="false">
+          <span class="ic" aria-hidden="true">&#9635;</span><span class="code">resume.pdf</span><span class="plain">R&eacute;sum&eacute;</span>
+        </button>
+        <button class="tree-file" data-file="projects" aria-current="false">
+          <span class="ic" aria-hidden="true">{}</span><span class="code">projects.ipynb</span><span class="plain">Projects</span>
+        </button>
+        <button class="tree-file" data-file="experience" aria-current="false">
+          <span class="ic" aria-hidden="true">▤</span><span class="code">experience.log</span><span class="plain">Experience</span>
+        </button>
+        <button class="tree-file" data-file="skills" aria-current="false">
+          <span class="ic" aria-hidden="true">{}</span><span class="code">skills.json</span><span class="plain">Skills</span>
+        </button>
+        <button class="tree-file" data-file="contact" aria-current="false">
+          <span class="ic" aria-hidden="true">&gt;_</span><span class="code">contact.sh</span><span class="plain">Contact</span>
+        </button>
       </div>
-      <div class="about-stats">
-        <div class="stat">
-          <span class="stat-number">35k+</span>
-          <span class="stat-label">survey records analyzed</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">10+</span>
-          <span class="stat-label">shipped projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">2 years</span>
-          <span class="stat-label">Experience</span>
-        </div>
+
+      <button class="tree-folder" aria-expanded="true" aria-controls="grp-archive">
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="code">archive/</span><span class="plain">Archive</span>
+        <span class="tag">2021–23</span>
+      </button>
+      <div class="tree-group" id="grp-archive">
+        <button class="tree-file" data-file="archive-data" aria-current="false">
+          <span class="ic" aria-hidden="true">▤</span><span class="code">data-projects.md</span><span class="plain">Earlier data work</span>
+        </button>
+        <button class="tree-file" data-file="archive-web" aria-current="false">
+          <span class="ic" aria-hidden="true">▤</span><span class="code">web-projects.md</span><span class="plain">Earlier web work</span>
+        </button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- DATA PROJECTS -->
-<section id="data">
-  <div class="section-inner">
-    <div class="section-label reveal">02 / data projects</div>
-    <div class="project-list">
-
-      <article class="project-item reveal">
-        <div class="project-meta">
-          <span class="project-tag">Hydrology · Simulation</span>
-          <span class="project-year">2024</span>
-        </div>
-        <h3 class="project-title"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank">Flood Risk Assessment via SWE-Based Hydrological Modeling</a></h3>
-        <p class="project-desc">Built a flood simulation model using shallow water equations and cellular automata to model flood progression, infiltration rates, and critical flow thresholds across Philippine river systems. Optimized with Numba JIT compilation.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>Python</span><span>Numba</span><span>Matplotlib</span></div>
-          <div class="project-links">
-            <a href="https://github.com/Louis-Miguel/cag-flood-sim" target="_blank" class="link-pill">Code ↗</a>
-            <a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank" class="link-pill">Paper ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-item reveal">
-        <div class="project-meta">
-          <span class="project-tag">Finance · Fraud Detection · BI</span>
-          <span class="project-year">2024</span>
-        </div>
-
-        <h3 class="project-title">Bank Fraud Detection Dashboard</h3>
-
-        <p class="project-desc">
-          Built a Power BI fraud dashboard analyzing 1M+ bank account applications from the NeurIPS 2022 dataset. Designed a composite fraud risk scoring system that identified a 6.56% fraud rate in very high-risk applicants, 6x the portfolio average.
-        </p>
-
-        <div class="project-footer">
-          <div class="project-stack">
-            <span>Power BI</span>
-            <span>Python</span>
-            <span>Data Analysis</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-item reveal">
-        <div class="project-meta">
-          <span class="project-tag">Public Health · EDA</span>
-          <span class="project-year">2023</span>
-        </div>
-        <h3 class="project-title"><a href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank">Perception Mapping of HIV Awareness in the Philippines</a></h3>
-        <p class="project-desc">Analyzed NDHS 2022 survey data from over 35,000 households to quantify HIV knowledge and awareness. Engineered a composite perception metric and visualized patterns disaggregated by region, age, and education level.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>Python</span><span>Pandas</span><span>Plotly</span><span>Jupyter</span></div>
-          <div class="project-links">
-            <a href="https://github.com/g-mooncloud/cs132-portfolio" target="_blank" class="link-pill">Code ↗</a>
-            <a href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank" class="link-pill">Site ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-item reveal">
-        <div class="project-meta">
-          <span class="project-tag">Sports Analytics · ML</span>
-          <span class="project-year">2023</span>
-        </div>
-        <h3 class="project-title"><a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing" target="_blank">NBA Playoff Prediction: Logistic Regression &amp; Random Forest</a></h3>
-        <p class="project-desc">Comprehensive analysis of NBA team performance using logistic regression, linear regression, and random forest classifiers. Identified key statistical predictors of playoff success across multiple seasons.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>Python</span><span>NumPy</span><span>Matplotlib</span><span>Scikit-learn</span></div>
-          <div class="project-links">
-            <a href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb" target="_blank" class="link-pill">Code ↗</a>
-            <a href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing" target="_blank" class="link-pill">Paper ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-item reveal">
-        <div class="project-meta">
-          <span class="project-tag">Systems · OS</span>
-          <span class="project-year">2023</span>
-        </div>
-        <h3 class="project-title">BF Scheduler Variant in xv6</h3>
-        <p class="project-desc">Extended the xv6 educational OS with a skiplist-backed scheduler using virtual deadlines. Implemented custom kernel system calls including a modified fork and a schedlog function for process introspection.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>C</span><span>x86</span></div>
-        </div>
-      </article>
-
+    <div class="side-foot">
+      <a href="mailto:guiaomikhail@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+        guiaomikhail@gmail.com
+      </a>
+      <a href="https://github.com/Cytical" target="_blank" rel="me noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12a11.5 11.5 0 0 0 7.9 10.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg>
+        github.com/Cytical
+      </a>
+      <a href="https://www.linkedin.com/in/ezra-guiao/" target="_blank" rel="me noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.32-2.02-3.32-2.02 0-2.33 1.58-2.33 3.21V21H9z"/></svg>
+        linkedin.com/in/ezra-guiao
+      </a>
     </div>
-  </div>
-</section>
+  </aside>
 
-<!-- WEB PROJECTS -->
-<section id="web">
-  <div class="section-inner">
-    <div class="section-label reveal">03 / web projects</div>
-    <div class="web-grid reveal">
+  <!-- ============ EDITOR ============ -->
+  <main class="editor">
+    <div class="tabbar" id="tabbar" role="tablist" aria-label="Open files"></div>
 
-      <article class="web-card">
-        <div class="web-card-header">
-          <div class="web-card-meta">
-            <span class="project-tag">Full-Stack · Music</span>
-            <span class="project-year">2023</span>
+    <div class="editor-body" id="editorBody">
+      <div class="panes">
+
+        <!-- ==================== README ==================== -->
+        <section class="pane" id="pane-about" data-active="true" role="tabpanel" tabindex="0" aria-label="About">
+          <div class="pane-inner">
+
+            <div class="recruiter-card">
+              <p class="rc-title">Quick summary</p>
+              <div class="rc-grid">
+                <div class="rc-item"><div class="k">Current role</div><div class="v">Data Quality Analyst, Citibank<br>Oct 2025 – Present</div></div>
+                <div class="rc-item"><div class="k">Education</div><div class="v">MS Analytics, Georgia Tech (2026–28)<br>BS Computer Science, UP Diliman <em>cum laude</em></div></div>
+                <div class="rc-item"><div class="k">Core skills</div><div class="v">Python · SQL · Pandas · Power BI · Next.js · AI workflow automation</div></div>
+                <div class="rc-item"><div class="k">Looking for</div><div class="v">Data analyst and data scientist roles</div></div>
+              </div>
+              <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Download résumé (PDF)</a>
+            </div>
+
+            <div class="about-top">
+              <div>
+                <p class="pill"><span class="status-dot" aria-hidden="true"></span> Open to opportunities · Manila, PH</p>
+                <h1 class="hero-name">Ezra Guiao</h1>
+                <p class="hero-role">Data Quality Analyst @ Citibank · Data Science · Full-Stack</p>
+                <p class="hero-tag">I make data tell the <span class="hl">right</span> story.</p>
+                <div class="hero-actions">
+                  <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+                    Résumé (PDF)
+                  </a>
+                  <a class="btn" href="mailto:guiaomikhail@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+                    Email
+                  </a>
+                  <a class="btn" href="https://github.com/Cytical" target="_blank" rel="me noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12a11.5 11.5 0 0 0 7.9 10.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg>
+                    GitHub
+                  </a>
+                  <a class="btn" href="https://www.linkedin.com/in/ezra-guiao/" target="_blank" rel="me noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.32-2.02-3.32-2.02 0-2.33 1.58-2.33 3.21V21H9z"/></svg>
+                    LinkedIn
+                  </a>
+                  <button class="btn btn--copy copy-email" id="copyEmail" data-copy="guiaomikhail@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                    <span class="copy-label">Copy email</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero-viz" aria-hidden="true">
+                <svg viewBox="0 0 260 170" role="presentation">
+                  <g class="viz-grid">
+                    <line x1="10" y1="20" x2="250" y2="20"/><line x1="10" y1="60" x2="250" y2="60"/>
+                    <line x1="10" y1="100" x2="250" y2="100"/><line x1="10" y1="140" x2="250" y2="140"/>
+                  </g>
+                  <path class="viz-area" d="M14 132 L54 118 L94 124 L134 84 L174 92 L214 46 L246 34 L246 140 L14 140 Z"/>
+                  <path class="viz-line" d="M14 132 L54 118 L94 124 L134 84 L174 92 L214 46 L246 34"/>
+                  <circle class="viz-dot" cx="54"  cy="118" r="3" style="animation-delay:1.0s"/>
+                  <circle class="viz-dot" cx="94"  cy="124" r="3" style="animation-delay:1.4s"/>
+                  <circle class="viz-dot" cx="134" cy="84"  r="3" style="animation-delay:1.8s"/>
+                  <circle class="viz-dot" cx="174" cy="92"  r="3" style="animation-delay:2.2s"/>
+                  <circle class="viz-dot" cx="214" cy="46"  r="3" style="animation-delay:2.6s"/>
+                  <circle class="viz-pulse" cx="246" cy="34" r="3.5"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="stats reveal">
+              <div class="stat"><div class="stat-num">1M+</div><div class="stat-label">account applications risk-scored</div></div>
+              <div class="stat"><div class="stat-num">35k+</div><div class="stat-label">survey records analyzed</div></div>
+              <div class="stat"><div class="stat-num">10+</div><div class="stat-label">shipped projects</div></div>
+              <div class="stat"><div class="stat-num">92%</div><div class="stat-label">processing time cut by automation</div></div>
+            </div>
+
+            <ul class="creds reveal">
+              <li><span class="k">Now</span><span class="v">Data Quality Analyst, <b>Citibank</b></span></li>
+              <li><span class="k">Next</span><span class="v">MS Analytics, <b>Georgia Tech</b> &middot; 2026&ndash;28</span></li>
+              <li><span class="k">Degree</span><span class="v">BS Computer Science, <b>UP Diliman</b> &middot; <i>cum laude</i></span></li>
+            </ul>
+
+            <div class="prose reveal">
+              <p>I'm a CS graduate who sits at the intersection of <em>data and finance.</em></p>
+              <p>Whether it's building predictive models in Python or shipping interactive dashboards with Power BI, I care about the question behind the analysis. I've worked with large-scale survey data, financial scrapers, and spatial flood simulations.</p>
+              <p>With my previous experience in software engineering, I can not only interpret data into business decisions, I can also build and maintain the data pipelines underneath them.</p>
+            </div>
+
+            <div class="looking reveal">
+              <h2 class="looking-title"><span class="code">$ cat looking-for.txt</span><span class="plain">What I'm looking for</span></h2>
+              <dl class="looking-grid">
+                <div><dt>Roles</dt><dd>Data Analyst &middot; Data Scientist &middot; Analytics Engineer</dd></div>
+                <div><dt>Domains</dt><dd>Finance, risk, and fraud &mdash; where I already have production experience</dd></div>
+                <div><dt>Based in</dt><dd>Manila, Philippines &middot; open to remote and hybrid</dd></div>
+                <div><dt>Strengths</dt><dd>Owning a problem end to end: pipeline, model, dashboard, and the stakeholder call</dd></div>
+              </dl>
+              <div class="looking-cta">
+                <a class="btn btn--primary" href="mailto:guiaomikhail@gmail.com?subject=Opportunity%20for%20Ezra%20Guiao">Get in touch</a>
+                <a class="btn" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+              </div>
+            </div>
           </div>
-          <h3>Acoustify</h3>
-        </div>
-        <div class="web-card-img-wrap">
-          <img src="images/acoustify main.png" alt="Acoustify main screen" loading="lazy">
-        </div>
-        <p>Full-stack app built on the Spotify Web API. Implements OAuth via a Node server, surfaces your most-played songs and artists, generates dynamic song pages with audio analysis, and lets you play music directly in the browser.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>Vue.js</span><span>Node</span><span>Python</span><span>REST API</span></div>
-          <div class="project-links">
-            <a href="https://github.com/Cytical/Acoustify" target="_blank" class="link-pill">Code ↗</a>
-            <a href="https://acoustify.onrender.com/" target="_blank" class="link-pill">Demo ↗</a>
-          </div>
-        </div>
-      </article>
+        </section>
 
-      <article class="web-card">
-        <div class="web-card-header">
-          <div class="web-card-meta">
-            <span class="project-tag">Finance · Web Scraping</span>
-            <span class="project-year">2022</span>
-          </div>
-          <h3>Philippine Stock Exchange Terminal</h3>
-        </div>
-        <div class="web-card-img-wrap">
-          <img src="images/terminal chart.png" alt="PSE Terminal chart view" loading="lazy">
-        </div>
-        <p>Django app powered by the PSE API and scraped financial data from Marketwatch via BeautifulSoup. Ticker search returns up-to-date company info with an integrated TradingView chart.</p>
-        <div class="project-footer">
-          <div class="project-stack"><span>Django</span><span>Python</span><span>BeautifulSoup</span></div>
-          <div class="project-links">
-            <a href="https://github.com/Cytical/PSE_Terminal" target="_blank" class="link-pill">Code ↗</a>
-            <a href="https://pse-terminal.herokuapp.com/home" target="_blank" class="link-pill">Demo ↗</a>
-          </div>
-        </div>
-      </article>
+        <!-- ==================== RESUME ==================== -->
+        <section class="pane" id="pane-readme" role="tabpanel" tabindex="0" aria-label="README">
+          <div class="pane-inner">
+            <p class="filepath">README.md</p>
+            <h2 class="readme-title">ezra-guiao / portfolio.sys</h2>
+            <div class="prose">
+              <p>My portfolio, laid out as the workspace I actually work in. Click any file in the explorer. The terminal works, and every project links out to the code or the paper behind it.</p>
+            </div>
 
-    </div>
-  </div>
-</section>
+            <div class="howto">
+              <div class="howto-head">How to explore</div>
+              <ul>
+                <li><span class="ic">▤</span><span><b>about.md</b> — who I am and what I build</span></li>
+                <li><span class="ic">&#9679;</span><span><b>resume.pdf</b> — the one-pager, readable right here</span></li>
+                <li><span class="ic">{}</span><span><b>projects.ipynb</b> — four projects worth your time, with the numbers</span></li>
+                <li><span class="ic">▤</span><span><b>experience.log</b> — Citibank, Pointwest, Ayala Health, Bit Create, plus education</span></li>
+                <li><span class="ic">{}</span><span><b>skills.json</b> — every skill paired with where I actually used it</span></li>
+                <li><span class="ic">▤</span><span><b>archive/</b> — earlier work, all of it still here</span></li>
+                <li><span class="ic">&gt;_</span><span><b>terminal</b> — try <code>help</code>, <code>git log</code>, or <code>open projects</code></span></li>
+                <li><span class="ic">⌘</span><span><b>⌘K</b> — jump to anything</span></li>
+              </ul>
+            </div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="section-label reveal">04 / contact</div>
-    <h2 class="contact-headline reveal">Let's work<br><em>together.</em></h2>
-    <div class="contact-inner-grid">
-      <div class="contact-links reveal">
-        <a href="mailto:guiaomikhail@gmail.com" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">guiaomikhail@gmail.com</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="https://www.linkedin.com/in/ezra-guiao/" target="_blank" class="contact-link">
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/ezra-guiao</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
+            <div class="readme-cta">
+              <button class="btn btn--primary" data-open="about">start with about.md →</button>
+              <span class="pane-note">or click any file in the explorer</span>
+            </div>
+
+            <p class="readme-foot">Not into IDEs? Toggle <b>recruiter mode</b> in the top bar for plain-English everything.</p>
+          </div>
+        </section>
+
+        <!-- ==================== ABOUT ==================== -->
+        <section class="pane" id="pane-resume" role="tabpanel" tabindex="0" aria-label="Resume">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">R&eacute;sum&eacute;</h2>
+              <p class="pane-note">one page &middot; updated 2026</p>
+            </div>
+            <div class="pdf-actions">
+              <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+                Download PDF
+              </a>
+              <a class="btn" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+              <button class="btn" data-open="contact">Get in touch</button>
+            </div>
+            <!-- Default content is a working link, not a spinner: without JS
+                 (and for crawlers) this stays useful. JS swaps in the embedded
+                 viewer on first open. -->
+            <div class="pdf-frame" id="pdfFrame" data-src="Ezra_Guiao_Resume.pdf">
+              <p class="pdf-fallback">
+                One-page r&eacute;sum&eacute; &mdash; experience, education, skills and projects.<br>
+                <a class="btn btn--primary" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Open r&eacute;sum&eacute; (PDF)</a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PROJECTS ==================== -->
+        <section class="pane" id="pane-projects" role="tabpanel" tabindex="0" aria-label="Projects">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">Projects</h2>
+              <p class="pane-note">featured · the archive holds the rest</p>
+            </div>
+
+            <div class="proj-grid">
+
+              <!-- PSEye -->
+              <article class="proj reveal" id="proj-pseye">
+                <div class="proj-head">
+                  <div>
+                    <h3 class="proj-title"><a href="https://pseye.site" target="_blank" rel="noopener">PSEye</a></h3>
+                    <p class="proj-meta">Market intelligence · 2025</p>
+                  </div>
+                  <span class="badge">2,500 monthly visitors</span>
+                </div>
+                <p class="proj-desc">A live market intelligence platform covering 282 PSE-listed companies — market map, portfolio and watchlist tracking, dividend history, and foreign fund flow. I designed the daily ingestion pipeline and the unified schema that standardizes inconsistent exchange sources into a single queryable model, powering an automated market recap.</p>
+                <p class="impact"><span class="impact-k">Impact</span>Live product with real users, not a demo &mdash; 2,500 monthly visitors and full coverage of the exchange.</p>
+                <div class="readout">
+                  <div class="readout-row"><span>coverage</span><span class="v ok">282 / 282 listed</span></div>
+                  <div class="meter"><span style="width:100%"></span></div>
+                  <div class="readout-row"><span>ingestion</span><span class="v">daily · automated recap</span></div>
+                  <div class="readout-row"><span>status</span><span class="v ok">● live at pseye.site</span></div>
+                </div>
+                <div class="proj-foot">
+                  <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Postgres (Neon)</span><span class="chip">Vercel</span></div>
+                  <div class="proj-links"><a class="xlink" href="https://pseye.site" target="_blank" rel="noopener">Live ↗</a></div>
+                </div>
+              </article>
+
+              <!-- Flood model -->
+              <article class="proj reveal" id="proj-flood">
+                <div class="proj-head">
+                  <div>
+                    <h3 class="proj-title"><a href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank" rel="noopener">Flood Modeling &amp; Visualization System</a></h3>
+                    <p class="proj-meta">Hydrology · Simulation · 2024</p>
+                  </div>
+                  <span class="badge badge--alt">NCTS-funded thesis</span>
+                </div>
+                <p class="proj-desc">A geospatial flood simulation built as my undergraduate thesis under an NCTS-funded research initiative. Applies shallow water equations and RK2 numerical integration with cellular automata to model flood progression, infiltration rates, and critical flow thresholds across Philippine river systems, optimized with Numba JIT. Derived flood risk thresholds from rainfall and flow analysis for disaster risk assessment.</p>
+                <p class="impact"><span class="impact-k">Impact</span>Funded undergraduate research, and the thresholds it produced are usable for real disaster risk planning.</p>
+                <div class="readout">
+                  <div class="readout-row"><span>method</span><span class="v">shallow water equations &middot; RK2</span></div>
+                  <div class="readout-row"><span>terrain scenarios</span><span class="v">multiple, Philippine river systems</span></div>
+                  <div class="readout-row"><span>output</span><span class="v ok">flood risk thresholds</span></div>
+                  <div class="readout-row"><span>funding</span><span class="v alt">NCTS research initiative</span></div>
+                </div>
+                <div class="proj-foot">
+                  <div class="chips"><span class="chip">Python</span><span class="chip">NumPy</span><span class="chip">Numba</span><span class="chip">QGIS</span><span class="chip">Matplotlib</span></div>
+                  <div class="proj-links">
+                    <a class="xlink" href="https://github.com/Louis-Miguel/cag-flood-sim" target="_blank" rel="noopener">Code ↗</a>
+                    <a class="xlink" href="https://drive.google.com/file/d/1kvXU9y2UvdTjW1IYdtwiLHIOwQuSg_2N/view?usp=sharing" target="_blank" rel="noopener">Paper ↗</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Fraud -->
+              <article class="proj reveal" id="proj-fraud">
+                <div class="proj-head">
+                  <div>
+                    <h3 class="proj-title">Bank Fraud Risk Scoring</h3>
+                    <p class="proj-meta">Finance · Fraud detection · 2024</p>
+                  </div>
+                  <span class="badge badge--alt">6.56% top-tier fraud rate</span>
+                </div>
+                <p class="proj-desc">A composite fraud risk score engineered over 1M+ bank account applications from the NeurIPS 2022 dataset. I analyzed feature distributions and fraud rates to isolate high-signal predictors, segmented applicants into risk tiers, and surfaced the result in an interactive Power BI dashboard. The top tier carries a 6.56% fraud rate — roughly 6× the portfolio average.</p>
+                <p class="impact"><span class="impact-k">Impact</span>Turned 1M+ raw applications into a tiered screening rule a reviewer can act on.</p>
+                <div class="readout">
+                  <div class="readout-row"><span>top risk tier</span><span class="v alt">6.56% fraud rate</span></div>
+                  <div class="meter"><span class="alt" style="width:100%"></span></div>
+                  <div class="readout-row"><span>vs. portfolio average</span><span class="v">~6x higher</span></div>
+                  <div class="meter"><span style="width:17%"></span></div>
+                  <div class="readout-row"><span>applications scored</span><span class="v">1,000,000+</span></div>
+                </div>
+                <div class="proj-foot">
+                  <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Power BI</span></div>
+                </div>
+              </article>
+
+              <!-- HIV -->
+              <article class="proj reveal" id="proj-hiv">
+                <div class="proj-head">
+                  <div>
+                    <h3 class="proj-title"><a href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank" rel="noopener">Perception Mapping of HIV Awareness in the Philippines</a></h3>
+                    <p class="proj-meta">Public health · EDA · 2023</p>
+                  </div>
+                  <span class="badge">35k+ households</span>
+                </div>
+                <p class="proj-desc">Analysis of NDHS 2022 survey data from over 35,000 households to quantify HIV knowledge and awareness. I engineered a composite perception metric and visualized the patterns disaggregated by region, age, and education level.</p>
+                <p class="impact"><span class="impact-k">Impact</span>Reduced a 35,000-household national survey to one comparable perception metric.</p>
+                <div class="readout">
+                  <div class="readout-row"><span>dataset</span><span class="v">NDHS 2022</span></div>
+                  <div class="readout-row"><span>households</span><span class="v ok">35,000+</span></div>
+                  <div class="readout-row"><span>disaggregated by</span><span class="v">region &middot; age &middot; education</span></div>
+                  <div class="readout-row"><span>output</span><span class="v">composite perception metric</span></div>
+                </div>
+                <div class="proj-foot">
+                  <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Plotly</span><span class="chip">Jupyter</span></div>
+                  <div class="proj-links">
+                    <a class="xlink" href="https://github.com/g-mooncloud/cs132-portfolio" target="_blank" rel="noopener">Code ↗</a>
+                    <a class="xlink" href="https://g-mooncloud.github.io/cs132-portfolio/" target="_blank" rel="noopener">Site ↗</a>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <hr class="rule">
+            <p class="pane-note">Five more projects live in <b>archive/</b> — Acoustify, the PSE Terminal, NBA playoff prediction, an xv6 scheduler, and Ugnayan.</p>
+          </div>
+        </section>
+
+        <!-- ==================== EXPERIENCE ==================== -->
+        <section class="pane" id="pane-experience" role="tabpanel" tabindex="0" aria-label="Experience">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">Experience</h2>
+              <p class="pane-note">most recent first</p>
+            </div>
+
+            <div class="tl">
+              <div class="tl-item reveal">
+                <div class="tl-when">Oct 2025 – Present</div>
+                <div>
+                  <h3 class="tl-role">Data Quality Analyst <span class="org">· Citibank</span></h3>
+                  <ul class="tl-bullets">
+                    <li>Owned data remediation (onboarding) change requests end to end, from scope submission and FRD through deployment and post-release monitoring.</li>
+                    <li>Served as primary liaison between stakeholder teams across APAC and NAM, reviewing change requests and running calls to resolve clarifications and drive approvals.</li>
+                    <li>Coordinated UAT and test validation through Jira, tracking defects to production sign-off.</li>
+                    <li>Automated data validation workflows using Stylus and AI prompts, <b>reducing processing time by 92%</b>.</li>
+                    <li>Volunteered to migrate legacy systems to SharePoint, reducing retrieval time and streamlining data validation.</li>
+                    <li>Won a firm-wide prompt engineering competition, building a business recommendation from a live case scenario and presenting to executive leadership as <b>the sole Officer-level competitor among VPs</b>.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="tl-item reveal">
+                <div class="tl-when">Jul 2024 – Aug 2024</div>
+                <div>
+                  <h3 class="tl-role">Software Engineer Intern <span class="org">· Pointwest</span></h3>
+                  <ul class="tl-bullets">
+                    <li>Led UI/UX design and system architecture for an internal employee skills inventory platform, working with a 10-person engineering team; <b>secured C-suite approval for company-wide adoption</b>.</li>
+                    <li>Built and optimized Angular and Bootstrap components, improving load time, consistency, and reliability.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="tl-item reveal">
+                <div class="tl-when">Jul 2022 – Sept 2022</div>
+                <div>
+                  <h3 class="tl-role">Data Analyst Intern <span class="org">· HealthNow (Ayala Health)</span></h3>
+                  <ul class="tl-bullets">
+                    <li>Optimized data pipelines and standardized cross-company database integrations, improving data consistency, scalability, and analytics efficiency.</li>
+                    <li>Analyzed <b>500K+ user profiles</b> and transaction records using Pandas and MySQL to shape audience targeting.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="tl-item reveal">
+                <div class="tl-when">Jun 2022 – Aug 2022</div>
+                <div>
+                  <h3 class="tl-role">Software Engineer Intern <span class="org">· Bit Create</span></h3>
+                  <ul class="tl-bullets">
+                    <li>Developed and deployed client websites using Vue.js, focusing on responsive design and maintainability.</li>
+                    <li>Planned and designed the UI/UX of a real estate website and handled its back-end services.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <hr class="rule">
+
+            <div class="pane-head"><h2 class="pane-title">Education</h2></div>
+            <div class="tl">
+              <div class="tl-item reveal">
+                <div class="tl-when">Aug 2026 – Expected 2028</div>
+                <div>
+                  <h3 class="tl-role">Master of Science in Analytics <span class="org">· Georgia Institute of Technology</span></h3>
+                  <p class="tl-sub">Data Science track.</p>
+                </div>
+              </div>
+              <div class="tl-item reveal">
+                <div class="tl-when">Sep 2021 – Jul 2025</div>
+                <div>
+                  <h3 class="tl-role">Bachelor of Science in Computer Science <span class="org">· University of the Philippines Diliman</span></h3>
+                  <p class="edu-honor">cum laude · University Scholar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SKILLS ==================== -->
+        <section class="pane" id="pane-skills" role="tabpanel" tabindex="0" aria-label="Skills">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">Skills</h2>
+              <p class="pane-note">evidence · not badges — click any line to see the work</p>
+            </div>
+
+            <div class="skill-cols">
+              <div class="skill-col reveal">
+                <h3>data-analytics/</h3>
+                <div class="skill"><div class="n">Python</div><button class="e" data-goto="projects#proj-flood">Flood simulation, fraud scoring, NDHS analysis</button></div>
+                <div class="skill"><div class="n">SQL</div><button class="e" data-goto="experience">Citibank remediation &amp; validation workflows</button></div>
+                <div class="skill"><div class="n">Pandas / NumPy</div><button class="e" data-goto="experience">500K+ user profiles at HealthNow</button></div>
+                <div class="skill"><div class="n">Power BI</div><button class="e" data-goto="projects#proj-fraud">1M+ application fraud dashboard</button></div>
+                <div class="skill"><div class="n">Tableau</div><button class="e" data-goto="archive-data">Reporting &amp; exploratory dashboards</button></div>
+                <div class="skill"><div class="n">PostgreSQL / MySQL</div><button class="e" data-goto="projects#proj-pseye">PSEye on Neon; HealthNow pipelines</button></div>
+                <div class="skill"><div class="n">Jupyter · Matplotlib · Plotly</div><button class="e" data-goto="projects#proj-hiv">NBA prediction, HIV perception mapping</button></div>
+                <div class="skill"><div class="n">Numba · QGIS</div><button class="e" data-goto="projects#proj-flood">JIT-optimized geospatial flood model</button></div>
+              </div>
+
+              <div class="skill-col reveal">
+                <h3>web-fullstack/</h3>
+                <div class="skill"><div class="n">TypeScript</div><button class="e" data-goto="projects#proj-pseye">PSEye, Ugnayan</button></div>
+                <div class="skill"><div class="n">React / Next.js</div><button class="e" data-goto="projects#proj-pseye">PSEye, live at pseye.site</button></div>
+                <div class="skill"><div class="n">Angular · Bootstrap</div><button class="e" data-goto="experience">Pointwest skills inventory platform</button></div>
+                <div class="skill"><div class="n">Vue.js</div><button class="e" data-goto="archive-web">Acoustify; Bit Create client sites</button></div>
+                <div class="skill"><div class="n">Node.js</div><button class="e" data-goto="archive-web">Acoustify OAuth server</button></div>
+                <div class="skill"><div class="n">Django</div><button class="e" data-goto="archive-web">PSE Terminal</button></div>
+                <div class="skill"><div class="n">Firebase</div><button class="e" data-goto="archive-web">Ugnayan real-time application tracking</button></div>
+                <div class="skill"><div class="n">Git · Vercel</div><button class="e" data-goto="projects#proj-pseye">Shipping and deploying everything here</button></div>
+                <div class="skill"><div class="n">BeautifulSoup</div><button class="e" data-goto="archive-web">Marketwatch financial scraping</button></div>
+              </div>
+
+              <div class="skill-col reveal">
+                <h3>ai-automation/</h3>
+                <div class="skill"><div class="n">Prompt engineering</div><button class="e" data-goto="experience">Won a firm-wide competition at Citibank</button></div>
+                <div class="skill"><div class="n">AI workflow automation</div><button class="e" data-goto="experience">92% processing time reduction</button></div>
+                <div class="skill"><div class="n">Agent orchestration</div><button class="e" data-goto="experience">Multi-step automated data validation</button></div>
+                <div class="skill"><div class="n">Context management</div><button class="e" data-goto="experience">Structuring inputs for reliable output</button></div>
+                <div class="skill"><div class="n">Scikit-learn</div><button class="e" data-goto="archive-data">NBA playoff prediction models</button></div>
+                <div class="skill"><div class="n">C · x86</div><button class="e" data-goto="archive-data">xv6 kernel scheduler variant</button></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== CONTACT ==================== -->
+        <section class="pane" id="pane-contact" role="tabpanel" tabindex="0" aria-label="Contact">
+          <div class="pane-inner">
+            <div class="pane-head"><h2 class="pane-title">Get in touch</h2></div>
+
+            <div class="prose" style="margin-bottom:30px">
+              <p>I'm currently open to full-time data analyst and data scientist roles. If you have a problem that needs clear thinking and clean data, reach out.</p>
+            </div>
+
+            <div class="contact-block">
+              <div class="cb-head">$ cat contact.json</div>
+              <ul>
+                <li><span class="k">email</span><a class="v" href="mailto:guiaomikhail@gmail.com">guiaomikhail@gmail.com</a></li>
+                <li><span class="k">linkedin</span><a class="v" href="https://www.linkedin.com/in/ezra-guiao/" target="_blank" rel="me noopener">linkedin.com/in/ezra-guiao</a></li>
+                <li><span class="k">github</span><a class="v" href="https://github.com/Cytical" target="_blank" rel="me noopener">github.com/Cytical</a></li>
+                <li><span class="k">location</span><span class="v">Manila, Philippines</span></li>
+                <li><span class="k">timezone</span><span class="v">PHT &middot; UTC+8</span></li>
+                <li><span class="k">status</span><span class="v">open to opportunities</span></li>
+              </ul>
+            </div>
+
+            <div class="contact-cta">
+              <a class="btn btn--primary" href="mailto:guiaomikhail@gmail.com">Send a message</a>
+              <a class="btn" href="Ezra_Guiao_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+              <button class="btn btn--copy copy-email" data-copy="guiaomikhail@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <span class="copy-label">Copy email</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== ARCHIVE: DATA ==================== -->
+        <section class="pane" id="pane-archive-data" role="tabpanel" tabindex="0" aria-label="Archived data projects">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">Archive · data</h2>
+              <p class="pane-note">earlier work, still here</p>
+            </div>
+
+            <div class="arch">
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">2023</span>
+                  <span class="arch-main">
+                    <span class="arch-name">NBA Playoff Prediction</span>
+                    <span class="arch-sub">Analysis of NBA team performance using logistic regression, linear regression, and random forest classifiers. Identified the key statistical predictors of playoff success across multiple seasons.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-shots">
+                    <figure class="is-chart"><picture><source srcset="images/opt/capstone-chart.webp" type="image/webp"><img src="images/opt/capstone-chart.jpg" width="550" height="523" alt="Confusion matrix of logistic regression playoff predictions" loading="lazy" decoding="async"></picture><figcaption>confusion matrix &mdash; logistic regression</figcaption></figure>
+                    <figure class="is-chart"><picture><source srcset="images/opt/capstone-graph.webp" type="image/webp"><img src="images/opt/capstone-graph.jpg" width="777" height="468" alt="Residual plot of predicted playoff results" loading="lazy" decoding="async"></picture><figcaption>residual plot &mdash; predicted vs. actual</figcaption></figure>
+                  </div>
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">Python</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Scikit-learn</span></div>
+                    <a class="xlink" href="https://github.com/Cytical/nba-performace-prediction/blob/main/algorithm_and_results.ipynb" target="_blank" rel="noopener">Code ↗</a>
+                    <a class="xlink" href="https://drive.google.com/file/d/1y1MawYBuIgJ6vd_Ab21X0RNnPJ3UI-Nu/view?usp=sharing" target="_blank" rel="noopener">Paper ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">2023</span>
+                  <span class="arch-main">
+                    <span class="arch-name">BF Scheduler Variant in xv6</span>
+                    <span class="arch-sub">Extended the xv6 educational OS with a skiplist-backed scheduler using virtual deadlines. Implemented custom kernel system calls including a modified fork and a schedlog function for process introspection.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">C</span><span class="chip">x86</span></div>
+                    <span class="pane-note">Coursework · no public repo</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">&mdash;</span>
+                  <span class="arch-main">
+                    <span class="arch-name">Global Development Indicators &mdash; exploratory visualization</span>
+                    <span class="arch-sub">A log-scaled bubble chart of GDP per capita against population for 2018, sized and coloured by region, with mean reference lines on both axes.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-shots">
+                    <figure class="is-chart"><picture><source srcset="images/opt/world-data-visual.webp" type="image/webp"><img src="images/opt/world-data-visual.jpg" width="1195" height="883" alt="Bubble chart of GDP per capita against population, 2018" loading="lazy" decoding="async"></picture><figcaption>GDP per capita vs. population, 2018</figcaption></figure>
+                  </div>
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">Python</span><span class="chip">Matplotlib</span><span class="chip">Pandas</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== ARCHIVE: WEB ==================== -->
+        <section class="pane" id="pane-archive-web" role="tabpanel" tabindex="0" aria-label="Archived web projects">
+          <div class="pane-inner">
+            <div class="pane-head">
+              <h2 class="pane-title">Archive · web</h2>
+              <p class="pane-note">earlier work, still here</p>
+            </div>
+
+            <div class="arch">
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">2023</span>
+                  <span class="arch-main">
+                    <span class="arch-name">Acoustify</span>
+                    <span class="arch-sub">Full-stack app built on the Spotify Web API. Implements OAuth via a Node server, surfaces your most-played songs and artists, generates dynamic song pages with audio analysis, and lets you play music directly in the browser.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-shots">
+                    <figure><picture><source srcset="images/opt/acoustify-main.webp" type="image/webp"><img src="images/opt/acoustify-main.jpg" width="1200" height="679" alt="Acoustify main screen" loading="lazy" decoding="async"></picture><figcaption>main screen</figcaption></figure>
+                    <figure><picture><source srcset="images/opt/acoustify-rank.webp" type="image/webp"><img src="images/opt/acoustify-rank.jpg" width="1200" height="679" alt="Acoustify top tracks ranking" loading="lazy" decoding="async"></picture><figcaption>top tracks</figcaption></figure>
+                    <figure><picture><source srcset="images/opt/acoustify-artist.webp" type="image/webp"><img src="images/opt/acoustify-artist.jpg" width="1200" height="679" alt="Acoustify artist page" loading="lazy" decoding="async"></picture><figcaption>artist page</figcaption></figure>
+                    <figure><picture><source srcset="images/opt/acoustify-song.webp" type="image/webp"><img src="images/opt/acoustify-song.jpg" width="1200" height="680" alt="Acoustify song page with audio analysis" loading="lazy" decoding="async"></picture><figcaption>song &amp; audio analysis</figcaption></figure>
+                    <figure><picture><source srcset="images/opt/acoustify-search.webp" type="image/webp"><img src="images/opt/acoustify-search.jpg" width="1200" height="679" alt="Acoustify search" loading="lazy" decoding="async"></picture><figcaption>search</figcaption></figure>
+                  </div>
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">Vue.js</span><span class="chip">Node</span><span class="chip">Python</span><span class="chip">REST API</span></div>
+                    <a class="xlink" href="https://github.com/Cytical/Acoustify" target="_blank" rel="noopener">Code ↗</a>
+                    <a class="xlink" href="https://acoustify.onrender.com/" target="_blank" rel="noopener">Demo ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">2022</span>
+                  <span class="arch-main">
+                    <span class="arch-name">Philippine Stock Exchange Terminal</span>
+                    <span class="arch-sub">Django app powered by the PSE API and scraped financial data from Marketwatch via BeautifulSoup. Ticker search returns up-to-date company info with an integrated TradingView chart. The direct ancestor of PSEye.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-shots">
+                    <figure><picture><source srcset="images/opt/terminal-main.webp" type="image/webp"><img src="images/opt/terminal-main.jpg" width="1200" height="750" alt="PSE Terminal main view" loading="lazy" decoding="async"></picture><figcaption>ticker search</figcaption></figure>
+                    <figure><picture><source srcset="images/opt/terminal-chart.webp" type="image/webp"><img src="images/opt/terminal-chart.jpg" width="1200" height="632" alt="PSE Terminal chart view" loading="lazy" decoding="async"></picture><figcaption>integrated chart</figcaption></figure>
+                  </div>
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">Django</span><span class="chip">Python</span><span class="chip">BeautifulSoup</span></div>
+                    <a class="xlink" href="https://github.com/Cytical/PSE_Terminal" target="_blank" rel="noopener">Code ↗</a>
+                    <span class="dead" title="Heroku retired its free tier; the deployment is no longer live">Demo — archived</span>
+                    <button class="xlink" data-open="projects">Successor: PSEye →</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="arch-item">
+                <button class="arch-head" aria-expanded="false">
+                  <span class="arch-year">2023</span>
+                  <span class="arch-main">
+                    <span class="arch-name">Ugnayan</span>
+                    <span class="arch-sub">A student-org matching platform. I led a 4-person Agile team across 8 sprints, handling client alignment, and designed the data models supporting real-time application tracking across multiple organizations.</span>
+                  </span>
+                  <span class="arch-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="arch-body">
+                  <div class="arch-foot">
+                    <div class="chips"><span class="chip">React.js</span><span class="chip">TypeScript</span><span class="chip">Firebase</span><span class="chip">Bootstrap</span></div>
+                    <span class="pane-note">Team project · private repo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
-      <div class="contact-right reveal">
-        <p class="contact-sub">I'm currently open to full-time data analyst and data scientist roles. If you have a problem that needs clear thinking and clean data, reach out.</p>
-        <a href="mailto:guiaomikhail@gmail.com" class="btn btn-primary btn-large">Send a message</a>
+
+      <button class="to-top" id="toTop" aria-label="Back to top" hidden>
+        <svg viewBox="0 0 122.88 120.64" aria-hidden="true" focusable="false"><path fill="currentColor" d="M108.91,66.6c1.63,1.55,3.74,2.31,5.85,2.28c2.11-0.03,4.2-0.84,5.79-2.44l0.12-0.12c1.5-1.58,2.23-3.6,2.2-5.61 c-0.03-2.01-0.82-4.01-2.37-5.55C102.85,37.5,84.9,20.03,67.11,2.48c-0.05-0.07-0.1-0.13-0.16-0.19C65.32,0.73,63.19-0.03,61.08,0 c-2.11,0.03-4.21,0.85-5.8,2.45l-0.26,0.27C37.47,20.21,19.87,37.65,2.36,55.17C0.82,56.71,0.03,58.7,0,60.71 c-0.03,2.01,0.7,4.03,2.21,5.61l0.15,0.15c1.58,1.57,3.66,2.38,5.76,2.41c2.1,0.03,4.22-0.73,5.85-2.28l47.27-47.22L108.91,66.6 L108.91,66.6z M106.91,118.37c1.62,1.54,3.73,2.29,5.83,2.26c2.11-0.03,4.2-0.84,5.79-2.44l0.12-0.12c1.5-1.57,2.23-3.6,2.21-5.61 c-0.03-2.01-0.82-4.02-2.37-5.55C101.2,89.63,84.2,71.76,67.12,54.24c-0.05-0.07-0.11-0.14-0.17-0.21 c-1.63-1.55-3.76-2.31-5.87-2.28c-2.11,0.03-4.21,0.85-5.8,2.45C38.33,71.7,21.44,89.27,4.51,106.8l-0.13,0.12 c-1.54,1.53-2.32,3.53-2.35,5.54c-0.03,2.01,0.7,4.03,2.21,5.61l0.15,0.15c1.58,1.57,3.66,2.38,5.76,2.41 c2.1,0.03,4.22-0.73,5.85-2.28l45.24-47.18L106.91,118.37L106.91,118.37z"/></svg>
+      </button>
+
+      <nav class="pager" id="pager" aria-label="Pagination">
+        <span id="pagerCurrent">about.md</span>
+        <button class="pager-next" id="pagerNext">next: <b>projects.ipynb</b> →</button>
+      </nav>
+    </div>
+
+    <!-- ============ TERMINAL ============ -->
+    <section class="terminal" id="terminal" hidden aria-label="Terminal">
+      <div class="term-head">
+        <span>terminal · bash</span>
+        <button class="term-x" id="termClose" aria-label="Close terminal">×</button>
       </div>
+      <div class="term-body" id="termBody" role="log" aria-live="polite" aria-atomic="false">
+        <p class="term-out">portfolio.sh — type <b>help</b> to begin.</p>
+        <div class="term-input-row">
+          <span class="ps1" aria-hidden="true">$</span>
+          <input id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ STATUS BAR ============ -->
+  <footer class="statusbar">
+    <span class="status-item"><span class="status-dot" aria-hidden="true"></span> open to work</span>
+    <span class="status-item hide-sm">UTF-8</span>
+    <span class="status-item hide-sm" id="statusLang">PY</span>
+    <span class="right">
+      <button class="status-item" id="themeBtn">theme: <b id="themeState">dark</b></button>
+      <span class="status-item hide-sm">© 2026 Mikhail Ezra Guiao</span>
+      <span class="status-item">manila, ph</span>
+    </span>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <div class="lb-scrim" id="lbScrim"></div>
+  <div class="lb-box">
+    <div class="lb-frame" id="lbFrame"><img id="lbImg" alt="" hidden></div>
+    <div class="lb-bar">
+      <span id="lbCap"></span>
+      <span class="lb-count" id="lbCount"></span>
+      <span class="lb-actions">
+        <button class="lb-btn" id="lbPrev" aria-label="Previous image">&#8249;</button>
+        <button class="lb-btn" id="lbNext" aria-label="Next image">&#8250;</button>
+        <button class="lb-btn" id="lbClose" aria-label="Close viewer">&times;</button>
+      </span>
     </div>
   </div>
-</section>
+</div>
 
-<footer>
-  <div class="footer-inner">
-    <span>© 2025 Mikhail Ezra Guiao</span>
-    <span>Manila, PH</span>
+<!-- ============ COMMAND PALETTE ============ -->
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="palette-scrim" id="paletteScrim"></div>
+  <div class="palette-box">
+    <input id="paletteInput" placeholder="type a command or search files..." autocomplete="off" spellcheck="false" aria-label="Command palette search">
+    <div class="palette-list" id="paletteList"></div>
   </div>
-</footer>
+</div>
 
-<script>
-/* -- THEME -- */
-const html  = document.documentElement;
-const btn   = document.getElementById('themeToggle');
-const lbl   = document.getElementById('toggleLabel');
-const saved = localStorage.getItem('theme') || 'light';
-html.setAttribute('data-theme', saved);
-lbl.textContent = saved === 'dark' ? 'light' : 'dark';
-btn.addEventListener('click', () => {
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  lbl.textContent = next === 'dark' ? 'light' : 'dark';
-});
-
-/* -- NAV BORDER ON SCROLL -- */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive:true });
-
-/* -- SCROLL REVEAL -- */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
-}, { threshold:.08, rootMargin:'0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
+<script src="assets/js/app.js?v=31"></script>
 </body>
 </html>

@@ -1,0 +1,851 @@
+/* ============================================================
+   ezra-guiao / portfolio.sys
+   IDE-workspace portfolio. Vanilla CSS, no build step.
+   ============================================================ */
+
+/* ---------- tokens ---------- */
+:root{
+  --bg:#0a0a0b;
+  --bg-panel:#101012;
+  --bg-elev:#161618;
+  --bg-hover:rgba(255,255,255,.045);
+  --bg-active:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.08);
+  --dim:#4a4a48;
+  --line-strong:rgba(255,255,255,.16);
+  --ink:#e8e8e6;
+  --mid:#84847e;
+  --faint:#808079;
+  --accent:#3ddc97;
+  --accent-dim:rgba(61,220,151,.14);
+  --accent-2:#e07040;
+  --accent-2-dim:rgba(224,112,64,.14);
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+
+  --rail:48px;
+  --sidebar:248px;
+  --titlebar:38px;
+  --statusbar:24px;
+  --tabbar:36px;
+  --radius:4px;
+
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+  color-scheme:dark;
+}
+[data-theme="light"]{
+  --bg:#f7f5f0;
+  --bg-panel:#fffefb;
+  --bg-elev:#edeae3;
+  --bg-hover:rgba(17,16,8,.045);
+  --bg-active:rgba(17,16,8,.075);
+  --line:rgba(17,16,8,.10);
+  --dim:#a8a49c;
+  --line-strong:rgba(17,16,8,.20);
+  --ink:#111008;
+  --mid:#605c55;
+  --faint:#6a665e;
+  --accent:#0a6b47;
+  --accent-dim:rgba(10,107,71,.12);
+  --accent-2:#9c4210;
+  --accent-2-dim:rgba(156,66,16,.12);
+  --shadow:0 18px 50px rgba(17,16,8,.16);
+  color-scheme:light;
+}
+
+/* ---------- reset ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+
+/* film grain — carried over from the previous design */
+body::after{
+  content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- app shell ---------- */
+.app{
+  display:grid;
+  height:100vh;height:100dvh;
+  grid-template-columns:var(--rail) var(--sidebar) 1fr;
+  grid-template-rows:var(--titlebar) 1fr var(--statusbar);
+  grid-template-areas:
+    "title  title   title"
+    "rail   side    editor"
+    "status status  status";
+}
+
+/* ---------- title bar ---------- */
+.titlebar{
+  grid-area:title;display:flex;align-items:center;gap:12px;
+  padding:0 12px;background:var(--bg);border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11.5px;color:var(--mid);
+}
+.tb-menu{display:none;width:28px;height:28px;place-items:center;border-radius:var(--radius)}
+.tb-menu:hover{background:var(--bg-hover)}
+.tb-menu svg{width:15px;height:15px}
+.tb-crumb{display:flex;align-items:center;gap:7px;min-width:0}
+.tb-crumb b{color:var(--ink);font-weight:500}
+.tb-crumb .sep{color:var(--faint)}
+.tb-crumb .file{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
+.tb-btn{
+  display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;
+  border:1px solid var(--line);border-radius:var(--radius);
+  font-family:var(--mono);font-size:11px;color:var(--mid);white-space:nowrap;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.tb-btn:hover{background:var(--bg-hover);color:var(--ink);border-color:var(--line-strong)}
+.tb-btn svg{width:12px;height:12px;flex:none}
+.tb-btn .dot{width:6px;height:6px;border-radius:50%;background:var(--faint);flex:none}
+[data-mode="recruiter"] .tb-btn--mode .dot{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+[data-mode="recruiter"] .tb-btn--mode{color:var(--ink);border-color:var(--line-strong)}
+.kbd{
+  font-family:var(--mono);font-size:10.5px;color:var(--faint);
+  border:1px solid var(--line);border-radius:3px;padding:2px 5px;line-height:1;
+}
+
+/* ---------- activity rail ---------- */
+.rail{
+  grid-area:rail;background:var(--bg);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;padding-top:6px;gap:2px;
+}
+.rail-btn{
+  position:relative;width:40px;height:40px;display:grid;place-items:center;
+  color:var(--faint);transition:color .15s;
+}
+.rail-btn svg{width:19px;height:19px}
+.rail-btn:hover{color:var(--mid)}
+.rail-btn[aria-pressed="true"]{color:var(--ink)}
+.rail-btn[aria-pressed="true"]::before{
+  content:"";position:absolute;left:0;top:8px;bottom:8px;width:2px;background:var(--accent);
+}
+
+/* ---------- explorer sidebar ---------- */
+.sidebar{
+  grid-area:side;background:var(--bg);border-right:1px solid var(--line);
+  overflow-y:auto;font-family:var(--mono);font-size:12.5px;padding-bottom:20px;
+}
+.side-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 8px;font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--faint);
+}
+.side-close{display:none;color:var(--mid);font-size:18px;line-height:1;padding:0 4px}
+.tree{padding:0 6px}
+.tree-folder{
+  display:flex;align-items:center;gap:6px;width:100%;
+  padding:4px 8px;color:var(--mid);border-radius:var(--radius);
+}
+.tree-folder:hover{background:var(--bg-hover)}
+.tree-folder .chev{width:10px;height:10px;transition:transform .18s;flex:none}
+.tree-folder[aria-expanded="false"] .chev{transform:rotate(-90deg)}
+.tree-folder .tag{margin-left:auto;font-size:9.5px;color:var(--faint);letter-spacing:.04em}
+.tree-folder[aria-expanded="false"] + .tree-group{display:none}
+.tree-file{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:4.5px 8px 4.5px 10px;color:var(--mid);border-radius:var(--radius);
+  text-align:left;transition:background .12s,color .12s;
+}
+.tree-group .tree-file{padding-left:26px}
+.tree-file:hover{background:var(--bg-hover);color:var(--ink)}
+.tree-file[aria-current="true"]{background:var(--bg-active);color:var(--ink)}
+.tree-file .ic{flex:none;width:13px;font-size:11px;color:var(--dim);text-align:center}
+.tree-file[aria-current="true"] .ic{color:var(--accent)}
+.plain{display:none}
+[data-mode="recruiter"] .code{display:none}
+[data-mode="recruiter"] .plain{display:inline}
+
+.side-foot{
+  margin-top:18px;padding:12px 14px 0;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px;font-size:11.5px;
+}
+.side-foot a{display:flex;align-items:center;gap:9px;color:var(--faint);transition:color .15s}
+.side-foot a:hover{color:var(--accent)}
+.side-foot svg{width:13px;height:13px;flex:none}
+
+/* ---------- editor region ---------- */
+.editor{grid-area:editor;display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bg-panel)}
+
+.tabbar{
+  display:flex;align-items:stretch;height:var(--tabbar);flex:none;
+  background:var(--bg);border-bottom:1px solid var(--line);
+  overflow-x:auto;scrollbar-width:none;
+}
+.tabbar::-webkit-scrollbar{display:none}
+.tab{
+  position:relative;display:flex;align-items:center;gap:9px;padding:0 11px;flex:none;
+  border-right:1px solid var(--line);
+  font-family:var(--mono);font-size:12px;color:var(--faint);
+  background:transparent;transition:background .12s,color .12s;
+}
+.tab:hover{background:var(--bg-hover);color:var(--mid)}
+.tab[aria-selected="true"]{background:var(--bg-panel);color:var(--ink)}
+.tab[aria-selected="true"]::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--accent);
+}
+.tab .ic{color:var(--dim);font-size:10.5px}
+.tab[aria-selected="true"] .ic{color:var(--accent)}
+.tab-close{
+  width:16px;height:16px;display:grid;place-items:center;border-radius:3px;
+  color:var(--faint);font-size:14px;line-height:1;opacity:0;transition:opacity .12s,background .12s;
+}
+.tab:hover .tab-close,.tab[aria-selected="true"] .tab-close{opacity:1}
+.tab-close:hover{background:var(--bg-active);color:var(--ink)}
+
+.editor-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;scroll-behavior:smooth}
+.panes{flex:1}
+
+/* ---------- terminal panel ---------- */
+.terminal{
+  flex:none;height:238px;display:flex;flex-direction:column;
+  border-top:1px solid var(--line);background:var(--bg);
+}
+.terminal[hidden]{display:none}
+.palette[hidden]{display:none}
+.scrim[hidden]{display:none}
+.term-head{
+  display:flex;align-items:center;height:28px;padding:0 12px;flex:none;
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;color:var(--faint);
+}
+.term-head .term-x{margin-left:auto;font-size:15px;line-height:1;padding:0 4px}
+.term-head .term-x:hover{color:var(--ink)}
+.term-body{
+  flex:1;overflow-y:auto;padding:10px 14px 14px;
+  font-family:var(--mono);font-size:12.5px;line-height:1.66;
+}
+.term-body p{white-space:pre-wrap;word-break:break-word}
+.term-cmd{color:var(--ink)}
+.ps1{color:var(--accent);margin-right:6px}
+.term-out{color:var(--mid)}
+.term-out b{color:var(--ink);font-weight:500}
+.term-out .ok{color:var(--accent)}
+.term-out .warn{color:var(--accent-2)}
+.term-input-row{display:flex;align-items:baseline;gap:0;margin-top:2px}
+#termInput{
+  flex:1;background:none;border:0;outline:0;padding:0;min-width:0;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink);caret-color:var(--accent);
+}
+
+/* ---------- status bar ---------- */
+.statusbar{
+  grid-area:status;display:flex;align-items:center;gap:16px;padding:0 12px;
+  background:var(--bg);border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;color:var(--faint);
+}
+.statusbar .right{margin-left:auto;display:flex;gap:16px}
+.status-item{display:flex;align-items:center;gap:6px;white-space:nowrap}
+button.status-item:hover{color:var(--ink)}
+.status-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;
+  animation:pulse 2.6s ease-out infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 var(--accent-dim)}
+  70%{box-shadow:0 0 0 7px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+
+/* ============================================================
+   PANES — shared content primitives
+   ============================================================ */
+.pane{display:none;padding:56px clamp(24px,5vw,72px) 0;max-width:1080px;margin:0 auto;width:100%}
+.pane[data-active="true"]{display:block}
+.pane-inner{padding-bottom:64px}
+
+.pane-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.pane-title{font-size:clamp(28px,4vw,38px);font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.pane-note{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.02em}
+.filepath{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-bottom:12px;letter-spacing:.02em}
+
+.prose p{color:var(--mid);margin-bottom:16px;max-width:66ch;font-size:14.5px}
+.prose p:last-child{margin-bottom:0}
+.prose em{color:var(--ink);font-style:italic}
+.prose strong{color:var(--ink);font-weight:500}
+
+.rule{height:1px;background:var(--line);border:0;margin:48px 0}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 15px;
+  border:1px solid var(--line-strong);border-radius:var(--radius);
+  font-family:var(--mono);font-size:12px;color:var(--ink);
+  transition:background .15s,border-color .15s,transform .15s;
+}
+.btn:hover{background:var(--bg-hover);border-color:var(--accent);transform:translateY(-1px)}
+.btn svg{width:13px;height:13px;flex:none}
+.btn--primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:500}
+.btn--primary:hover{background:var(--accent);border-color:var(--accent);color:#07110c}
+[data-theme="light"] .btn--primary:hover{color:#fff}
+
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11.5px;color:var(--mid);
+  margin-bottom:22px;
+}
+.pill .status-dot{animation:pulse 2.6s ease-out infinite}
+
+/* stacks / chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-family:var(--mono);font-size:10.5px;color:var(--mid);
+  border:1px solid var(--line);border-radius:3px;padding:3px 8px;letter-spacing:.02em;
+}
+.badge{
+  font-family:var(--mono);font-size:10.5px;color:var(--accent);
+  border:1px solid var(--accent);border-radius:3px;padding:3px 8px;
+  white-space:nowrap;letter-spacing:.02em;
+}
+.badge--alt{color:var(--accent-2);border-color:var(--accent-2)}
+
+/* external link */
+.xlink{
+  font-family:var(--mono);font-size:11.5px;color:var(--mid);
+  border-bottom:1px solid transparent;transition:color .15s,border-color .15s;
+}
+.xlink:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ---------- README pane ---------- */
+.readme-title{font-size:clamp(26px,3.6vw,34px);font-weight:600;letter-spacing:-.02em;margin-bottom:14px}
+.howto{border:1px solid var(--line);border-radius:var(--radius);margin:30px 0;background:var(--bg-elev)}
+.howto-head{
+  padding:9px 16px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+}
+.howto ul{padding:14px 16px;display:flex;flex-direction:column;gap:11px}
+.howto li{display:flex;align-items:baseline;gap:11px;font-size:13.5px;color:var(--mid)}
+.howto li .ic{flex:none;width:16px;font-family:var(--mono);font-size:11px;color:var(--accent);text-align:center}
+.howto b{color:var(--ink);font-weight:500;font-family:var(--mono);font-size:12.5px}
+.howto code{font-family:var(--mono);font-size:12px;color:var(--accent-2);background:var(--accent-2-dim);padding:1px 5px;border-radius:3px}
+.readme-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px}
+.readme-foot{margin-top:28px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.readme-foot b{color:var(--mid);font-weight:400}
+
+/* ---------- about pane ---------- */
+.about-top{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
+.hero-name{font-size:clamp(40px,6.4vw,68px);font-weight:600;letter-spacing:-.04em;line-height:1;margin-bottom:16px}
+.hero-role{font-family:var(--mono);font-size:13px;color:var(--mid);margin-bottom:26px;letter-spacing:.01em}
+.hero-tag{
+  font-family:var(--mono);font-size:clamp(16px,2.1vw,21px);line-height:1.5;
+  color:var(--ink);max-width:22ch;margin-bottom:32px;letter-spacing:-.01em;
+}
+.hero-tag .hl{color:var(--accent)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:9px}
+.hero-viz{justify-self:center}
+.hero-viz svg{width:100%;max-width:280px;height:auto;overflow:visible}
+.viz-line{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:draw 3.2s ease-out forwards}
+.viz-area{fill:var(--accent-dim);opacity:0;animation:fadeIn 1.4s ease-out 1.6s forwards}
+.viz-grid{stroke:var(--line);stroke-width:1}
+.viz-dot{fill:var(--bg-panel);stroke:var(--accent);stroke-width:1.6;opacity:0;animation:fadeIn .5s ease-out forwards}
+.viz-pulse{fill:var(--accent-2);animation:blip 2.4s ease-in-out infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes blip{0%,100%{opacity:.25;r:3}50%{opacity:1;r:4.5}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:48px 0}
+.stat{background:var(--bg-panel);padding:20px 18px}
+.stat-num{font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-bottom:7px}
+.stat-label{font-family:var(--mono);font-size:10.5px;color:var(--faint);line-height:1.45}
+
+/* ---------- skip link ---------- */
+.skip{
+  position:fixed;top:-60px;left:12px;z-index:9600;
+  padding:9px 14px;background:var(--accent);color:#07110c;
+  font-family:var(--mono);font-size:12px;border-radius:var(--radius);
+  transition:top .18s;
+}
+.skip:focus{top:12px}
+
+/* ---------- credentials row ---------- */
+.creds{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:48px;
+}
+.creds li{background:var(--bg-panel);padding:16px 18px}
+.creds .k{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:6px;
+}
+.creds .v{display:block;font-size:13.5px;color:var(--mid);line-height:1.45}
+.creds .v b{color:var(--ink);font-weight:600}
+.creds .v i{font-style:italic;white-space:nowrap}
+
+/* ---------- copy-email button ---------- */
+.btn--copy.is-done{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- what I'm looking for ---------- */
+.looking{
+  border:1px solid var(--line);border-left:2px solid var(--accent);
+  border-radius:var(--radius);background:var(--bg-elev);
+  padding:26px 28px;margin-top:48px;
+}
+.looking-title{
+  font-family:var(--mono);font-size:12px;color:var(--faint);
+  font-weight:400;margin-bottom:20px;letter-spacing:.02em;
+}
+[data-mode="recruiter"] .looking-title{
+  font-family:var(--sans);font-size:16px;font-weight:600;color:var(--ink);
+}
+.looking-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 32px;margin-bottom:24px}
+.looking-grid dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:5px;
+}
+.looking-grid dd{margin:0;font-size:13.5px;color:var(--mid);line-height:1.5}
+.looking-cta{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- project impact line ---------- */
+.impact{
+  font-size:13px;line-height:1.55;color:var(--ink);
+  border-left:2px solid var(--accent);padding:2px 0 2px 12px;
+}
+.impact-k{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:3px;
+}
+
+/* recruiter summary card */
+.recruiter-card{display:none;border:1px solid var(--accent);border-radius:var(--radius);
+  background:var(--accent-dim);padding:22px 24px;margin-bottom:40px}
+[data-mode="recruiter"] .recruiter-card{display:block}
+.rc-title{font-size:16px;font-weight:600;margin-bottom:14px;color:var(--ink);font-family:var(--sans)}
+.rc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px 28px;margin-bottom:18px}
+.rc-item .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.rc-item .v{font-size:13.5px;color:var(--ink);line-height:1.45}
+
+/* ---------- resume pane ---------- */
+.pdf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.pdf-frame{
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:var(--bg-elev);min-height:60vh;display:flex;
+}
+.pdf-frame object,.pdf-frame iframe{width:100%;height:min(1100px,82vh);border:0;display:block}
+.pdf-fallback{
+  margin:auto;padding:40px 24px;text-align:center;
+  font-family:var(--mono);font-size:12.5px;color:var(--mid);line-height:1.8;
+}
+.pdf-fallback .btn{margin-top:14px}
+@media (max-width:900px){
+  /* mobile browsers mostly refuse to render PDFs inline; don't ship them a
+     blank grey box, hand them the download instead */
+  .pdf-frame{min-height:0}
+  .pdf-frame object,.pdf-frame iframe{height:70vh}
+}
+/* ---------- projects pane ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;align-items:start}
+.proj{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-elev);
+  padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px;
+  transition:border-color .2s,transform .2s;
+}
+.proj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.proj-title{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.proj-title a:hover{color:var(--accent)}
+.proj-meta{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px}
+.proj-desc{font-size:13.5px;color:var(--mid);line-height:1.62}
+/* Featured figures are charts and plots — never crop them. A fixed box with
+   `contain` keeps every card the same height regardless of source ratio
+   (sources here range from 1.05:1 to 1.9:1). */
+.proj-figure{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg);
+  cursor:zoom-in;transition:border-color .2s}
+.proj-figure:hover{border-color:var(--accent)}
+.proj-figure picture{display:block}
+.proj-figure img{
+  width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;
+  /* these are matplotlib/plotly exports on white — give them a deliberate
+     "plot paper" inset instead of letting white float on near-black */
+  background:#fff;padding:10px;
+  transition:transform .4s;
+}
+.proj:hover .proj-figure img{transform:scale(1.015)}
+.proj-figcap{font-family:var(--mono);font-size:10px;color:var(--faint);padding:7px 10px;border-top:1px solid var(--line)}
+.proj-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.proj-links{display:flex;gap:14px;margin-left:auto}
+
+/* readout strip — a little "live data" texture on featured cards */
+.readout{border:1px solid var(--line);border-radius:3px;background:var(--bg);padding:11px 13px;
+  font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;flex-direction:column;gap:8px}
+.readout-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.readout-row .v{color:var(--ink)}
+.readout-row .v.ok{color:var(--accent)}
+.readout-row .v.alt{color:var(--accent-2)}
+.meter{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.meter span{display:block;height:100%;background:var(--accent);border-radius:2px}
+.meter span.alt{background:var(--accent-2)}
+
+/* target highlight when arriving from a skills link */
+@keyframes flashRing{
+  0%{box-shadow:0 0 0 0 var(--accent-dim);border-color:var(--accent)}
+  100%{box-shadow:0 0 0 10px transparent;border-color:var(--line)}
+}
+.flash{animation:flashRing 1.4s ease-out}
+@media (prefers-reduced-motion:reduce){.flash{animation:none;border-color:var(--accent)}}
+
+/* ---------- archive panes ---------- */
+.arch{border-top:1px solid var(--line)}
+.arch-item{border-bottom:1px solid var(--line)}
+.arch-head{
+  width:100%;display:flex;align-items:baseline;gap:16px;padding:18px 4px;text-align:left;
+  transition:background .15s;
+}
+.arch-head:hover{background:var(--bg-hover)}
+.arch-year{font-family:var(--mono);font-size:11px;color:var(--faint);flex:none;width:44px}
+.arch-main{flex:1;min-width:0}
+.arch-name{display:block;font-size:15.5px;font-weight:500;letter-spacing:-.01em}
+.arch-sub{display:block;font-size:13px;color:var(--mid);margin-top:5px;line-height:1.58;max-width:70ch}
+.arch-chev{margin-left:auto;flex:none;color:var(--faint);font-family:var(--mono);font-size:11px;align-self:center}
+.arch-head[aria-expanded="true"] .arch-chev{color:var(--accent)}
+.arch-body{padding:0 4px 22px 60px;display:flex;flex-direction:column;gap:16px}
+.arch-head[aria-expanded="false"] + .arch-body{display:none}
+/* Archive strips are UI screenshots — cropping from the top keeps the
+   interesting part and makes every tile identical. */
+.arch-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.arch-shots figure{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--bg);
+  cursor:zoom-in;transition:border-color .2s}
+.arch-shots figure:hover{border-color:var(--accent)}
+.arch-shots picture{display:block}
+.arch-shots img{
+  width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center;
+  transition:transform .4s;
+}
+/* charts must not be cropped — a 1.05:1 plot loses a third of its height to
+   a 16:10 crop, so contain it on the same plot-paper ground instead */
+.arch-shots .is-chart img{object-fit:contain;background:#fff;padding:8px}
+.arch-shots .is-chart:hover img{transform:none}
+.arch-shots figure:hover img{transform:scale(1.03)}
+.arch-shots figcaption{font-family:var(--mono);font-size:9.5px;color:var(--faint);padding:6px 9px;border-top:1px solid var(--line)}
+.arch-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.arch-foot .chips{margin-right:auto}
+.dead{color:var(--faint);border-bottom:1px dashed var(--faint);cursor:help}
+
+/* ---------- experience pane ---------- */
+.tl-item{display:grid;grid-template-columns:170px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--line)}
+.tl-item:last-child{border-bottom:0}
+.tl-when{font-family:var(--mono);font-size:11.5px;color:var(--faint);padding-top:3px}
+.tl-role{font-size:15.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px}
+.tl-role .org{color:var(--accent);font-weight:400}
+.tl-bullets{display:flex;flex-direction:column;gap:9px}
+.tl-bullets li{position:relative;padding-left:22px;font-size:13.5px;color:var(--mid);line-height:1.6}
+.tl-bullets li::before{content:"—";position:absolute;left:0;top:0;color:var(--dim)}
+.tl-bullets b{color:var(--ink);font-weight:500}
+.edu-honor{font-family:var(--mono);font-size:11px;color:var(--accent-2);margin-top:7px}
+.tl-sub{font-size:13.5px;color:var(--mid)}
+
+/* ---------- skills pane ---------- */
+.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.skill-col{border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-elev);padding:20px}
+.skill-col h3{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-bottom:18px;letter-spacing:.02em}
+.skill{margin-bottom:15px}
+.skill:last-child{margin-bottom:0}
+.skill .n{font-size:13.5px;font-weight:500;color:var(--ink);line-height:1.35}
+.skill .e{
+  display:block;width:100%;text-align:left;font-family:var(--mono);font-size:11px;
+  color:var(--mid);margin-top:3px;padding:1px 0;border-radius:2px;line-height:1.45;
+  transition:color .15s;
+}
+.skill .e::before{content:"→ ";color:var(--accent)}
+button.skill-e-noop{cursor:default}
+.skill button.e:hover{color:var(--ink)}
+.skill button.e:hover::before{content:"↗ "}
+
+/* ---------- contact pane ---------- */
+.contact-block{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--bg);
+  font-family:var(--mono);font-size:13px;overflow:hidden;max-width:560px;
+}
+.contact-block .cb-head{padding:9px 16px;border-bottom:1px solid var(--line);color:var(--faint);font-size:11px}
+.contact-block ul{padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.contact-block li{display:flex;gap:8px;padding:5px 0;flex-wrap:wrap}
+.contact-block .k{color:var(--faint);width:100px;flex:none}
+.contact-block .v{color:var(--ink)}
+.contact-block a.v:hover{color:var(--accent)}
+.contact-cta{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- back to top ---------- */
+.to-top{
+  position:sticky;bottom:20px;margin-left:auto;margin-right:20px;z-index:20;
+  width:38px;height:38px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:var(--bg-elev);color:var(--mid);box-shadow:var(--shadow);
+  transition:color .15s,border-color .15s,opacity .2s;
+}
+.to-top[hidden]{display:none}
+.to-top:hover{color:var(--ink);border-color:var(--accent)}
+.to-top svg{width:12px;height:12px}
+
+/* ---------- pager ---------- */
+.pager{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  border-top:1px solid var(--line);padding:22px clamp(24px,5vw,72px);
+  max-width:1080px;margin:0 auto;width:100%;
+  font-family:var(--mono);font-size:11.5px;color:var(--faint);
+}
+.pager-next{
+  display:inline-flex;align-items:center;gap:9px;height:32px;padding:0 13px;
+  border:1px solid var(--line);border-radius:var(--radius);color:var(--mid);
+  transition:border-color .15s,color .15s;
+}
+.pager-next:hover{border-color:var(--accent);color:var(--ink)}
+
+/* ============================================================
+   COMMAND PALETTE
+   ============================================================ */
+.palette{position:fixed;inset:0;z-index:9500;display:grid;place-items:start center;padding-top:12vh}
+.palette[hidden]{display:none}
+.palette-scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px)}
+[data-theme="light"] .palette-scrim{background:rgba(17,16,8,.32)}
+.palette-box{
+  position:relative;width:min(600px,92vw);background:var(--bg-elev);
+  border:1px solid var(--line-strong);border-radius:6px;box-shadow:var(--shadow);overflow:hidden;
+}
+#paletteInput{
+  width:100%;height:46px;padding:0 16px;background:none;border:0;
+  border-bottom:1px solid var(--line);outline:0;
+  font-family:var(--mono);font-size:13.5px;color:var(--ink);caret-color:var(--accent);
+}
+#paletteInput::placeholder{color:var(--faint)}
+.palette-list{max-height:min(52vh,420px);overflow-y:auto;padding:6px}
+.palette-group{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);padding:11px 12px 6px;
+}
+.palette-item{
+  display:flex;align-items:center;gap:11px;width:100%;padding:8px 12px;
+  border-radius:var(--radius);color:var(--mid);text-align:left;font-size:13.5px;
+}
+.palette-item .ic{flex:none;width:16px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.palette-item .hint{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--faint)}
+.palette-item[data-sel="true"]{background:var(--bg-active);color:var(--ink)}
+.palette-item[data-sel="true"] .ic{color:var(--accent)}
+.palette-empty{padding:22px 14px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--faint)}
+
+
+/* ============================================================
+   LIGHTBOX — screenshots are the evidence; let people see them
+   ============================================================ */
+.lightbox{position:fixed;inset:0;z-index:9700;display:grid;place-items:center;padding:4vh 4vw}
+.lightbox[hidden]{display:none}
+.lb-scrim{position:absolute;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(3px)}
+[data-theme="light"] .lb-scrim{background:rgba(17,16,8,.8)}
+.lb-box{position:relative;max-width:min(1200px,92vw);max-height:88vh;display:flex;flex-direction:column;gap:10px}
+.lb-frame{
+  border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden;
+  background:var(--bg-elev);min-height:0;display:flex;
+}
+.lb-frame img[hidden]{display:none}
+.lb-frame img{max-width:100%;max-height:76vh;width:auto;height:auto;object-fit:contain;margin:auto}
+.lb-frame.is-chart{background:#fff}
+.lb-bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11.5px;color:var(--mid)}
+.lb-count{color:var(--faint)}
+.lb-actions{margin-left:auto;display:flex;gap:6px}
+.lb-btn{
+  width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);
+  border-radius:var(--radius);color:var(--mid);font-size:15px;line-height:1;
+  transition:border-color .15s,color .15s;
+}
+.lb-btn:hover{border-color:var(--accent);color:var(--ink)}
+.lb-btn[disabled]{opacity:.3;pointer-events:none}
+@media (max-width:600px){
+  .lightbox{padding:2vh 3vw}
+  .lb-frame img{max-height:66vh}
+}
+
+/* ---------- mobile drawer scrim ---------- */
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.5)}
+.scrim[hidden]{display:none}
+
+/* ---------- scrollbars ---------- */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--mid)}
+
+/* ============================================================
+   REVEAL — pure CSS, driven by the pane becoming active.
+   `both` fill means the end state is guaranteed even if the tab
+   is throttled; no JS timing can strand content at opacity 0.
+   Re-runs on tab switch because display:none restarts animations.
+   ============================================================ */
+@keyframes revealUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.js-ready .pane[data-active="true"] .reveal{animation:revealUp .55s cubic-bezier(.2,.7,.3,1) both}
+.js-ready .pane[data-active="true"] .reveal:nth-child(2){animation-delay:.07s}
+.js-ready .pane[data-active="true"] .reveal:nth-child(3){animation-delay:.14s}
+.js-ready .pane[data-active="true"] .reveal:nth-child(4){animation-delay:.21s}
+.js-ready .pane[data-active="true"] .reveal:nth-child(n+5){animation-delay:.28s}
+
+/* ============================================================
+   NO-JS FALLBACK — every pane stacked and readable
+   ============================================================ */
+html:not(.js-ready) .rail,
+html:not(.js-ready) .tabbar,
+html:not(.js-ready) .terminal,
+html:not(.js-ready) .pager,
+html:not(.js-ready) .tb-btn--palette,
+html:not(.js-ready) .tb-btn--mode,
+html:not(.js-ready) .arch-chev{display:none}
+html:not(.js-ready) .app{display:block;height:auto}
+html:not(.js-ready) .sidebar{
+  position:static;transform:none;width:auto;box-shadow:none;
+  border-right:0;border-bottom:1px solid var(--line);overflow:visible;
+}
+html:not(.js-ready) .side-close{display:none}
+html:not(.js-ready) .tb-menu{display:none}
+html:not(.js-ready) .pane{display:block;border-bottom:1px solid var(--line)}
+html:not(.js-ready) .arch-body{display:flex !important}
+html:not(.js-ready) .statusbar{position:static}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .about-top{grid-template-columns:1fr;gap:36px}
+  /* The sparkline is decoration. When the hero collapses to one column it
+     must fall BELOW the name and role, not push them off the first screen. */
+  .hero-viz{justify-self:start}
+  .hero-viz svg{max-width:200px}
+  .skill-cols{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .creds{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  :root{--sidebar:260px}
+  .app{grid-template-columns:1fr;grid-template-areas:"title" "editor" "status"}
+  .rail{display:none}
+  .tb-menu{display:grid}
+  .side-close{display:block}
+  .sidebar{
+    position:fixed;z-index:70;top:0;bottom:0;left:0;width:var(--sidebar);
+    border-right:1px solid var(--line-strong);box-shadow:var(--shadow);
+    transform:translateX(-100%);transition:transform .22s cubic-bezier(.3,.7,.3,1);
+  }
+  .sidebar[data-open="true"]{transform:none}
+  .proj-grid{grid-template-columns:1fr}
+  .tl-item{grid-template-columns:1fr;gap:10px}
+  .pane{padding-top:40px}
+  .statusbar .right .hide-sm{display:none}
+}
+@media (max-width:600px){
+  /* on a phone the fold is ~4 lines of text; spend all of it on content */
+  .hero-viz{display:none}
+  body{font-size:13.5px}
+  .skill-cols{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .looking-grid{grid-template-columns:1fr}
+  .looking{padding:20px}
+  .tb-btn--resume span,.tb-btn--mode span{display:none}
+  .tb-btn--mode{padding:0 8px;font-size:0}
+  .tb-btn--mode .dot{margin:0}
+  .tb-btn--palette{display:none}
+  .titlebar{gap:8px}
+  .tb-crumb b{display:none}
+  .tb-crumb .sep{display:none}
+  .arch-body{padding-left:0}
+  .arch-head{flex-wrap:wrap;gap:6px 14px}
+  .arch-chev{margin-left:0}
+  .pane{padding-left:20px;padding-right:20px}
+  .pager{padding-left:20px;padding-right:20px}
+  .terminal{height:200px}
+  .statusbar{gap:12px}
+  .statusbar .right{gap:12px}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .js-ready .pane[data-active="true"] .reveal{animation:none}
+  .viz-line{stroke-dashoffset:0}
+  .viz-area,.viz-dot{opacity:1}
+}
+
+/* ============================================================
+   PRINT — a recruiter hitting Cmd+P should get a clean document,
+   not a screenshot of an IDE. Every pane prints, in reading order.
+   ============================================================ */
+@media print{
+  .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,
+  .palette,.scrim,.skip,.hero-viz,.readout,.meter,.lightbox,.to-top,.pdf-frame,.pdf-actions,
+  .tb-actions,.hero-actions,.looking-cta,.contact-cta,
+  .proj-figure,.arch-shots,.arch-chev,body::after{display:none !important}
+
+  /* Re-point the palette at ink on paper. Without this the dark-theme
+     tokens survive and accent text prints almost invisibly. */
+  :root,:root[data-theme="dark"],:root[data-theme="light"]{
+    --bg:#fff;--bg-panel:#fff;--bg-elev:#fff;--bg-hover:transparent;--bg-active:transparent;
+    --ink:#000;--mid:#2b2b2b;--faint:#5f5f5f;
+    --line:#ccc;--line-strong:#999;
+    --accent:#0a6b47;--accent-2:#9c4512;
+    --accent-dim:transparent;--accent-2-dim:transparent;
+    --shadow:none;
+  }
+  @page{margin:14mm}
+  html,body{height:auto;background:#fff;color:#000}
+  body{font-size:10.5pt;line-height:1.45}
+  .app{display:block;height:auto}
+  .editor,.editor-body{display:block;overflow:visible;height:auto;background:#fff}
+
+  .pane{display:block !important;max-width:none;padding:0;margin:0 0 14pt}
+  /* the resume pane is only a PDF viewer; on paper it would print as a bare
+     heading, and the reader is already holding the document it embeds */
+  #pane-resume{display:none !important}
+  .pane-inner{padding-bottom:0}
+  .pane[data-active] .reveal{animation:none !important;opacity:1 !important;transform:none !important}
+
+  .pane-title,.readme-title,.hero-name{font-size:17pt;margin-bottom:6pt;color:#000}
+  .hero-name{font-size:22pt}
+  .proj-title,.tl-role,.arch-name{font-size:11.5pt;color:#000}
+  .prose p,.proj-desc,.tl-bullets li,.arch-sub,.skill .n{color:#222}
+  .pane-note,.filepath,.proj-meta,.tl-when,.stat-label{color:#666}
+
+  /* keep related content together across page breaks */
+  .proj,.tl-item,.skill-col,.arch-item,.looking,.creds{page-break-inside:avoid}
+  .pane{page-break-before:auto}
+
+  /* grids collapse to a readable single flow */
+  .proj-grid,.skill-cols{display:block}
+  .proj,.skill-col{border:0;border-top:1pt solid #ccc;border-radius:0;
+    background:none;padding:8pt 0;margin:0}
+  .stats{grid-template-columns:repeat(4,1fr);border-color:#ccc}
+  .stat{background:none;padding:6pt 8pt}
+  .stat-num{font-size:14pt;color:#000}
+  .creds{grid-template-columns:repeat(3,1fr);background:#fff}
+  .creds li{background:#fff;border:0}
+  .looking{background:none;border:1pt solid #ccc;border-left-width:2pt}
+  .impact{border-left:2pt solid #666}
+  .impact-k,.creds .k,.looking-grid dt,.skill .e::before{color:#000}
+  .chip,.badge{border-color:#999;color:#333}
+  .recruiter-card{display:block !important;background:none;border:1pt solid #999}
+
+  /* archives print collapsed-open, without the image strips */
+  .arch-head[aria-expanded="false"] + .arch-body{display:flex !important}
+
+  /* surface link targets on paper */
+  .prose a[href^="http"]::after,
+  .proj-links a[href^="http"]::after,
+  .arch-foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt;color:#555}
+}

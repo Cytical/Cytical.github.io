@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Ezra Guiao</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<script>
+(function(){var d=document.documentElement,t=null;
+try{t=localStorage.getItem('theme');}catch(e){}
+if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=11">
+<style>
+  .nf{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:32px;background:var(--bg)}
+  .nf-box{width:min(620px,100%)}
+  .nf-chrome{display:flex;align-items:center;gap:8px;padding:9px 12px;
+    border:1px solid var(--line);border-bottom:0;border-radius:var(--radius) var(--radius) 0 0;
+    background:var(--bg-elev);font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .nf-dot{width:9px;height:9px;border-radius:50%;background:var(--dim)}
+  .nf-body{border:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);
+    background:var(--bg-panel);padding:26px 24px;font-family:var(--mono);font-size:13px;line-height:1.75}
+  .nf-body .err{color:var(--accent-2)}
+  .nf-body .ok{color:var(--accent)}
+  .nf-body .mid{color:var(--mid)}
+  .nf-links{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
+</style>
+</head>
+<body>
+<main class="nf">
+  <div class="nf-box">
+    <div class="nf-chrome">
+      <span class="nf-dot" aria-hidden="true"></span>
+      <span class="nf-dot" aria-hidden="true"></span>
+      <span class="nf-dot" aria-hidden="true"></span>
+      <span style="margin-left:6px">bash — portfolio.sys</span>
+    </div>
+    <div class="nf-body">
+      <p><span class="ok">$</span> cat <span id="nfPath">this-page</span></p>
+      <p class="err">cat: no such file or directory</p>
+      <p class="mid" style="margin-top:14px">exit status <b>404</b></p>
+      <p style="margin-top:18px"><span class="ok">$</span> ls ~/portfolio</p>
+      <p class="mid">about.md&nbsp;&nbsp;projects.ipynb&nbsp;&nbsp;experience.log&nbsp;&nbsp;skills.json&nbsp;&nbsp;contact.sh</p>
+      <div class="nf-links">
+        <a class="btn btn--primary" href="/">Back to portfolio</a>
+        <a class="btn" href="/#projects">Projects</a>
+        <a class="btn" href="/#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+  var el=document.getElementById('nfPath');
+  var p=(location.pathname||'').replace(/^\//,'');
+  if(p) el.textContent=p.slice(0,60).replace(/[<>]/g,'');
+</script>
+</body>
+</html>
