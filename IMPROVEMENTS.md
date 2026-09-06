@@ -170,3 +170,24 @@ screenshots and the recording dropped.
   regenerate the PDF from here: it needs to come from whatever produced it.
 - **LinkedIn presumably still says "Data Quality Analyst"** for the same reason, and
   is the first thing a recruiter cross-checks.
+- **Bank Fraud Risk Scoring has no link and no screenshot.** It carries the
+  strongest quantified result on the site, a 6.56% fraud rate in the top tier
+  against roughly a 1% base rate over a million applications, and it is the
+  headline number on the link-preview card. It is also the only project a reader
+  cannot verify: no repo, no notebook, no dashboard image. Publishing the
+  notebook, or even one screenshot of the Power BI dashboard, would do more for
+  credibility than anything left on this list. I cannot create either.
+- **A Hong Kong or Singapore recruiter will ask about work authorisation.** The
+  site now says which markets the search is aimed at, but nothing about visa
+  status or notice period, because I have no way to know either. One line in
+  looking-for.txt would close the most common first question.
+
+## Final state
+
+All 32 items above are done. Verified on a cleared localStorage: recruiter
+mode and dark theme on a first visit, every pane opens, the terminal answers,
+the palette opens and traps focus, the theme and mode toggles round-trip, the
+PSEye recording reveals and plays, its poster is fetched only on that pane, and
+the console stays empty through all of it. Zero third-party requests. The page
+still renders every pane stacked and readable with JavaScript removed.
+
