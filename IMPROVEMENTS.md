@@ -101,6 +101,34 @@ continue. Each is easy to reverse.
 
 ---
 
+## Round two, surfaced by the first pass
+
+Re-audited after the twenty above. Most of these exist because an earlier fix
+moved the goalposts.
+
+- [x] **21. contact.sh still stops at Manila.** about.md, the terminal's whoami
+  and contact, the meta description, the manifest and the schema all name Hong
+  Kong and Singapore now. The contact pane, which is where a recruiter goes to
+  actually act, does not.
+- [x] **22. The palette's copy-email action confirms itself off screen.** It
+  always drives `#copyEmail`, the button in the About hero. Trigger it from any
+  other pane and the address is copied but the "Copied" label lands on an
+  element that is display:none, so nothing appears to happen.
+- [x] **23. The node canvas is not excluded from print.** It is position:fixed,
+  which in several browsers means it paints over the first printed page.
+- [x] **24. The one inline style in the codebase.** `style="margin-bottom:30px"`
+  in the contact pane.
+- [x] **25. Recruiter mode does not reach the title bar.** The crumb shows
+  `skills.json` while the explorer beside it says Skills. It is the one label
+  the plain-English switch misses.
+- [x] **26. The Citibank bullets bury the two that matter.** The automation
+  that cut processing time by 92% is fourth, and the firm-wide prompt
+  engineering win is sixth, under three bullets about owning change requests
+  and coordinating UAT. For a move toward data science and AI engineering,
+  those two are the evidence and they are below the fold of the entry.
+
+---
+
 ## Blocked, needs Ezra
 
 - **`Ezra_Guiao_Resume.pdf` contradicts the site.** It still reads "Data Quality

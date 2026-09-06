@@ -148,7 +148,10 @@
     if (skipLink) skipLink.setAttribute('href', '#pane-' + id);
 
     var f = FILES[id];
-    $('#crumbFile').textContent = f.name;
+    /* The crumb is the last label recruiter mode did not reach: the
+       explorer said Skills while the title bar said skills.json. */
+    $('#crumbFile').textContent =
+      root.getAttribute('data-mode') === 'recruiter' ? f.plain : f.name;
     $('#statusLang').textContent = f.lang;
     document.title = 'Ezra Guiao, ' + f.plain;
 
@@ -299,6 +302,13 @@
     b.addEventListener('click', function () { copyEmail(b); });
   });
 
+  /* The one the visitor can actually see, so the palette's copy action
+     confirms itself where they are looking. */
+  function visibleCopyBtn() {
+    var seen = $$('.copy-email').filter(function (b) { return b.offsetParent; });
+    return seen[0] || $('#copyEmail');
+  }
+
   /* ============================================================
      THEME
      ============================================================ */
@@ -331,6 +341,10 @@
     $('#modeState').textContent = on ? 'on' : 'off';
     $('#modeBtn').setAttribute('aria-pressed', on ? 'true' : 'false');
     if (on) hideTerm();
+    var crumb = $('#crumbFile');
+    if (crumb && FILES[current]) {
+      crumb.textContent = on ? FILES[current].plain : FILES[current].name;
+    }
     try { localStorage.setItem('mode', m); } catch (e) {}
   }
   /* Recruiter mode is what a first-time visitor gets, so this has to run
@@ -1100,7 +1114,9 @@
       { group: 'Links', ic: '↗', label: 'Email guiaomikhail@gmail.com', alt: 'contact mail',
         go: function () { location.href = 'mailto:guiaomikhail@gmail.com'; } },
       { group: 'Links', ic: '⧉', label: 'Copy email address', alt: 'clipboard contact',
-        go: function () { copyEmail($('#copyEmail')); } },
+        /* Both panes carry one. Confirming on the hidden one copies the
+           address and looks like nothing happened. */
+        go: function () { copyEmail(visibleCopyBtn()); } },
       { group: 'Links', ic: '↗', label: 'GitHub, github.com/Cytical', alt: 'code repos',
         go: function () { window.open('https://github.com/Cytical', '_blank', 'noopener'); } },
       { group: 'Links', ic: '↗', label: 'LinkedIn, linkedin.com/in/ezra-guiao', alt: 'profile',

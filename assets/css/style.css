@@ -650,6 +650,7 @@ button.skill-e-noop{cursor:default}
 .contact-block .k{color:var(--faint);width:100px;flex:none}
 .contact-block .v{color:var(--ink)}
 .contact-block a.v:hover{color:var(--accent)}
+.contact-intro{margin-bottom:30px}
 .contact-cta{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
 
 /* ---------- back to top ---------- */
@@ -845,7 +846,7 @@ html:not(.js-ready) .statusbar{position:static}
    not a screenshot of an IDE. Every pane prints, in reading order.
    ============================================================ */
 @media print{
-  .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,
+  .rail,.sidebar,.tabbar,.terminal,.statusbar,.titlebar,.pager,.nodes,
   .palette,.scrim,.skip,.demo,.lightbox,.to-top,.pdf-frame,.pdf-actions,
   .tb-actions,.hero-actions,.looking-cta,.contact-cta,
   .arch-shots,.proj-shots,.arch-chev,body::after{display:none !important}
